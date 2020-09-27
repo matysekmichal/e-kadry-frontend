@@ -1,0 +1,24 @@
+<div class="bg-gray-100 w-screen h-screen">
+  <div class="max-w-sm w-full lg:max-w-full lg:flex">
+    <div
+      class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+      style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
+    </div>
+    <div
+      class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 leading-normal">
+      <form class="flex flex-col" novalidate>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input aria-label="Wpisz login" matInput name="email" required type="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input aria-label="Wpisz hasło" matInput name="password" required type="password">
+        </mat-form-field>
+
+        <button color="primary" mat-raised-button type="submit">Zaloguj się</button>
+      </form>
+    </div>
+  </div>
+</div>

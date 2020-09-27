@@ -1,0 +1,6 @@
+@import "tailwind";
+@import "overrides";
+@import "material";
+
+@include mat-core($config);
+@include angular-material-theme($col-theme);
