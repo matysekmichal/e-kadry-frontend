@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <div class="text-center">
+    <p class="title-primary" *ngIf="data.title" [innerText]="data.title"></p>
+
+    <p class="text-gray-700 mt-3" *ngIf="data.text" [innerHTML]="data.text"></p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="w-full flex justify-between items-center">
+    <button mat-flat-button type="button" color="warn" (click)="rejected()" mat-dialog-close>{{ data.rejectButton || 'Anuluj' }}</button>
+    <button mat-flat-button type="submit" color="primary" (click)="confirmed()">{{ data.confirmButton || 'Potwierdź' }}</button>
+  </div>
+</mat-dialog-actions>

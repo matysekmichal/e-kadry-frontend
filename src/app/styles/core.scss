@@ -1,6 +1,40 @@
+@import '~@angular/material/theming';
+
+@import "var";
+
+@import "components/mixins";
+
+@import "styles/style-default";
+@import "components/layout";
+
 @import "tailwind";
 @import "overrides";
-@import "material";
+@import "components/angular";
+@import "components/background";
+
+@import "components/text";
+@import "components/angular/list";
 
 @include mat-core($config);
 @include angular-material-theme($col-theme);
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  @include mat-typography-level-to-styles($config, body-1);
+  @apply text-black leading-normal antialiased;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+button:focus {
+  outline: unset !important;
+}

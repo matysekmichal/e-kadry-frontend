@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NavigationItem, NavigationLink} from "../../interfaces/navigation-item.interface";
-import {NavigationService} from "../../services/naviagtion.service";
-import {NavigationEnd, Router} from "@angular/router";
-import {filter, map, startWith} from "rxjs/operators";
+import {NavigationItem, NavigationLink} from '../../interfaces/navigation-item.interface';
+import {NavigationService} from '../../services/naviagtion.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {filter, map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navigation-item',
@@ -25,7 +25,8 @@ export class NavigationItemComponent implements OnInit {
   constructor(
     private navigationService: NavigationService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

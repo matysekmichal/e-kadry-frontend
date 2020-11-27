@@ -1,0 +1,49 @@
+<div *ngIf="!(service.loading$ | async);then tForm else tLoading"></div>
+
+<ng-template #tForm>
+  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
+    <mat-dialog-content>
+      <div class="flex flex-col">
+        <p class="title-primary mb-4">Dodaj operatora</p>
+
+        <mat-form-field>
+          <mat-label>Login</mat-label>
+          <input type="text" name="login" [(ngModel)]="resource.login" aria-label="Wpisz login" required matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Hasło</mat-label>
+          <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="resource.password" aria-label="Wpisz hasło" required matInput>
+          <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword">
+            <mat-icon [icIcon]="icVisibility"></mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Imię</mat-label>
+          <input type="text" name="first-name" [(ngModel)]="resource.firstName" aria-label="Wpisz imię" required matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nazwisko</mat-label>
+          <input type="text" name="last-name" [(ngModel)]="resource.lastName" aria-label="Wpisz nazwisko" required matInput>
+        </mat-form-field>
+
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <div class="w-full flex justify-between items-center">
+        <button mat-flat-button type="button" mat-dialog-close>Anuluj</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Dodaj</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</ng-template>
+
+<ng-template #tLoading>
+  <div class="flex flex-col items-center my-5">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+    <p class="title-primary">Trwa dodawanie</p>
+  </div>
+</ng-template>

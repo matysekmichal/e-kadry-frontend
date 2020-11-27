@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://api.e-kadry.tech/api/',
+  allowDomains: [
+    'api.e-kadry.tech'
+  ]
 };

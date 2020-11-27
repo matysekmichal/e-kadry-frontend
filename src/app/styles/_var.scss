@@ -1,0 +1,113 @@
+@import '~@angular/material/theming';
+@import "components/mixins";
+
+$sidenav-background: #222222 !default;
+
+$config: mat-typography-config(
+  $font-family: var(--font),
+  $display-4: mat-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: mat-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2: mat-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: mat-typography-level(34px, 40px, 400),
+  $headline: mat-typography-level(24px, 32px, 400),
+  $title: mat-typography-level(18px, 26px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(14px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(14px, 1.125, 400)
+) !default;
+
+$mat-primary: mat-palette((
+  50: #eef2f6,
+  100: #c3dcf6,
+  200: #84b6ee,
+  300: #599be2,
+  400: #3e8bd7,
+  500: #3182CE,
+  600: #296fb4,
+  700: #225d97,
+  800: #1a4671,
+  900: #13304C,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #FFF,
+    600: #FFF,
+    700: #FFF,
+    800: #FFF,
+    900: #FFF,
+  )
+)) !default;
+
+$mat-red: mat-palette((
+  50: #fffbfb,
+  100: #fff5f5,
+  200: #fed7d7,
+  300: #feb2b2,
+  400: #fc8181,
+  500: #f56565,
+  600: #e53e3e,
+  700: #c53030,
+  800: #9b2c2c,
+  900: #742a2a,
+  contrast: (
+    50: #742a2a,
+    100: #9b2c2c,
+    200: #c53030,
+    300: #e53e3e,
+    400: #f56565,
+    500: #fc8181,
+    600: #feb2b2,
+    700: #fed7d7,
+    800: #fff5f5,
+    900: #fffbfb,
+  )
+)) !default;
+
+$col-accent: mat-palette($mat-blue) !default;
+$col-warn: mat-palette($mat-red) !default;
+
+$col-theme-foreground: (
+  text: black,
+  elevation: $mat-elevation-color,
+  divider: rgba(82, 63, 105, 0.06)
+) !default;
+
+$col-theme-background: (
+  app-bar: #ebebee
+) !default;
+
+$col-theme: (
+  primary: $mat-primary,
+  accent: $col-accent,
+  warn: $col-warn,
+  is-dark: false,
+  foreground: map_merge($mat-light-theme-foreground, $col-theme-foreground),
+  background: map_merge($mat-light-theme-background, $col-theme-background),
+) !default;
+
+
+$col-dark-theme-background: (
+  background: lighten($sidenav-background, 5),
+  card: $sidenav-background,
+  app-bar: darken($sidenav-background, 5),
+  dialog: $sidenav-background,
+  status-bar: darken($sidenav-background, 5)
+) !default;
+
+$col-dark-theme: (
+  primary: $mat-primary,
+  accent: $col-accent,
+  warn: $col-warn,
+  is-dark: true,
+  foreground: $mat-dark-theme-foreground,
+  background: map_merge($mat-dark-theme-background, $col-dark-theme-background),
+) !default;
+
+

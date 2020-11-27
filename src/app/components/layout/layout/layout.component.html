@@ -1,10 +1,16 @@
-<mat-toolbar>
-  <div class="logo">Colesear</div>
-  <ng-container>
-    <app-navigation></app-navigation>
-  </ng-container>
-</mat-toolbar>
+<div class="page-container">
+  <mat-toolbar>
+      <div class="container">
+        <div class="logo">
+          <img src="assets/img/e-kadry/logo.svg" alt="EKadry">
+        </div>
+        <ng-container>
+          <app-navigation></app-navigation>
+        </ng-container>
+    </div>
+  </mat-toolbar>
 
-<main class="container">
-  <router-outlet></router-outlet>
-</main>
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
+</div>

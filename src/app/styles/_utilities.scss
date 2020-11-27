@@ -1,0 +1,98 @@
+.btn-icon-primary {
+  @apply bg-blue-500 text-white w-10 h-10 flex items-center justify-center hover:bg-blue-600 rounded-full;
+}
+
+.table-search {
+  @apply bg-gray-200 rounded border-2 border-gray-200 pr-4 mr-4 px-2 flex items-center cursor-text;
+
+  ic-icon {
+    @apply text-gray-500;
+  }
+
+  input {
+    @apply pl-2 py-2 border-0 text-gray-600 outline-none w-full bg-transparent font-semibold;
+
+    &::placeholder {
+      @apply text-gray-600 font-normal;
+    }
+  }
+
+  &:focus-within {
+    @apply border-blue-500;
+
+    ic-icon {
+      @apply text-blue-500;
+    }
+
+    input {
+      @apply text-blue-500;
+    }
+  }
+}
+
+.table-message {
+  @apply text-xl font-semibold text-blue-900 flex flex-col justify-center items-center my-10;
+}
+
+// Angular mat menu
+
+.mat-menu-panel {
+  @apply rounded-sm;
+
+  &.mat-menu-dark {
+
+    .mat-menu-content {
+      @apply bg-black text-white;
+
+      .mat-menu-item {
+        mat-icon {
+          @apply text-gray-400;
+        }
+
+        span {
+          @apply text-white;
+        }
+
+        &.danger {
+          mat-icon, span {
+            @apply text-red-500;
+          }
+        }
+      }
+    }
+  }
+}
+
+.title-primary {
+  @apply text-lg font-semibold;
+}
+
+.tiny-form {
+  .mat-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 5px !important;
+    }
+
+    .mat-form-field-infix {
+      padding: 0.3em 0 0.8em 0;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1.2em;
+    }
+
+    .mat-select-arrow-wrapper {
+      transform: none;
+    }
+
+    .mat-form-field-subscript-wrapper {
+      position: relative;
+    }
+
+    .mat-form-field-suffix {
+      top: 0.50em;
+      height: 28px;
+    }
+  }
+}
+

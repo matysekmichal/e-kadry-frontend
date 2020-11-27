@@ -1,0 +1,25 @@
+.col-layout {
+  --footer-background: var(--background-base);
+  --sidenav-background: var(--background-base);
+  --toolbar-background: var(--background-base);
+  --toolbar-z-index: 9;
+  --sidenav-color: var(--text-color);
+  --sidenav-item-background-active: var(--background-card);
+  --sidenav-item-color: var(--text-color);
+  --sidenav-item-color-active: var(--text-color);
+  --sidenav-item-dropdown-background: var(--background-base);
+
+  --sidenav-item-dropdown-background-hover: var(--background-hover);
+  --secondary-toolbar-background: var(--background-base);
+
+  --sidenav-toolbar-background: var(--background-base);
+
+  --secondary-toolbar-height: auto;
+
+  &.col-style-default {
+    --sidenav-item-background-active: theme('colors.blue.500');
+    --sidenav-item-color-active: theme('textColor.blue.500');
+    --sidenav-item-dropdown-color-hover: var(--text-color);
+    --sidenav-item-icon-color-active: theme('textColor.blue.500');
+  }
+}

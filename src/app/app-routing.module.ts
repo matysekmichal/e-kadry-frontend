@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent} from "./components/layout/layout/layout.component";
-import {AuthGuard} from "./guards/auth.guard";
-import {ColRoutes} from "./components/layout/interfaces/col-route.interface";
+import {LayoutComponent} from './components/layout/layout/layout.component';
+import {AuthGuard} from './guards/auth.guard';
+import {ColRoutes} from './components/layout/interfaces/col-route.interface';
 
 const childrenRoutes: ColRoutes = [
   {
@@ -13,6 +13,10 @@ const childrenRoutes: ColRoutes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
+  },
+  {
+    path: 'operators',
+    loadChildren: () => import('./components/operator/operator.module').then(m => m.OperatorModule),
   },
   {
     path: '**',

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  height="14.999998mm"
+  id="svg8"
+  inkscape:version="1.0.1 (unknown)"
+  sodipodi:docname="e-kadry-sygnet.svg"
+  version="1.1"
+  viewBox="0 0 14.999971 14.999999"
+  width="14.999971mm"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+  <defs
+    id="defs2"/>
+  <sodipodi:namedview
+    bordercolor="#666666"
+    borderopacity="1.0"
+    fit-margin-bottom="0"
+    fit-margin-left="0"
+    fit-margin-right="0"
+    fit-margin-top="0"
+    id="base"
+    inkscape:current-layer="g1394"
+    inkscape:cx="62.547428"
+    inkscape:cy="4.2926443"
+    inkscape:document-rotation="0"
+    inkscape:document-units="mm"
+    inkscape:guide-bbox="true"
+    inkscape:pageopacity="0.0"
+    inkscape:pageshadow="2"
+    inkscape:window-height="1005"
+    inkscape:window-maximized="0"
+    inkscape:window-width="2520"
+    inkscape:window-x="20"
+    inkscape:window-y="55"
+    inkscape:zoom="4"
+    pagecolor="#ffffff"
+    showgrid="false"
+    showguides="true"/>
+  <metadata
+    id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+        rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+          rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+    id="layer1"
+    inkscape:groupmode="layer"
+    inkscape:label="Layer 1"
+    transform="translate(-3809.3903,-2.0948316)">
+    <g
+      aria-label="E"
+      id="text835-3-1-3-62-6-5-1"
+      style="font-style:normal;font-weight:normal;font-size:18.9588px;line-height:1.25;font-family:sans-serif;fill:#ff3425;fill-opacity:1;stroke:none;stroke-width:0.473969"
+      transform="matrix(1.3324176,0,0,1.4988058,225.4949,-159.39349)">
+      <g
+        id="g1394"
+        transform="matrix(0.70744477,0,0,0.70744477,786.90595,31.521264)">
+        <path
+          d="m 2704.0909,107.74466 -5.874,5.65909 -5.2656,-3.6e-4 v -2.82919 l 5.2665,-1.41459 v -1.4146 h -8.4489 v 7.07297 7.07296 h 8.4489 v -1.4146 l -5.2665,-1.41459 v -2.82918 l 5.2656,-3.7e-4 5.874,5.6591 h 1.5912 l -4.2824,-7.07332 4.2824,-7.07332 z"
+          id="path855-65-2-9-0-3-2-1-2-5-68-4-1-0-1"
+          style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:18.9588px;line-height:1.25;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web Heavy';fill:#ff3425;fill-opacity:1;stroke:none;stroke-width:0.522498"/>
+      </g>
+    </g>
+  </g>
+</svg>
