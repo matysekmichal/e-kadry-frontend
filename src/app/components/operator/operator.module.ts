@@ -15,10 +15,13 @@ import {OperatorAddDialogModule} from './operator-add-dialog/operator-add-dialog
 import {MessageService} from '../layout/services/message.service';
 import {OperatorAddDialogComponent} from './operator-add-dialog/operator-add-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {OperatorEditDialogComponent} from './operator-edit-dialog/operator-edit-dialog.component';
+import {OperatorEditDialogModule} from './operator-edit-dialog/operator-edit-dialog.module';
 
 @NgModule({
   entryComponents: [
-    OperatorAddDialogComponent
+    OperatorAddDialogComponent,
+    OperatorEditDialogComponent
   ],
   declarations: [
     OperatorListComponent
@@ -35,8 +38,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatMenuModule,
     ReactiveFormsModule,
-    OperatorAddDialogModule,
     MatProgressSpinnerModule,
+    OperatorAddDialogModule,
+    OperatorEditDialogModule,
   ],
   providers: [
     MessageService,

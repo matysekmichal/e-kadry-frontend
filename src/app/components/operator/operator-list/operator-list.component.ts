@@ -10,6 +10,7 @@ import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import {MatDialog} from '@angular/material/dialog';
 import {OperatorAddDialogComponent} from '../operator-add-dialog/operator-add-dialog.component';
+import {OperatorEditDialogComponent} from '../operator-edit-dialog/operator-edit-dialog.component';
 
 @Component({
   selector: 'app-operator-list',
@@ -42,6 +43,17 @@ export class OperatorListComponent extends ListTemplate<Operator> implements OnI
   addOperator() {
     this.dialog.open(OperatorAddDialogComponent, {
       data: {},
+      disableClose: true,
+      autoFocus: false,
+      minWidth: 400
+    });
+  }
+
+  editOperator(resource: Operator) {
+    this.dialog.open(OperatorEditDialogComponent, {
+      data: {
+        resource: resource,
+      },
       disableClose: true,
       autoFocus: false,
       minWidth: 400

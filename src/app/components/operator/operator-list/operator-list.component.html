@@ -74,13 +74,11 @@
       Nie znaleziono operatorów
     </div>
   </ng-template>
-
-
 </div>
 
 <mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
   <ng-template let-data="data" matMenuContent class="bg-black">
-    <button type="button" mat-menu-item>
+    <button type="button" (click)="editOperator(data)" mat-menu-item>
       <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
       <span>Edytuj</span>
     </button>
