@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ResourceService} from './resource.service';
-import {Operator} from '../components/operator/operator.entity';
+import {ResourceService} from '../../services/resource.service';
+import {Operator} from './operator.entity';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Operator} from '../operator.entity';
 import {ResourceDialogData} from '../../../contracts/dialog.interface';
-import {OperatorService} from '../../../services/operator.service';
+import {OperatorService} from '../operator.service';
 import {DelegatedFormTemplate} from '../../../templates/delegated-form.template';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icPassword from '@iconify/icons-ic/twotone-lock';

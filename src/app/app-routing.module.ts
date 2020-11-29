@@ -19,6 +19,10 @@ const childrenRoutes: ColRoutes = [
     loadChildren: () => import('./components/operator/operator.module').then(m => m.OperatorModule),
   },
   {
+    path: 'workers',
+    loadChildren: () => import('./components/worker/worker.module').then(m => m.WorkerModule),
+  },
+  {
     path: '**',
     loadChildren: () => import('./components/error/error.module').then(m => m.ErrorModule),
   },
