@@ -1,5 +1,5 @@
-<div class="bg-white rounded overflow-hidden shadow mt-10">
-  <div class="h-16 px-6 flex border-b justify-between items-center">
+<main class="card-base mt-10">
+  <section class="card-bar border-b">
     <div class="flex gap-6">
       <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
       <label for="search" class="table-search">
@@ -12,9 +12,9 @@
         <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
       </button>
     </div>
-  </div>
+  </section>
 
-  <div [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
+  <section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
     <table [dataSource]="dataSource" class="w-full" mat-table matSort>
       <ng-container matColumnDef="status">
         <th class="w-16" *matHeaderCellDef mat-header-cell></th>
@@ -28,7 +28,7 @@
       <ng-container matColumnDef="name">
         <th class="uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="LastName">Imię i nazwisko</th>
         <td *matCellDef="let row" mat-cell>
-          <a [routerLink]="['/worker', row.id, 'manage']" class="friendly">
+          <a [routerLink]="['/workers', row.id, 'manage']" class="friendly">
             <span>{{ row.firstName }} {{ row.lastName }}</span> &nbsp;
           </a>
         </td>
@@ -59,7 +59,7 @@
                    [length]="(dataSource.data$ | async).total"
                    [showFirstLastButtons]="true">
     </mat-paginator>
-  </div>
+  </section>
 
   <div *ngIf="service.filter$ | async;then filtering else notFiltering"></div>
   <ng-template #filtering>
@@ -72,7 +72,7 @@
       Nie znaleziono pracowników
     </div>
   </ng-template>
-</div>
+</main>
 
 <mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
   <ng-template let-data="data" matMenuContent class="bg-black">

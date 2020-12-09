@@ -34,6 +34,61 @@
   @apply text-xl font-semibold text-blue-900 flex flex-col justify-center items-center my-10;
 }
 
+// Containers
+
+.card-base {
+  @apply bg-white rounded overflow-hidden shadow-md;
+
+  .card-header {
+    @apply flex justify-between items-center px-6 py-2 border-b;
+    min-height: 60px;
+  }
+
+  .card-bar {
+    @apply flex h-16 px-6 justify-between items-center;
+  }
+
+  & > .content {
+    @apply px-6 py-4;
+
+    &.no-padding {
+      padding: 0;
+    }
+
+    .content-value {
+      @apply flex flex-row justify-between py-3 px-6 border-b text-sm;
+
+      & > div:first-child {
+        @apply text-gray-600 text-left;
+      }
+
+      & > div:last-child {
+        @apply text-right;
+      }
+
+      &:last-child {
+        @apply border-none;
+      }
+    }
+  }
+}
+
+.base-content-wrapper {
+  @apply flex gap-6;
+
+  article {
+    @apply w-8/12;
+  }
+
+  aside {
+    @apply flex flex-col gap-6 w-4/12;
+
+    & > section {
+      @apply flex flex-col;
+    }
+  }
+}
+
 // Angular mat menu
 
 .mat-menu-panel {

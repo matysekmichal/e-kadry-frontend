@@ -1,0 +1,105 @@
+<div *ngIf="resource">
+<section class="card-base mt-10">
+  <div class="card-bar">
+    <h1 class="title-primary">{{ resource.firstName }} {{ resource.lastName }}</h1>
+  </div>
+</section>
+
+<main class="base-content-wrapper w-full mt-6">
+  <article>
+    <div class="card-base">
+      <div class="card-header">
+        <h2 class="title-primary">Informacje</h2>
+      </div>
+    </div>
+  </article>
+
+  <aside>
+    <section class="card-base">
+      <div class="card-header">
+        <h2 class="title-primary">Informacje</h2>
+        <div class="action">
+          <button type="button" class="btn-icon-primary" matTooltip="Edytuj pracownika">
+            <mat-icon [icIcon]="icEdit" class="text-white" size="24px"></mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="content no-padding">
+        <div class="content-value">
+          <div>
+            Adres
+          </div>
+          <div>
+            {{ resource.street }} {{ resource.propertyNumber }}{{ resource.apartmentNumber ? '/'+resource.apartmentNumber : '' }}<br>
+            {{ resource.city }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Telefon
+          </div>
+          <div>
+            {{ resource.phone ? resource.phone : '-' }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Data urodzenia
+          </div>
+          <div>
+            {{ resource.birthday | date:'dd MMM y' }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Miejsce urodzenia
+          </div>
+          <div>
+            {{ resource.cityOfBirthday }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            PESEL
+          </div>
+          <div>
+            <app-hidden-text hiddenText="{{ resource.pesel }}"></app-hidden-text>
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Numer aktu
+          </div>
+          <div>
+            {{ resource.actNumber }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Imię matki i ojca
+          </div>
+          <div>
+            {{ resource.motherName }} {{ resource.fatherName }}
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            {{ resource.documentType.displayName }}
+          </div>
+          <div>
+            <app-hidden-text hiddenText="{{ resource.documentNumber }}"></app-hidden-text>
+          </div>
+        </div>
+        <div class="content-value">
+          <div>
+            Utworzono
+          </div>
+          <div>
+            {{ resource.createdAt | date:'dd MMM y' }}
+          </div>
+        </div>
+      </div>
+    </section>
+  </aside>
+</main>
+</div>

@@ -1,0 +1,4 @@
+<div class="hidden-text flex justify-center gap-2">
+  <span>{{ show ? hiddenText : securedText() }}</span>
+  <mat-icon [icIcon]="show ? icVisibilityHidden : icVisibility" size="19px" (click)="toggleHiddenText()"></mat-icon>
+</div>

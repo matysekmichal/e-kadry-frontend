@@ -3,7 +3,6 @@ import {ListTemplate} from '../../../templates/list.template';
 import {TableColumn} from '../../../contracts/table-column.interface';
 import {Worker} from '../worker.entity';
 import {WorkerService} from '../worker.service';
-import {MatDialog} from '@angular/material/dialog';
 import icMore from '@iconify/icons-ic/twotone-more-horiz';
 import icAdd from '@iconify/icons-ic/twotone-add';
 import icEdit from '@iconify/icons-ic/twotone-edit';
@@ -32,7 +31,6 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   constructor(
     protected injector: Injector,
     private workerService: WorkerService,
-    private dialog: MatDialog,
   ) {
     super(injector);
     this.service = workerService;

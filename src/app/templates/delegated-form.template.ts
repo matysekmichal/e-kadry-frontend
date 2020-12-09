@@ -25,7 +25,7 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
   }
 
   getItem(id: string) {
-    this.service.get(id).subscribe(resource => this.resource = resource.data);
+    this.service.get(id).subscribe(resource => this.resource = resource);
   }
 
   onSubmit() {

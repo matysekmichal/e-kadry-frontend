@@ -50,10 +50,10 @@ export abstract class ResourceService<T> implements IResourceService<T> {
     );
   }
 
-  get(id: number | string): Observable<{ data: T }> {
+  get(id: number | string): Observable<T> {
     this.loadingSubject.next(true);
 
-    return this.http.get<{ data: T }>(`${this.apiUrl}${this.url}/${id}`)
+    return this.http.get<T>(`${this.apiUrl}${this.url}/${id}`)
       .pipe(finalize(() => this.loadingSubject.next(false)));
   }
 

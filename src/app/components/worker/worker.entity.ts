@@ -1,3 +1,5 @@
+import {EnumItem} from '../../contracts/enum';
+
 export class Worker {
   id: string;
   firstName: string;
@@ -5,9 +7,9 @@ export class Worker {
   birthday: Date | string;
   cityOfBirthday: string;
   pesel: string;
-  documentType: number;
+  documentType: EnumItem;
   documentNumber: string;
-  gender: number;
+  gender: EnumItem;
   city: string;
   street: string;
   propertyNumber: string;

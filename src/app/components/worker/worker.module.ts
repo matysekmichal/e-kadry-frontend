@@ -13,9 +13,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {WorkerRoutingModule} from './worker-routing.module';
+import { WorkerManageComponent } from './worker-manage/worker-manage.component';
+import {HiddenTextModule} from '../hidden-text/hidden-text.module';
 
 @NgModule({
-  declarations: [WorkerListComponent],
+  declarations: [WorkerListComponent, WorkerManageComponent],
   imports: [
     CommonModule,
     WorkerRoutingModule,
@@ -29,7 +31,8 @@ import {WorkerRoutingModule} from './worker-routing.module';
     MatButtonModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HiddenTextModule
   ]
 })
 export class WorkerModule { }
