@@ -50,13 +50,19 @@ export class OperatorListComponent extends ListTemplate<Operator> implements OnI
   }
 
   editOperator(resource: Operator) {
-    this.dialog.open(OperatorEditDialogComponent, {
+    const dialogRef = this.dialog.open(OperatorEditDialogComponent, {
       data: {
         resource: resource,
       },
       disableClose: true,
       autoFocus: false,
       minWidth: 400
+    });
+
+    dialogRef.afterClosed().subscribe(next => {
+      if (next.data.refresh == true) {
+        this.getData();
+      }
     });
   }
 }

@@ -21,6 +21,8 @@
           <input type="text" name="last-name" [(ngModel)]="resource.lastName" aria-label="Wpisz nazwisko" required matInput>
         </mat-form-field>
 
+        <mat-slide-toggle name="active" [(ngModel)]="resource.active" class="mb-4">Aktywny</mat-slide-toggle>
+
         <div *ngIf="passwordChange; then passwordForm else noPasswordChange"></div>
 
         <ng-template #passwordForm>

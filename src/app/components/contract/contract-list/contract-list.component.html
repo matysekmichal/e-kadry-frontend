@@ -1,0 +1,88 @@
+<main class="card-base mt-10">
+  <section class="card-bar border-b">
+    <div class="flex gap-6">
+      <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
+      <label for="search" class="table-search">
+        <ic-icon [icIcon]="icSearch" size="22px"></ic-icon>
+        <input id="search" type="search" [formControl]="searchControl" placeholder="Szukaj ..." aria-label="Szukaj">
+      </label>
+    </div>
+    <div>
+      <button type="button" class="btn-icon-primary" (click)="addWorker()" matTooltip="Dodaj pracownika">
+        <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
+    <table [dataSource]="dataSource" class="w-full" mat-table matSort>
+      <ng-container matColumnDef="status">
+        <th class="w-16" *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let row" mat-cell>
+          <div class="w-full flex items-center cursor-pointer p-1">
+            <div class="w-3 h-3 rounded-full" [class.bg-green-500]="row.active" [class.bg-red-500]="!row.active"></div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th class="uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="LastName">Imię i nazwisko</th>
+        <td *matCellDef="let row" mat-cell>
+<!--          <a [routerLink]="['/workers', row.id, 'manage']" class="friendly">-->
+<!--            <span>{{ row.firstName }} {{ row.lastName }}</span> &nbsp;-->
+<!--          </a>-->
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="CreatedAt">Utworzono</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.createdAt | date:'dd MMM y HH:mm' }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th class="w-0" *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let row" mat-cell>
+          <button type="button" mat-icon-button [matMenuTriggerFor]="actionMenu" [matMenuTriggerData]="{ data: row }">
+            <mat-icon [icIcon]="icMore" size="22px"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+      <tr class="hover:bg-gray-100 transition-colors" *matRowDef="let row; columns: visibleColumns;" mat-row></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                   [pageSize]="(dataSource.data$ | async).perPage"
+                   [length]="(dataSource.data$ | async).total"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </section>
+
+  <div *ngIf="service.filter$ | async;then filtering else notFiltering"></div>
+  <ng-template #filtering>
+    <div class="table-message">
+      <mat-progress-spinner mode="indeterminate" color="primary" diameter="56"></mat-progress-spinner>
+    </div>
+  </ng-template>
+  <ng-template #notFiltering>
+    <div class="table-message" *ngIf="dataSource.isEmpty">
+      Nie znaleziono pracowników
+    </div>
+  </ng-template>
+</main>
+
+<mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
+  <ng-template let-data="data" matMenuContent class="bg-black">
+    <button type="button" (click)="editWorker(data)" mat-menu-item>
+      <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
+      <span>Edytuj</span>
+    </button>
+    <button type="button" (click)="deleteResource(data)" class="danger" mat-menu-item>
+      <mat-icon [icIcon]="icDelete" size="24px"></mat-icon>
+      <span>Usuń</span>
+    </button>
+  </ng-template>
+</mat-menu>

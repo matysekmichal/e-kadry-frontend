@@ -35,7 +35,7 @@ export interface IResourceService<T> {
   getAll(page: number, filters: { [fieldName: string]: any }): Observable<{ data: T[] } | DataSourceInterface>;
   get(id: string): Observable<T>;
   delete(id: string): Observable<object | void>;
-  update(id: string, resource: T): Observable<object | void>;
+  update(id: string, resource: T): Observable<ResourceResponse>;
   create(resource: T): Observable<ResourceCreatedResponse>;
 }
 

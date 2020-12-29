@@ -38,9 +38,10 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
 
   updateResource(successCallback: () => any = () => {}, errorCallback: () => any = () => {}) {
     this.service.update(this.resourceId, this.resource).subscribe(
-      (response) => {
+      response => {
+        this.messageService.toast(response.message);
         successCallback();
-      }, (error) => {
+      }, error => {
         this.messageService.error('Nie udało się zaktualizowanie zasobu.');
         errorCallback();
       }
@@ -50,7 +51,6 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
   createResource(successCallback: () => any = () => {}, errorCallback: () => any = () => {}) {
     this.service.create(this.resource).subscribe(
       (response: ResourceCreatedResponse) => {
-        console.log(this.redirect);
         if (this.redirect !== false) {
           this.router.navigate([this.redirect, response.id, 'manage']).then();
         }

@@ -10,23 +10,25 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {IconModule} from '@visurel/iconify-angular';
 import {MatRippleModule} from '@angular/material/core';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
     OperatorEditDialogComponent
   ],
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatButtonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    IconModule,
-    MatRippleModule,
-  ],
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        MatButtonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        IconModule,
+        MatRippleModule,
+        MatSlideToggleModule,
+    ],
   exports: [
     OperatorEditDialogComponent
   ]

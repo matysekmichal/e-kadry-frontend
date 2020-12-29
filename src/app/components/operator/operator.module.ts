@@ -17,6 +17,7 @@ import {OperatorAddDialogComponent} from './operator-add-dialog/operator-add-dia
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {OperatorEditDialogComponent} from './operator-edit-dialog/operator-edit-dialog.component';
 import {OperatorEditDialogModule} from './operator-edit-dialog/operator-edit-dialog.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   entryComponents: [
@@ -41,6 +42,7 @@ import {OperatorEditDialogModule} from './operator-edit-dialog/operator-edit-dia
     MatProgressSpinnerModule,
     OperatorAddDialogModule,
     OperatorEditDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [
     MessageService,

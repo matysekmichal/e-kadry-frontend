@@ -27,36 +27,21 @@ export class OperatorEditDialogComponent extends DelegatedFormTemplate<Operator>
   ) {
     super(injector);
     this.service = operatorService;
-
-    this.dialogRef.beforeClosed().subscribe(() => {
-      this.closeDialog();
-    });
   }
 
   ngOnInit(): void {
     if (this.data.resource) {
       this.redirect = this.data.redirect ?? false;
-      this.resource = this.data.resource;
+      this.resource = Object.assign({}, this.data.resource);
       this.resourceId = this.data.resource.id;
-    } else {
-      this.resource = new Operator();
-      this.resource.password = this.generatePassword();
-      this.showPassword = true;
     }
   }
 
   onSubmit() {
-    if (this.resourceId) {
-      this.updateResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
-    } else {
-      this.createResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
-    }
+    this.updateResource(() => {
+      this.refreshAfterClose = true;
+      this.closeDialog();
+    });
   }
 
   generatePassword() {
@@ -73,7 +58,8 @@ export class OperatorEditDialogComponent extends DelegatedFormTemplate<Operator>
   private closeDialog() {
     this.dialogRef.close({
       data: {
-        refresh: this.refreshAfterClose
+        refresh: this.refreshAfterClose,
+        resource: this.resource,
       }
     });
   }

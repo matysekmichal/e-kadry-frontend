@@ -15,8 +15,16 @@ const childrenRoutes: ColRoutes = [
     loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
+    path: 'contracts',
+    loadChildren: () => import('./components/contract/contract.module').then(m => m.ContractModule),
+  },
+  {
     path: 'operators',
     loadChildren: () => import('./components/operator/operator.module').then(m => m.OperatorModule),
+  },
+  {
+    path: 'pkzp',
+    loadChildren: () => import('./components/pkzp/pkzp.module').then(m => m.PkzpModule),
   },
   {
     path: 'workers',

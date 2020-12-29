@@ -1,0 +1,24 @@
+<div *ngIf="workerId;then showPkzp else selectWorker"></div>
+<ng-template #showPkzp>
+  <section class="card-bar border-b">
+    <div class="flex gap-6">
+      <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
+    </div>
+    <div>
+      <button type="button" class="btn-icon-primary">
+        <mat-icon [icIcon]="icAdd" (click)="addRecord()" class="text-white" size="24px"></mat-icon>
+      </button>
+    </div>
+  </section>
+
+  {{ workerId | json }}
+</ng-template>
+
+<ng-template #selectWorker>
+  <div class="message-simply w-full py-16">
+    <mat-icon [icIcon]="icWorker" size="80px" class="text-blue-500"></mat-icon>
+    <span class="h2 title-primary">Wybierz pracownika</span>
+  </div>
+</ng-template>
+
+
