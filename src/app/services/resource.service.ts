@@ -1,4 +1,4 @@
-import {DataSourceInterface, IResourceService, ResourceCreatedResponse} from '../contracts/data-source.interface';
+import {DataSourceInterface, IResourceService, ResourceCreatedResponse, ResourceResponse} from '../contracts/data-source.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -65,10 +65,10 @@ export abstract class ResourceService<T> implements IResourceService<T> {
     }).pipe(finalize(() => this.loadingSubject.next(false)));
   }
 
-  update(id: number | string, resource: T): Observable<object> {
+  update(id: number | string, resource: T): Observable<ResourceResponse> {
     this.loadingSubject.next(true);
 
-    return this.http.put<object>(`${this.apiUrl}${this.url}/${id}`, resource, {
+    return this.http.put<ResourceResponse>(`${this.apiUrl}${this.url}/${id}`, resource, {
       headers: this.headers
     }).pipe(finalize(() => this.loadingSubject.next(false)));
   }

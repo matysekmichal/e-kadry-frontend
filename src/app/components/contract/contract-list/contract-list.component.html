@@ -26,11 +26,16 @@
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th class="uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="LastName">Imię i nazwisko</th>
+        <th class="uppercase" *matHeaderCellDef mat-header-cell>Imię i nazwisko</th>
         <td *matCellDef="let row" mat-cell>
-<!--          <a [routerLink]="['/workers', row.id, 'manage']" class="friendly">-->
-<!--            <span>{{ row.firstName }} {{ row.lastName }}</span> &nbsp;-->
-<!--          </a>-->
+          <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="is-sick">
+        <th class="uppercase" *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
         </td>
       </ng-container>
 
