@@ -17,13 +17,10 @@ export class HiddenTextComponent {
   constructor() { }
 
   securedText() {
-    let a =this.hiddenText.replace(/./g, '*');
-    console.log(a)
-    return a;
+    return this.hiddenText.replace(/./g, '*');
   }
 
   toggleHiddenText() {
     this.show = !this.show;
-    console.log(this.show);
   }
 }
