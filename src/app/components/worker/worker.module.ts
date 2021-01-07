@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { WorkerListComponent } from './worker-list/worker-list.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {WorkerListComponent} from './worker-list/worker-list.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {IconModule} from '@visurel/iconify-angular';
 import {MatIconModule} from '@angular/material/icon';
@@ -13,11 +13,19 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {WorkerRoutingModule} from './worker-routing.module';
-import { WorkerManageComponent } from './worker-manage/worker-manage.component';
+import {WorkerManageComponent} from './worker-manage/worker-manage.component';
 import {HiddenTextModule} from '../hidden-text/hidden-text.module';
+import {WorkerAddDialogModule} from './worker-add-dialog/worker-add-dialog.module';
+import {WorkerAddDialogComponent} from './worker-add-dialog/worker-add-dialog.component';
 
 @NgModule({
-  declarations: [WorkerListComponent, WorkerManageComponent],
+  entryComponents: [
+    WorkerAddDialogComponent
+  ],
+  declarations: [
+    WorkerListComponent,
+    WorkerManageComponent
+  ],
   imports: [
     CommonModule,
     WorkerRoutingModule,
@@ -32,7 +40,9 @@ import {HiddenTextModule} from '../hidden-text/hidden-text.module';
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    HiddenTextModule
+    HiddenTextModule,
+    WorkerAddDialogModule
   ]
 })
-export class WorkerModule { }
+export class WorkerModule {
+}

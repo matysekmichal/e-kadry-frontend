@@ -1,0 +1,141 @@
+<div *ngIf="!(service.loading$ | async);then tForm else tLoading"></div>
+
+<ng-template #tForm>
+  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
+    <mat-dialog-content>
+      <div class="flex flex-col">
+        <p class="title-primary mb-4">Dodaj pracownika</p>
+
+        <!--        Gender-->
+        <!--        Phon-->
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Imię</mat-label>
+            <input type="text" name="first-name" [(ngModel)]="resource.firstName" aria-label="Wpisz imię" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Nazwisko</mat-label>
+            <input type="text" name="last-name" [(ngModel)]="resource.lastName" aria-label="Wpisz nazwisko" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Data urodzenia</mat-label>
+            <input [matDatepicker]="picker" [(ngModel)]="resource.birthday" aria-label="Wpisz datę urodzenia" required matInput>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Miasto urodzenia</mat-label>
+            <input type="text" name="city-of-birthday" [(ngModel)]="resource.cityOfBirthday" aria-label="Wpisz miasto urodzenia" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="divider mb-1 mt-3">
+          <p class="text-md font-semibold">Informacje szczegółowe</p>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>PESEL</mat-label>
+            <input type="number" name="pesel" [(ngModel)]="resource.pesel" aria-label="Wpisz PESEL" required matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Płeć</mat-label>
+            <mat-select name="gender" [(ngModel)]="resource.gender">
+              <mat-option *ngFor="let genderType of genderTypes" [value]="genderType.id">
+                {{ genderType.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field>
+            <mat-label>Rodzaj dokumentu</mat-label>
+            <mat-select name="document-type" [(ngModel)]="resource.documentType">
+              <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.id">
+                {{ documentType.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Numer dokumentu</mat-label>
+            <input type="text" name="document-number" [(ngModel)]="resource.documentNumber" aria-label="Wpisz numer dokumentu" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Imię matki</mat-label>
+            <input type="text" name="mother-name" [(ngModel)]="resource.motherName" aria-label="Wpisz imię matki" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Imię ojca</mat-label>
+            <input type="text" name="father-name" [(ngModel)]="resource.fatherName" aria-label="Wpisz imię ojca" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="divider mb-1 mt-3">
+          <p class="text-md font-semibold">Adres pracownika</p>
+        </div>
+
+        <div class="flex flex-row gap-4 w-full">
+          <mat-form-field class="w-3/5">
+            <mat-label>Ulica</mat-label>
+            <input type="text" name="street" [(ngModel)]="resource.street" aria-label="Wpisz ulicę" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-1/5">
+            <mat-label>Nr domu</mat-label>
+            <input type="text" name="property-number" [(ngModel)]="resource.propertyNumber" aria-label="Wpisz numer domu" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-1/5">
+            <mat-label>Nr lokalu</mat-label>
+            <input type="text" name="apartment-number" [(ngModel)]="resource.apartmentNumber" aria-label="Wpisz numer lokalu" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4 w-full">
+          <mat-form-field class="w-3/12">
+            <mat-label>Kod pocztowy</mat-label>
+            <input type="text" name="zip-code" [(ngModel)]="resource.zipCode" aria-label="Wpisz kod pocztowy" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-5/12">
+            <mat-label>Miasto</mat-label>
+            <input type="text" name="city" [(ngModel)]="resource.city" aria-label="Wpisz miasto" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-4/12">
+            <mat-label>Kraj</mat-label>
+            <input type="text" name="county" [(ngModel)]="resource.country" aria-label="Wpisz kraj" required matInput>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <div class="w-full flex justify-between items-center">
+        <button mat-flat-button type="button" mat-dialog-close>Anuluj</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Dodaj</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</ng-template>
+
+<ng-template #tLoading>
+  <div class="flex flex-col items-center my-5">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+    <p class="title-primary">Trwa dodawanie</p>
+  </div>
+</ng-template>

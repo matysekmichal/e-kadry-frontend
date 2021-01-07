@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Enums} from '../contracts/enum';
 
-type EnumType = 'DocumentType' | 'Gender';
+type EnumType = 'documentType' | 'gender';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,11 @@ export class EnumService {
   }
 
   get gender() {
-    return this._getOrReturn('Gender');
+    return this._getOrReturn('gender');
   }
 
   get documentType() {
-    return this._getOrReturn('DocumentType');
+    return this._getOrReturn('documentType');
   }
 
   refresh() {

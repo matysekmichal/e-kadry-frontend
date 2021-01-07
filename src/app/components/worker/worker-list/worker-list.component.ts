@@ -8,6 +8,8 @@ import icAdd from '@iconify/icons-ic/twotone-add';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import {MatDialog} from '@angular/material/dialog';
+import {WorkerAddDialogComponent} from '../worker-add-dialog/worker-add-dialog.component';
 
 @Component({
   selector: 'app-worker-list',
@@ -31,12 +33,20 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   constructor(
     protected injector: Injector,
     private workerService: WorkerService,
+    private dialog: MatDialog,
   ) {
     super(injector);
     this.service = workerService;
   }
 
   addWorker() {
+    this.dialog.open(WorkerAddDialogComponent, {
+      data: {},
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
   }
 
   editWorker(resource: Worker) {
