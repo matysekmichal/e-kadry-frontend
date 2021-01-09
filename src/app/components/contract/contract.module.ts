@@ -9,9 +9,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {IconModule} from '@visurel/iconify-angular';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSortModule} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
+import {CustomDateAdapter} from '../../utils/custom-date-adapter';
+import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
 
 @NgModule({
   declarations: [ContractListComponent],
@@ -28,6 +33,14 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatSortModule,
     MatButtonModule,
+    MatSlideToggleModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PricePipeModule,
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter},
   ]
 })
 export class ContractModule {

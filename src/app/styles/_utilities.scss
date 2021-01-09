@@ -216,3 +216,48 @@ form {
     @apply mt-3;
   }
 }
+
+.btn-group-range-filter {
+  .mat-date-range-input {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+}
+
+.range-filter {
+  button.short {
+    @apply bg-blue-100 text-blue-500 font-medium #{'!important'};
+    line-height: 29px !important;
+  }
+
+  .mat-date-range-input {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .clear-button {
+    transform: translateY(2px);
+
+    .mat-icon {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .double-action {
+    padding: 0;
+
+    span span {
+      display: inline-block;
+      padding-left: 14px;
+    }
+
+    button {
+      padding-right: 14px;
+    }
+  }
+}

@@ -1,14 +1,72 @@
-<main class="card-base mt-10">
+<div class="my-5 flex flex-row justify-between">
+  <div>
+    <mat-slide-toggle [ngModel]="showInactiveContracts" (toggleChange)="toggleShowClosedLeads()" matTooltip="Pokaż również wygasłe umowy">
+      <span class="caption font-medium text-gray-700">Wygasłe umowy</span>
+    </mat-slide-toggle>
+  </div>
+
+  <div>
+    <div class="range-filter">
+      <mat-date-range-picker #rangePicker (closed)="filterChange()" startView="year"></mat-date-range-picker>
+      <mat-date-range-input [rangePicker]="rangePicker" separator="">
+        <input matStartDate type="date" [(ngModel)]="range.start" aria-label="Data filtrowania od" aria-disabled="true">
+        <input matEndDate type="date" [(ngModel)]="range.end" aria-label="Data filtrowania do" aria-disabled="true">
+      </mat-date-range-input>
+      <span *ngIf="range.start && range.end; then rangeSelecting else rangeNotSelecting"></span>
+      <ng-template #rangeSelecting>
+        <button type="button" class="double-action short" mat-flat-button>
+            <span (click)="rangePicker.open()">
+              <span *ngIf="(range.start | date:'yyyy') === (range.end | date:'yyyy') && (range.start | date:'yyyy') === today.getFullYear().toString(); then currentYear else notCurrentYear"></span>
+              <ng-template #currentYear>
+                <span *ngIf="(range.start | date:'dd MM') === (range.end | date:'dd MM'); then notCurrentYearSameDay else notCurrentYearNotSameDay"></span>
+                <ng-template #notCurrentYearSameDay>
+                  {{ range.start | date:'dd MMM' }}
+                </ng-template>
+                <ng-template #notCurrentYearNotSameDay>
+                  <span *ngIf="(range.start | date:'MM') === (range.end | date:'MM'); then notCurrentYearSameDayMonth else notCurrentYearNotSameDayMonth"></span>
+                  <ng-template #notCurrentYearSameDayMonth>
+                    {{ range.start | date:'dd' }} - {{ range.end | date:'dd MMM' }}
+                  </ng-template>
+                  <ng-template #notCurrentYearNotSameDayMonth>
+                    {{ range.start | date:'dd MMM' }} - {{ range.end | date:'dd MMM' }}
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </span>
+          <button type="button" (click)="clearRange()" class="clear-button ml-2">
+            <mat-icon [icIcon]="icClear" size="16px" class="text-blue-500"></mat-icon>
+          </button>
+        </button>
+        <ng-template #notCurrentYear>
+          <span *ngIf="(range.start | date:'yyyy') === (range.end | date:'yyyy'); then notCurrentSameYear else notCurrentNotSameYear"></span>
+          <ng-template #notCurrentSameYear>
+            {{ range.start | date:'dd MMM' }} - {{ range.end | date:'dd MMM yyyy' }}
+          </ng-template>
+          <ng-template #notCurrentNotSameYear>
+            {{ range.start | date:'dd MMM yyyy' }} - {{ range.end | date:'dd MMM yyyy' }}
+          </ng-template>
+        </ng-template>
+      </ng-template>
+      <ng-template #rangeNotSelecting>
+        <button type="button" class="short" (click)="rangePicker.open()" mat-flat-button>
+          Umowy z okresu
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="card-base">
   <section class="card-bar border-b">
     <div class="flex gap-6">
-      <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
+      <h2 class="text-xl font-semibold flex items-center">Umowy</h2>
       <label for="search" class="table-search">
         <ic-icon [icIcon]="icSearch" size="22px"></ic-icon>
         <input id="search" type="search" [formControl]="searchControl" placeholder="Szukaj ..." aria-label="Szukaj">
       </label>
     </div>
     <div>
-      <button type="button" class="btn-icon-primary" (click)="addWorker()" matTooltip="Dodaj pracownika">
+      <button type="button" class="btn-icon-primary" (click)="addWorker()" matTooltip="Dodaj umowę">
         <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
       </button>
     </div>
@@ -20,7 +78,7 @@
         <th class="w-16" *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let row" mat-cell>
           <div class="w-full flex items-center cursor-pointer p-1">
-            <div class="w-3 h-3 rounded-full" [class.bg-green-500]="row.active" [class.bg-red-500]="!row.active"></div>
+            <div class="w-3 h-3 rounded-full" [class.bg-green-500]="row.employedAt && !row.employedEndAt" [class.bg-red-500]="row.employedEndAt"></div>
           </div>
         </td>
       </ng-container>
@@ -32,14 +90,42 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="is-sick">
-        <th class="uppercase" *matHeaderCellDef mat-header-cell></th>
+      <ng-container matColumnDef="jobPosition">
+        <th class="uppercase" *matHeaderCellDef mat-header-cell>Stanowisko</th>
         <td *matCellDef="let row" mat-cell>
-          <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
+          <span>{{ row.jobPosition.name }}</span>
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="created_at">
+      <ng-container matColumnDef="baseSalary">
+        <th class="uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="BaseSalary">Wynagrodzenie zasadnicze</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.baseSalary | price }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="workingTime">
+        <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="WorkingTime">Czas pracy</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.workingTime }} h</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="employedAt">
+        <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="EmployedAt">Zawarto</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.employedAt | date:'dd MMM y' }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="employedEndAt">
+        <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="EmployedEndAt">Rozwiązano</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>{{ row.employedEndAt | date:'dd MMM y' }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
         <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="CreatedAt">Utworzono</th>
         <td *matCellDef="let row" mat-cell>
           <span>{{ row.createdAt | date:'dd MMM y HH:mm' }}</span>
@@ -77,7 +163,7 @@
       Nie znaleziono pracowników
     </div>
   </ng-template>
-</main>
+</div>
 
 <mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
   <ng-template let-data="data" matMenuContent class="bg-black">
