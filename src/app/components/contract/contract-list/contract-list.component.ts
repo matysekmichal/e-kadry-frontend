@@ -81,8 +81,8 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   get filtersResource() {
     return Object.assign(this.baseFilterResource, {
       ShowInactiveContracts: this.showInactiveContracts,
-      FromDate: this.range && this.range.start ? moment(this.range.start).format('DD-MM-YYYY') : null,
-      ToDate: this.range && this.range.end ? moment(this.range.end).format('DD-MM-YYYY') : null,
+      DateFrom: this.range && this.range.start ? moment(this.range.start).format('YYYY-MM-DD') : null,
+      DateTo: this.range && this.range.end ? moment(this.range.end).format('YYYY-MM-DD') : null,
     });
   }
 }
