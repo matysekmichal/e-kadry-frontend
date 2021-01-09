@@ -10,6 +10,8 @@ import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import {MatDialog} from '@angular/material/dialog';
 import {WorkerAddDialogComponent} from '../worker-add-dialog/worker-add-dialog.component';
+import {OperatorEditDialogComponent} from '../../operator/operator-edit-dialog/operator-edit-dialog.component';
+import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
 
 @Component({
   selector: 'app-worker-list',
@@ -50,5 +52,20 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   }
 
   editWorker(resource: Worker) {
+    const dialogRef = this.dialog.open(WorkerEditDialogComponent, {
+      data: {
+        resource: resource,
+      },
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(next => {
+      if (next.data.refresh == true) {
+        this.getData();
+      }
+    });
   }
 }

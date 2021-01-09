@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import {EnumItem} from '../../contracts/enum';
 
 export class Worker {
   id: string;
@@ -7,9 +8,9 @@ export class Worker {
   birthday: Date | string;
   cityOfBirthday: string;
   pesel: string;
-  documentType: number;
+  documentType: number | EnumItem;
   documentNumber: string;
-  gender: number;
+  gender: number | EnumItem;
   street: string;
   propertyNumber: string;
   city: string;

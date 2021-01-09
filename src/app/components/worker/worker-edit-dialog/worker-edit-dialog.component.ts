@@ -9,11 +9,11 @@ import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
 
 @Component({
-  selector: 'app-operator-add-dialog',
-  templateUrl: './worker-add-dialog.component.html',
-  styleUrls: ['./worker-add-dialog.component.scss']
+  selector: 'app-operator-edit-dialog',
+  templateUrl: './worker-edit-dialog.component.html',
+  styleUrls: ['./worker-edit-dialog.component.scss']
 })
-export class WorkerAddDialogComponent extends DelegatedFormTemplate<Worker> implements OnInit {
+export class WorkerEditDialogComponent extends DelegatedFormTemplate<Worker> implements OnInit {
   private refreshAfterClose = false;
   public genderTypes: EnumItem[];
   public documentTypes: EnumItem[];
@@ -23,25 +23,21 @@ export class WorkerAddDialogComponent extends DelegatedFormTemplate<Worker> impl
   constructor(
     private injector: Injector,
     private workerService: WorkerService,
-    private dialogRef: MatDialogRef<WorkerAddDialogComponent>,
+    private dialogRef: MatDialogRef<WorkerEditDialogComponent>,
     private enumService: EnumService,
     @Inject(MAT_DIALOG_DATA) private data: ResourceDialogData<Worker>,
   ) {
     super(injector);
     this.service = workerService;
-
-    this.dialogRef.beforeClosed().subscribe(() => {
-      this.closeDialog();
-    });
   }
 
   ngOnInit(): void {
     if (this.data.resource) {
       this.redirect = this.data.redirect ?? false;
-      this.resource = this.data.resource;
       this.resourceId = this.data.resource.id;
-    } else {
-      this.resource = new Worker();
+      this.service.get(this.resourceId).subscribe(response => {
+        this.resource = response;
+      })
     }
 
     this.enumService.gender.subscribe(response => {
@@ -55,23 +51,25 @@ export class WorkerAddDialogComponent extends DelegatedFormTemplate<Worker> impl
   }
 
   onSubmit() {
-    if (this.resourceId) {
-      this.updateResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
-    } else {
-      this.createResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
+    if (typeof this.resource.documentType !== 'number') {
+      this.resource.documentType = this.resource.documentType.id;
     }
+
+    if (typeof this.resource.gender !== 'number') {
+      this.resource.gender = this.resource.gender.id;
+    }
+
+    this.updateResource(() => {
+      this.refreshAfterClose = true;
+      this.closeDialog();
+    });
   }
 
   private closeDialog() {
     this.dialogRef.close({
       data: {
-        refresh: this.refreshAfterClose
+        refresh: this.refreshAfterClose,
+        resource: this.resource,
       }
     });
   }

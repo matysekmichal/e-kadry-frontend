@@ -17,14 +17,17 @@ import {WorkerManageComponent} from './worker-manage/worker-manage.component';
 import {HiddenTextModule} from '../hidden-text/hidden-text.module';
 import {WorkerAddDialogModule} from './worker-add-dialog/worker-add-dialog.module';
 import {WorkerAddDialogComponent} from './worker-add-dialog/worker-add-dialog.component';
+import {WorkerEditDialogComponent} from './worker-edit-dialog/worker-edit-dialog.component';
+import {WorkerEditDialogModule} from './worker-edit-dialog/worker-edit-dialog.module';
 
 @NgModule({
   entryComponents: [
-    WorkerAddDialogComponent
+    WorkerAddDialogComponent,
+    WorkerEditDialogComponent,
   ],
   declarations: [
     WorkerListComponent,
-    WorkerManageComponent
+    WorkerManageComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,8 @@ import {WorkerAddDialogComponent} from './worker-add-dialog/worker-add-dialog.co
     MatPaginatorModule,
     MatProgressSpinnerModule,
     HiddenTextModule,
-    WorkerAddDialogModule
+    WorkerAddDialogModule,
+    WorkerEditDialogModule,
   ]
 })
 export class WorkerModule {

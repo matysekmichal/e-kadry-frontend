@@ -55,15 +55,6 @@ export class OperatorEditDialogComponent extends DelegatedFormTemplate<Operator>
     return result;
   }
 
-  private closeDialog() {
-    this.dialogRef.close({
-      data: {
-        refresh: this.refreshAfterClose,
-        resource: this.resource,
-      }
-    });
-  }
-
   changePassword() {
     this.passwordChange = !this.passwordChange;
 
@@ -74,5 +65,14 @@ export class OperatorEditDialogComponent extends DelegatedFormTemplate<Operator>
       this.resource.password = null;
       this.showPassword = false;
     }
+  }
+
+  private closeDialog() {
+    this.dialogRef.close({
+      data: {
+        refresh: this.refreshAfterClose,
+        resource: this.resource,
+      }
+    });
   }
 }

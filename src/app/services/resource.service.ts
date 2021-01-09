@@ -12,6 +12,8 @@ export abstract class ResourceService<T> implements IResourceService<T> {
   protected apiUrl = environment.apiUrl.toString();
   protected loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$ = this.loadingSubject.asObservable();
+  protected persistSubject = new BehaviorSubject<boolean>(false);
+  public persist$ = this.persistSubject.asObservable();
   protected filterSubject = new BehaviorSubject<boolean>(false);
   public filter$ = this.filterSubject.asObservable();
   public headers: HttpHeaders;
@@ -58,26 +60,26 @@ export abstract class ResourceService<T> implements IResourceService<T> {
   }
 
   delete(id: number | string): Observable<object> {
-    this.loadingSubject.next(true);
+    this.persistSubject.next(true);
 
     return this.http.delete<object>(`${this.apiUrl}${this.url}/${id}`, {
       headers: this.headers
-    }).pipe(finalize(() => this.loadingSubject.next(false)));
+    }).pipe(finalize(() => this.persistSubject.next(false)));
   }
 
   update(id: number | string, resource: T): Observable<ResourceResponse> {
-    this.loadingSubject.next(true);
+    this.persistSubject.next(true);
 
     return this.http.put<ResourceResponse>(`${this.apiUrl}${this.url}/${id}`, resource, {
       headers: this.headers
-    }).pipe(finalize(() => this.loadingSubject.next(false)));
+    }).pipe(finalize(() => this.persistSubject.next(false)));
   }
 
   create(resource: T): Observable<ResourceCreatedResponse> {
-    this.loadingSubject.next(true);
+    this.persistSubject.next(true);
 
     return this.http.post<ResourceCreatedResponse>(`${this.apiUrl}${this.url}`, resource, {
       headers: this.headers
-    }).pipe(finalize(() => this.loadingSubject.next(false)));
+    }).pipe(finalize(() => this.persistSubject.next(false)));
   }
 }

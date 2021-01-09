@@ -3,6 +3,8 @@ import {FormTemplate} from '../../../templates/form.template';
 import {WorkerService} from '../worker.service';
 import {Worker} from '../worker.entity';
 import icEdit from '@iconify/icons-ic/twotone-edit';
+import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-worker-manage',
@@ -17,6 +19,7 @@ export class WorkerManageComponent extends FormTemplate implements OnInit {
   constructor(
     protected injector: Injector,
     public workerService: WorkerService,
+    private dialog: MatDialog,
   ) {
     super(injector);
   }
@@ -27,4 +30,21 @@ export class WorkerManageComponent extends FormTemplate implements OnInit {
     });
   }
 
+  editWorker() {
+    const dialogRef = this.dialog.open(WorkerEditDialogComponent, {
+      data: {
+        resource: this.resource,
+      },
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(next => {
+      if (next.data.resource) {
+        this.resource = next.data.resource;
+      }
+    });
+  }
 }

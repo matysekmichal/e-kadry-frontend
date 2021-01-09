@@ -1,10 +1,10 @@
-<div *ngIf="!(service.loading$ | async);then tForm else tLoading"></div>
+<div *ngIf="!(service.loading$ | async) && !(service.persist$ | async);then tForm else tAction"></div>
 
 <ng-template #tForm>
   <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
     <mat-dialog-content>
       <div class="flex flex-col">
-        <p class="title-primary mb-4">Dodaj pracownika</p>
+        <p class="title-primary mb-4">Edytuj pracownika</p>
 
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-full">
@@ -21,7 +21,7 @@
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-full">
             <mat-label>Data urodzenia</mat-label>
-            <input [matDatepicker]="birthdayPicker" name="birthday" (focus)="birthdayPicker.open()" [(ngModel)]="resource.birthday" [max]="resource.getMinAge()" aria-label="Wpisz datę urodzenia" required matInput>
+            <input [matDatepicker]="birthdayPicker" name="birthday" (focus)="birthdayPicker.open()" [(ngModel)]="resource.birthday" aria-label="Wpisz datę urodzenia" required matInput>
             <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
             <mat-datepicker #birthdayPicker startView="multi-year"></mat-datepicker>
           </mat-form-field>
@@ -44,7 +44,7 @@
 
           <mat-form-field>
             <mat-label>Płeć</mat-label>
-            <mat-select name="gender" [(ngModel)]="resource.gender">
+            <mat-select name="gender" [(ngModel)]="resource.gender.id">
               <mat-option *ngFor="let genderType of genderTypes" [value]="genderType.id">
                 {{ genderType.displayName }}
               </mat-option>
@@ -60,7 +60,7 @@
         <div class="flex flex-row gap-4">
           <mat-form-field>
             <mat-label>Rodzaj dokumentu</mat-label>
-            <mat-select name="document-type" [(ngModel)]="resource.documentType">
+            <mat-select name="document-type" [(ngModel)]="resource.documentType.id">
               <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.id">
                 {{ documentType.displayName }}
               </mat-option>
@@ -129,15 +129,16 @@
     <mat-dialog-actions>
       <div class="w-full flex justify-between items-center">
         <button mat-flat-button type="button" mat-dialog-close>Anuluj</button>
-        <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Dodaj</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Zapisz</button>
       </div>
     </mat-dialog-actions>
   </form>
 </ng-template>
 
-<ng-template #tLoading>
+<ng-template #tAction>
   <div class="flex flex-col items-center my-5">
     <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
-    <p class="title-primary">Trwa dodawanie</p>
+    <p class="title-primary" *ngIf="service.loading$ | async">Trwa ładowanie</p>
+    <p class="title-primary" *ngIf="service.persist$ | async">Trwa dodawanie</p>
   </div>
 </ng-template>

@@ -30,6 +30,7 @@ export const DATA_PLACEHOLDER: DataSourceInterface = {
 export interface IResourceService<T> {
   url: string;
   loading$?: Observable<boolean>;
+  persist$?: Observable<boolean>;
   filter$?: Observable<boolean>;
 
   getAll(page: number, filters: { [fieldName: string]: any }): Observable<{ data: T[] } | DataSourceInterface>;
