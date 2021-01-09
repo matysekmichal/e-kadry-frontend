@@ -7,6 +7,7 @@ import {DelegatedFormTemplate} from '../../../templates/delegated-form.template'
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-operator-add-dialog',

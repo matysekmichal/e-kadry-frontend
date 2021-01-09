@@ -6,9 +6,6 @@
       <div class="flex flex-col">
         <p class="title-primary mb-4">Dodaj pracownika</p>
 
-        <!--        Gender-->
-        <!--        Phon-->
-
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-full">
             <mat-label>Imię</mat-label>
@@ -22,11 +19,11 @@
         </div>
 
         <div class="flex flex-row gap-4">
-          <mat-form-field class="w-full">
+          <mat-form-field class="w-full" (click)="birthdayPicker.open()">
             <mat-label>Data urodzenia</mat-label>
-            <input [matDatepicker]="picker" [(ngModel)]="resource.birthday" aria-label="Wpisz datę urodzenia" required matInput>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            <input [matDatepicker]="birthdayPicker" name="birthday" [(ngModel)]="resource.birthday" [max]="resource.getMinAge()" aria-label="Wpisz datę urodzenia" required matInput>
+            <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
+            <mat-datepicker #birthdayPicker startView="multi-year"></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="w-full">
@@ -35,7 +32,7 @@
           </mat-form-field>
         </div>
 
-        <div class="divider mb-1 mt-3">
+        <div class="divider mb-2 mt-3">
           <p class="text-md font-semibold">Informacje szczegółowe</p>
         </div>
 
@@ -54,6 +51,11 @@
             </mat-select>
           </mat-form-field>
         </div>
+
+        <mat-form-field class="w-full">
+          <mat-label>Numer aktu</mat-label>
+          <input type="text" name="act-number" [(ngModel)]="resource.actNumber" aria-label="Wpisz numer aktu" required matInput>
+        </mat-form-field>
 
         <div class="flex flex-row gap-4">
           <mat-form-field>
@@ -83,7 +85,7 @@
           </mat-form-field>
         </div>
 
-        <div class="divider mb-1 mt-3">
+        <div class="divider mb-2 mt-3">
           <p class="text-md font-semibold">Adres pracownika</p>
         </div>
 
@@ -100,7 +102,7 @@
 
           <mat-form-field class="w-1/5">
             <mat-label>Nr lokalu</mat-label>
-            <input type="text" name="apartment-number" [(ngModel)]="resource.apartmentNumber" aria-label="Wpisz numer lokalu" required matInput>
+            <input type="text" name="apartment-number" [(ngModel)]="resource.apartmentNumber" aria-label="Wpisz numer lokalu" matInput>
           </mat-form-field>
         </div>
 

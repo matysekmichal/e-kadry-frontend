@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export class Worker {
   id: string;
   firstName: string;
@@ -21,10 +23,12 @@ export class Worker {
   createdAt: Date;
 
   constructor() {
-    this.id = this.firstName = this.lastName = this.cityOfBirthday = this.pesel = this.documentType = this.documentNumber = this.gender
+    this.id = this.firstName = this.lastName = this.birthday = this.cityOfBirthday = this.pesel = this.documentType = this.documentNumber = this.gender
       = this.city = this.street = this.propertyNumber = this.zipCode = this.city = this.country =this.apartmentNumber = this.actNumber = this.motherName = this.fatherName
       = this.phone = this.createdAt = null;
+  }
 
-    this.birthday = new Date();
+  getMinAge() {
+    return moment().subtract(16, 'years').toDate();
   }
 }
