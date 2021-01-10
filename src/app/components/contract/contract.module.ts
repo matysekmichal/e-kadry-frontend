@@ -17,6 +17,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import {CustomDateAdapter} from '../../utils/custom-date-adapter';
 import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [ContractListComponent],
@@ -38,6 +40,8 @@ import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
     MatDatepickerModule,
     MatNativeDateModule,
     PricePipeModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

@@ -8,9 +8,12 @@ import icAdd from '@iconify/icons-ic/twotone-add';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import icLabel from '@iconify/icons-ic/twotone-label';
 import icClear from '@iconify/icons-ic/twotone-clear';
 import {RangeDate} from '../../../contracts/range-date.model';
 import * as moment from 'moment';
+import {EnumService} from '../../../services/enum.service';
+import {EnumItem} from '../../../contracts/enum';
 
 @Component({
   selector: 'app-contract-list',
@@ -23,8 +26,10 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   icEdit = icEdit;
   icDelete = icDelete;
   icSearch = icSearch;
+  icLabel = icLabel;
   icClear = icClear;
 
+  jobPosition: number = null;
   showInactiveContracts = false;
   today = new Date();
   public range: RangeDate = {
@@ -33,6 +38,8 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   };
 
   filters: any = this.storedFilters;
+
+  jobPositions: EnumItem[];
 
   @Input() columns: TableColumn<Contract>[] = [
     {label: 'Status', property: 'status', type: 'badge', visible: true},
@@ -49,15 +56,25 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   constructor(
     protected injector: Injector,
     private contractService: ContractService,
+    private enumService: EnumService,
   ) {
     super(injector);
     this.service = contractService;
+
+    this.enumService.jobPosition.subscribe(response => {
+      this.jobPositions = response;
+    })
   }
 
   addWorker() {
   }
 
   editWorker(data: any) {
+  }
+
+  filterJobPosition($event: number) {
+    this.jobPosition = $event;
+    this.localFilterChange();
   }
 
   toggleShowClosedLeads() {
@@ -80,6 +97,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
 
   get filtersResource() {
     return Object.assign(this.baseFilterResource, {
+      JobPosition: this.jobPosition,
       ShowInactiveContracts: this.showInactiveContracts,
       DateFrom: this.range && this.range.start ? moment(this.range.start).format('YYYY-MM-DD') : null,
       DateTo: this.range && this.range.end ? moment(this.range.end).format('YYYY-MM-DD') : null,
