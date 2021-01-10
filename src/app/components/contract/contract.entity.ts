@@ -19,6 +19,7 @@ export class Contract {
   isGebf: boolean;
   isLeave: boolean;
   isSickLeave: boolean;
+  isPkzp: boolean;
   entireInternship: number;
   professionInternship: number;
   serviceInternship: number;
@@ -27,8 +28,8 @@ export class Contract {
 
   constructor() {
     this.id = this.employedAt = this.employedEndAt = this.baseSalary = this.idJobPosition = this.jobPosition = this.idWorker = this.identifierZusNumber = this.isSick
-      = this.isAnnuitant = this.isPensioner = this.isHealthy = this.isLf = this.isGebf = this.isLeave = this.isSickLeave = this.entireInternship = this.professionInternship
-      = this.serviceInternship = this.jubileeInternship = this.createdAt = null;
+      = this.isAnnuitant = this.isPensioner = this.isHealthy = this.isLf = this.isGebf = this.isLeave = this.isSickLeave = this.isPkzp = this.entireInternship
+      = this.professionInternship = this.serviceInternship = this.jubileeInternship = this.createdAt = null;
 
     this.worker = new Worker();
   }

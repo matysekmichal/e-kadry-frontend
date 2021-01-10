@@ -14,6 +14,8 @@ import {RangeDate} from '../../../contracts/range-date.model';
 import * as moment from 'moment';
 import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
+import {MatDialog} from '@angular/material/dialog';
+import {ContractAddDialogComponent} from '../contract-add-dialog/contract-add-dialog.component';
 
 @Component({
   selector: 'app-contract-list',
@@ -58,6 +60,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
     protected injector: Injector,
     private contractService: ContractService,
     private enumService: EnumService,
+    private dialog: MatDialog,
   ) {
     super(injector);
     this.service = contractService;
@@ -67,7 +70,14 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
     })
   }
 
-  addWorker() {
+  addContract() {
+    this.dialog.open(ContractAddDialogComponent, {
+      data: {},
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
   }
 
   editWorker(data: any) {

@@ -1,0 +1,120 @@
+<div *ngIf="!(service.loading$ | async);then tForm else tLoading"></div>
+
+<ng-template #tForm>
+  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
+    <mat-dialog-content>
+      <div class="flex flex-col">
+        <p class="title-primary mb-4">Utwórz umowę</p>
+
+        <mat-form-field>
+          <mat-label>Pracownik</mat-label>
+          <input type="text" name="searchFrom" matInput placeholder="Wpisz imię i/lub nazwisko pracownika" [matAutocomplete]="auto" [formControl]="searchForm" (keyup)="filter()" required>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" [autoActiveFirstOption]="true">
+            <mat-option *ngFor="let item of searchResult" [id]="item.id" [value]="item.firstName + ' ' + item.lastName">
+              <div class="flex flex-col">
+                <span class="font-medium">{{ item.firstName }} {{ item.lastName }}</span>
+                <span class="text-sm">{{ item.street }} {{ item.propertyNumber}} {{ item.apartmentNumber }}, {{ item.zipCode }} {{ item.city }}</span>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-icon [icIcon]="icVisibility" *ngIf="searchResult != undefined && searchResult.length <= 0" matSuffix style="display: inline-block;height: auto"></mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Wynagrodzenie zasadnicze netto</mat-label>
+          <input type="number" name="base-salary" [(ngModel)]="resource.baseSalary" aria-label="Wpisz wynagrodzenie zasadnicze" required matInput>
+        </mat-form-field>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Numer tytułu ZUS</mat-label>
+            <input type="number" name="identifier-zus-number" [(ngModel)]="resource.identifierZusNumber" aria-label="Wpisz numer tytułu ZUS" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Stanowisko</mat-label>
+            <mat-select name="job-position" [ngModel]="resource.idJobPosition">
+              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">
+                {{ jobPosition.displayName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Data rozpoczęcia umowy</mat-label>
+            <input [matDatepicker]="employedAtPicker" name="employed-at" (focus)="employedAtPicker.open()" [(ngModel)]="resource.employedAt" aria-label="Wpisz datę rozpoczęcia umowy" required matInput>
+            <mat-datepicker-toggle matSuffix [for]="employedAtPicker"></mat-datepicker-toggle>
+            <mat-datepicker #employedAtPicker startView="multi-year"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Data zakończenia umowy</mat-label>
+            <input [matDatepicker]="employedEndAtPicker" name="employed-end-at" (focus)="employedEndAtPicker.open()" [min]="resource.employedAt" [(ngModel)]="resource.employedEndAt" aria-label="Wpisz datę zakończenia umowy" [disabled]="!resource.employedAt" required matInput>
+            <mat-datepicker-toggle matSuffix [for]="employedEndAtPicker"></mat-datepicker-toggle>
+            <mat-datepicker #employedEndAtPicker startView="multi-year"></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4 mb-2">
+          <div class="flex flex-col gap-2 w-1/2">
+            <mat-checkbox name="is-sick" [(ngModel)]="resource.isSick">
+              Czy jest chory
+            </mat-checkbox>
+
+            <mat-checkbox name="is-pensioner" [(ngModel)]="resource.isPensioner">
+              Status emeryta
+            </mat-checkbox>
+
+
+            <mat-checkbox name="is-lf" [(ngModel)]="resource.isLf">
+              Czy Fundusz Pracy
+            </mat-checkbox>
+
+            <mat-checkbox name="is-leave" [(ngModel)]="resource.isLeave">
+              Czy urlop
+            </mat-checkbox>
+
+            <mat-checkbox name="is-pkzp" [(ngModel)]="resource.isPkzp">
+              Czy PKZP
+            </mat-checkbox>
+          </div>
+
+          <div class="flex flex-col gap-2 w-1/2">
+            <mat-checkbox name="is-annuitant" [(ngModel)]="resource.isAnnuitant">
+              Status rencista
+            </mat-checkbox>
+
+            <mat-checkbox name="is-healthy" [(ngModel)]="resource.isHealthy">
+              Czy jest zdrowy
+            </mat-checkbox>
+
+            <mat-checkbox name="is-gebf" [(ngModel)]="resource.isGebf">
+              Czy FGŚP
+            </mat-checkbox>
+
+            <mat-checkbox name="is-leave" [(ngModel)]="resource.isSickLeave">
+              Czy urlop chorobowy
+            </mat-checkbox>
+          </div>
+        </div>
+
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <div class="w-full flex justify-between items-center">
+        <button mat-flat-button type="button" mat-dialog-close>Anuluj</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Dodaj</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</ng-template>
+
+<ng-template #tLoading>
+  <div class="flex flex-col items-center my-5">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+    <p class="title-primary">Trwa dodawanie</p>
+  </div>
+</ng-template>

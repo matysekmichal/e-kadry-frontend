@@ -9,7 +9,7 @@ import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
 
 @Component({
-  selector: 'app-operator-add-dialog',
+  selector: 'app-worker-add-dialog',
   templateUrl: './worker-add-dialog.component.html',
   styleUrls: ['./worker-add-dialog.component.scss']
 })

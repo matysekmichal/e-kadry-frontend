@@ -19,9 +19,16 @@ import {CustomDateAdapter} from '../../utils/custom-date-adapter';
 import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {ContractAddDialogComponent} from './contract-add-dialog/contract-add-dialog.component';
+import {ContractAddDialogModule} from './contract-add-dialog/contract-add-dialog.module';
 
 @NgModule({
-  declarations: [ContractListComponent],
+  entryComponents: [
+    ContractAddDialogComponent,
+  ],
+  declarations: [
+    ContractListComponent,
+  ],
   imports: [
     CommonModule,
     ContractRoutingModule,
@@ -42,6 +49,7 @@ import {MatSelectModule} from '@angular/material/select';
     PricePipeModule,
     MatFormFieldModule,
     MatSelectModule,
+    ContractAddDialogModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
