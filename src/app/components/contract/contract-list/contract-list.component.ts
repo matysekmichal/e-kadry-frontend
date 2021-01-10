@@ -37,6 +37,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
     end: null
   };
 
+  filterKey = 'contract-filter';
   filters: any = this.storedFilters;
 
   jobPositions: EnumItem[];
@@ -102,5 +103,13 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
       DateFrom: this.range && this.range.start ? moment(this.range.start).format('YYYY-MM-DD') : null,
       DateTo: this.range && this.range.end ? moment(this.range.end).format('YYYY-MM-DD') : null,
     });
+  }
+
+  filtersPublish(filters) {
+    super.filtersPublish(filters);
+    this.jobPosition = filters.JobPosition;
+    this.showInactiveContracts = filters.ShowInactiveContracts;
+    this.range.start = filters.DateFrom ? moment(filters.DateFrom, 'YYYY-MM-DD').toDate() : null;
+    this.range.end = filters.DateTo ? moment(filters.DateTo, 'YYYY-MM-DD').toDate() : null;
   }
 }
