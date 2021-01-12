@@ -6,7 +6,7 @@
       <div class="flex flex-col">
         <p class="title-primary mb-4">Utwórz umowę</p>
 
-        <mat-form-field>
+        <mat-form-field *ngIf="!this.workerId">
           <mat-label>Pracownik</mat-label>
           <input type="text" name="searchFrom" matInput placeholder="Wpisz imię i/lub nazwisko pracownika" [matAutocomplete]="auto" [formControl]="searchForm" (keyup)="filter()" required>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" [autoActiveFirstOption]="true">
@@ -18,6 +18,15 @@
             </mat-option>
           </mat-autocomplete>
           <mat-icon [icIcon]="icVisibility" *ngIf="searchResult != undefined && searchResult.length <= 0" matSuffix style="display: inline-block;height: auto"></mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Rodzaj umowy</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let contractType of contractTypes" [value]="contractType.name" (click)="updateResourceWithSelectedValues(contractType)">
+              {{ contractType.name }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field class="w-full">
@@ -54,6 +63,30 @@
             <input [matDatepicker]="employedEndAtPicker" name="employed-end-at" (focus)="employedEndAtPicker.open()" [min]="resource.employedAt" [(ngModel)]="resource.employedEndAt" aria-label="Wpisz datę zakończenia umowy" [disabled]="!resource.employedAt" required matInput>
             <mat-datepicker-toggle matSuffix [for]="employedEndAtPicker"></mat-datepicker-toggle>
             <mat-datepicker #employedEndAtPicker startView="multi-year"></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-1/2">
+            <mat-label>Staż ogółem</mat-label>
+            <input type="number" name="entire-internship" [(ngModel)]="resource.entireInternship" aria-label="Wpisz staż ogółem" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-1/2">
+            <mat-label>Staż w zawodzie</mat-label>
+            <input type="number" name="profession-internship" [(ngModel)]="resource.professionInternship" aria-label="Wpisz staż w zawodzie" required matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-1/2">
+            <mat-label>Staż do wysługi</mat-label>
+            <input type="number" name="service-internship" [(ngModel)]="resource.serviceInternship" aria-label="Wpisz staż do wysługi" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-1/2">
+            <mat-label>Staż do jubileuszu</mat-label>
+            <input type="number" name="jubilee-internship" [(ngModel)]="resource.jubileeInternship" aria-label="Wpisz staż do wysługi" required matInput>
           </mat-form-field>
         </div>
 

@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ResourceDialogData} from '../../../contracts/dialog.interface';
+import {ResourceContractAddDialogData} from '../../../contracts/dialog.interface';
 import {DelegatedFormTemplate} from '../../../templates/delegated-form.template';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icLabel from '@iconify/icons-ic/twotone-label';
@@ -13,6 +13,7 @@ import {WorkerService} from '../../worker/worker.service';
 import {SearchQuery} from './search.query';
 import {Worker} from '../../worker/worker.entity';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {ContractType, ContractTypes} from './contract-types';
 
 @Component({
   selector: 'app-contract-add-dialog',
@@ -22,10 +23,12 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> implements OnInit {
 
   private refreshAfterClose = false;
+  workerId: any;
   genderTypes: EnumItem[];
   documentTypes: EnumItem[];
   jobPositions: EnumItem[];
 
+  contractTypes = ContractTypes;
   icVisibility = icVisibility;
   icLabel = icLabel;
 
@@ -41,7 +44,7 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
     private workerService: WorkerService,
     private dialogRef: MatDialogRef<ContractAddDialogComponent>,
     private enumService: EnumService,
-    @Inject(MAT_DIALOG_DATA) private data: ResourceDialogData<Contract>,
+    @Inject(MAT_DIALOG_DATA) private data: ResourceContractAddDialogData<Contract>,
   ) {
     super(injector);
     this.service = contractService;
@@ -58,6 +61,12 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
       this.resourceId = this.data.resource.id;
     } else {
       this.resource = new Contract();
+    }
+
+    if (this.data.worker instanceof Worker) {
+      this.workerId = this.data.worker.id;
+      this.resource.idWorker = this.data.worker.id;
+      this.resource.worker = this.data.worker;
     }
 
     this.enumService.gender.subscribe(response => {
@@ -111,5 +120,17 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
 
   select($event: MatAutocompleteSelectedEvent) {
     this.resource.idWorker = $event.option.id;
+  }
+
+  updateResourceWithSelectedValues(contractType: ContractType) {
+    const propertiesToNotUpdate = ['name'];
+
+    for (const prop in contractType) {
+      if (contractType.hasOwnProperty(prop) && this.resource.hasOwnProperty(prop)) {
+        if (propertiesToNotUpdate.findIndex(x => x === prop) < 0) {
+            this.resource[prop] = contractType[prop];
+        }
+      }
+    }
   }
 }
