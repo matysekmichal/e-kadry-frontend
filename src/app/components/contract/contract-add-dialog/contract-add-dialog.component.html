@@ -29,11 +29,6 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-full">
-          <mat-label>Wynagrodzenie zasadnicze brutto</mat-label>
-          <input type="number" name="base-salary" [(ngModel)]="resource.baseSalary" aria-label="Wpisz wynagrodzenie zasadnicze" required matInput>
-        </mat-form-field>
-
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-full">
             <mat-label>Numer tytułu ZUS</mat-label>
@@ -43,7 +38,7 @@
           <mat-form-field class="w-full">
             <mat-label>Stanowisko</mat-label>
             <mat-select>
-              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id" (click)="checkJobPosition(jobPosition.id)">
+              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id" (click)="checkJobPosition(jobPosition.id)" required>
                 {{ jobPosition.displayName }}
               </mat-option>
             </mat-select>
@@ -66,76 +61,81 @@
           </mat-form-field>
         </div>
 
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="w-full">
+            <mat-label>Wynagrodzenie zasadnicze brutto</mat-label>
+            <input type="number" name="base-salary" [(ngModel)]="resource.baseSalary" aria-label="Wpisz wynagrodzenie zasadnicze" required matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Normatyw czasu pracy</mat-label>
+            <input type="number" name="working-time" [(ngModel)]="resource.workingTime" aria-label="Wpisz normatyw czasu pracy" required matInput>
+          </mat-form-field>
+        </div>
+
+
         <div class="divider mb-2">
           <p class="text-md font-semibold">Informacje o stażu</p>
         </div>
 
-        <div class="flex flex-row gap-4 mb-2">
-          <div class="flex flex-col gap-2 w-1/2">
-            <mat-checkbox name="entire-internship" [(ngModel)]="resource.entireInternship">
-              Staż ogółem
-            </mat-checkbox>
+        <div class="flex flex-row flex-wrap gap-y-1 mb-2">
+          <mat-checkbox name="entire-internship" [(ngModel)]="resource.entireInternship" class="w-1/2">
+            Staż ogółem
+          </mat-checkbox>
 
-            <mat-checkbox name="profession-internship" [(ngModel)]="resource.professionInternship">
-              Staż w zawodzie
-            </mat-checkbox>
-          </div>
+          <mat-checkbox name="service-internship" [(ngModel)]="resource.serviceInternship" class="w-1/2">
+            Staż do wysługi
+          </mat-checkbox>
 
-          <div class="flex flex-col gap-2 w-1/2">
-            <mat-checkbox name="service-internship" [(ngModel)]="resource.serviceInternship">
-              Staż do wysługi
-            </mat-checkbox>
+          <mat-checkbox name="profession-internship" [(ngModel)]="resource.professionInternship" class="w-1/2">
+            Staż w zawodzie
+          </mat-checkbox>
 
-            <mat-checkbox name="jubilee-internship" [(ngModel)]="resource.jubileeInternship">
-              Staż do jubileuszu
-            </mat-checkbox>
-          </div>
+          <mat-checkbox name="jubilee-internship" [(ngModel)]="resource.jubileeInternship" class="w-1/2">
+            Staż do jubileuszu
+          </mat-checkbox>
         </div>
 
         <div class="divider mb-2 mt-3">
           <p class="text-md font-semibold">Informacje o naliczeniach składek</p>
         </div>
 
-        <div class="flex flex-row gap-4 mb-2">
-          <div class="flex flex-col gap-2 w-1/2">
-            <mat-checkbox name="is-sick" [(ngModel)]="resource.isSick">
-              Czy jest chory
-            </mat-checkbox>
+        <div class="flex flex-row flex-wrap gap-y-1 mb-2">
+          <mat-checkbox name="is-sick" [(ngModel)]="resource.isSick" class="w-1/2">
+            Czy jest chory
+          </mat-checkbox>
 
-            <mat-checkbox name="is-pensioner" [(ngModel)]="resource.isPensioner">
-              Status emeryta
-            </mat-checkbox>
+          <mat-checkbox name="is-annuitant" [(ngModel)]="resource.isAnnuitant" class="w-1/2">
+            Status rencista
+          </mat-checkbox>
 
-            <mat-checkbox name="is-lf" [(ngModel)]="resource.isLf">
-              Czy Fundusz Pracy
-            </mat-checkbox>
+          <mat-checkbox name="is-pensioner" [(ngModel)]="resource.isPensioner" class="w-1/2">
+            Status emeryta
+          </mat-checkbox>
 
-            <mat-checkbox name="is-leave" [(ngModel)]="resource.isLeave">
-              Czy urlop
-            </mat-checkbox>
+          <mat-checkbox name="is-healthy" [(ngModel)]="resource.isHealthy" class="w-1/2">
+            Czy jest zdrowy
+          </mat-checkbox>
 
-            <mat-checkbox name="is-pkzp" [(ngModel)]="resource.isPkzp">
-              Czy PKZP
-            </mat-checkbox>
-          </div>
+          <mat-checkbox name="is-lf" [(ngModel)]="resource.isLf" class="w-1/2">
+            Czy Fundusz Pracy
+          </mat-checkbox>
 
-          <div class="flex flex-col gap-2 w-1/2">
-            <mat-checkbox name="is-annuitant" [(ngModel)]="resource.isAnnuitant">
-              Status rencista
-            </mat-checkbox>
+          <mat-checkbox name="is-gebf" [(ngModel)]="resource.isGebf" class="w-1/2">
+            Czy FGŚP
+          </mat-checkbox>
 
-            <mat-checkbox name="is-healthy" [(ngModel)]="resource.isHealthy">
-              Czy jest zdrowy
-            </mat-checkbox>
+          <mat-checkbox name="is-leave" [(ngModel)]="resource.isLeave" class="w-1/2">
+            Czy urlop
+          </mat-checkbox>
 
-            <mat-checkbox name="is-gebf" [(ngModel)]="resource.isGebf">
-              Czy FGŚP
-            </mat-checkbox>
+          <mat-checkbox name="is-leave" [(ngModel)]="resource.isSickLeave" class="w-1/2">
+            Czy urlop chorobowy
+          </mat-checkbox>
 
-            <mat-checkbox name="is-leave" [(ngModel)]="resource.isSickLeave">
-              Czy urlop chorobowy
-            </mat-checkbox>
-          </div>
+          <mat-checkbox name="is-pkzp" [(ngModel)]="resource.isPkzp" class="w-1/2">
+            Czy PKZP
+          </mat-checkbox>
         </div>
 
       </div>
