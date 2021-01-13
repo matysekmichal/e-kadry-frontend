@@ -2,9 +2,13 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {FormTemplate} from '../../../templates/form.template';
 import {WorkerService} from '../worker.service';
 import {Worker} from '../worker.entity';
+import icAdd from '@iconify/icons-ic/twotone-add';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ContractAddDialogComponent} from '../../contract/contract-add-dialog/contract-add-dialog.component';
+import {ResourceContractAddDialogData} from '../../../contracts/dialog.interface';
+import {Contract} from '../../contract/contract.entity';
 
 @Component({
   selector: 'app-worker-manage',
@@ -12,6 +16,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./worker-manage.component.scss']
 })
 export class WorkerManageComponent extends FormTemplate implements OnInit {
+  icAdd = icAdd;
   icEdit = icEdit;
 
   resource: Worker;
@@ -47,4 +52,17 @@ export class WorkerManageComponent extends FormTemplate implements OnInit {
       }
     });
   }
+
+  addContract() {
+    this.dialog.open(ContractAddDialogComponent, {
+      data: {
+        worker: this.resource
+      },
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
+  }
+
 }

@@ -2,6 +2,10 @@
 <section class="card-base mt-10">
   <div class="card-bar">
     <h1 class="title-primary">{{ resource.firstName }} {{ resource.lastName }}</h1>
+    <button type="button" (click)="addContract()" matTooltip="Edytuj pracownika" color="primary" mat-flat-button>
+      <mat-icon [icIcon]="icAdd" class="text-white" size="19px"></mat-icon>
+      Dodaj umowę
+    </button>
   </div>
 </section>
 

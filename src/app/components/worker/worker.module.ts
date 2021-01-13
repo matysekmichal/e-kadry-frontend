@@ -19,11 +19,14 @@ import {WorkerAddDialogModule} from './worker-add-dialog/worker-add-dialog.modul
 import {WorkerAddDialogComponent} from './worker-add-dialog/worker-add-dialog.component';
 import {WorkerEditDialogComponent} from './worker-edit-dialog/worker-edit-dialog.component';
 import {WorkerEditDialogModule} from './worker-edit-dialog/worker-edit-dialog.module';
+import {ContractAddDialogComponent} from '../contract/contract-add-dialog/contract-add-dialog.component';
+import {ContractAddDialogModule} from '../contract/contract-add-dialog/contract-add-dialog.module';
 
 @NgModule({
   entryComponents: [
     WorkerAddDialogComponent,
     WorkerEditDialogComponent,
+    ContractAddDialogComponent,
   ],
   declarations: [
     WorkerListComponent,
@@ -46,6 +49,7 @@ import {WorkerEditDialogModule} from './worker-edit-dialog/worker-edit-dialog.mo
     HiddenTextModule,
     WorkerAddDialogModule,
     WorkerEditDialogModule,
+    ContractAddDialogModule,
   ]
 })
 export class WorkerModule {

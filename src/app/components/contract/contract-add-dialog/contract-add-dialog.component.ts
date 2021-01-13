@@ -63,10 +63,12 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
       this.resource = new Contract();
     }
 
-    if (this.data.worker instanceof Worker) {
-      this.workerId = this.data.worker.id;
-      this.resource.idWorker = this.data.worker.id;
-      this.resource.worker = this.data.worker;
+    const worker = this.data.worker ? this.data.worker as unknown as Worker : null;
+
+    if (!!worker.id) {
+      this.workerId = worker.id;
+      this.resource.idWorker = worker.id;
+      this.resource.worker = worker;
     }
 
     this.enumService.gender.subscribe(response => {
