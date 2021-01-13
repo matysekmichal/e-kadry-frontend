@@ -90,8 +90,8 @@
       <ng-container matColumnDef="status">
         <th class="w-16" *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let row" mat-cell>
-          <div class="w-full flex items-center cursor-pointer p-1">
-            <div class="w-3 h-3 rounded-full" [class.bg-green-500]="row.employedAt && !row.employedEndAt" [class.bg-red-500]="row.employedEndAt"></div>
+          <div class="w-full flex items-center p-1">
+            <div class="w-3 h-3 rounded-full" [ngClass]="isActiveContract(row)"></div>
           </div>
         </td>
       </ng-container>
@@ -122,7 +122,7 @@
       <ng-container matColumnDef="workingTime">
         <th class="w-40 uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="WorkingTime">Normatyw&nbsp;czasu&nbsp;pracy</th>
         <td *matCellDef="let row" mat-cell>
-          <span>{{ row.workingTime / 60 }} h</span>
+          <span>{{ transformWorkingTime(row.workingTime) }}</span>
         </td>
       </ng-container>
 

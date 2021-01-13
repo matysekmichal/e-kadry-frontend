@@ -124,4 +124,24 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
     this.range.start = filters.DateFrom ? moment(filters.DateFrom, 'YYYY-MM-DD').toDate() : null;
     this.range.end = filters.DateTo ? moment(filters.DateTo, 'YYYY-MM-DD').toDate() : null;
   }
+
+  isActiveContract(row: Contract) {
+    if (moment(row.employedAt).isAfter()) {
+      return 'bg-orange-500';
+    }
+
+    if (row.employedEndAt || moment(row.employedEndAt).isBefore()) {
+      return 'bg-red-500';
+    }
+
+    return 'bg-green-500';
+  }
+
+  transformWorkingTime(workingTime: any) {
+    if (!workingTime) {
+      return '-';
+    }
+
+    return Math.round(workingTime / 6) / 10 + 'h';
+  }
 }
