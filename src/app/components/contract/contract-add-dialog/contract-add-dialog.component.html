@@ -1,4 +1,4 @@
-<div *ngIf="!(service.loading$ | async);then tForm else tLoading"></div>
+<div *ngIf="!(service.loading$ | async) || !(service.persist$ | async);then tForm else tAction"></div>
 
 <ng-template #tForm>
   <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
@@ -66,28 +66,34 @@
           </mat-form-field>
         </div>
 
-        <div class="flex flex-row gap-4">
-          <mat-form-field class="w-1/2">
-            <mat-label>Staż ogółem</mat-label>
-            <input type="number" name="entire-internship" [(ngModel)]="resource.entireInternship" aria-label="Wpisz staż ogółem" matInput>
-          </mat-form-field>
-
-          <mat-form-field class="w-1/2">
-            <mat-label>Staż w zawodzie</mat-label>
-            <input type="number" name="profession-internship" [(ngModel)]="resource.professionInternship" aria-label="Wpisz staż w zawodzie" matInput>
-          </mat-form-field>
+        <div class="divider mb-2">
+          <p class="text-md font-semibold">Informacje o stażu</p>
         </div>
 
-        <div class="flex flex-row gap-4">
-          <mat-form-field class="w-1/2">
-            <mat-label>Staż do wysługi</mat-label>
-            <input type="number" name="service-internship" [(ngModel)]="resource.serviceInternship" aria-label="Wpisz staż do wysługi" matInput>
-          </mat-form-field>
+        <div class="flex flex-row gap-4 mb-2">
+          <div class="flex flex-col gap-2 w-1/2">
+            <mat-checkbox name="entire-internship" [(ngModel)]="resource.entireInternship">
+              Staż ogółem
+            </mat-checkbox>
 
-          <mat-form-field class="w-1/2">
-            <mat-label>Staż do jubileuszu</mat-label>
-            <input type="number" name="jubilee-internship" [(ngModel)]="resource.jubileeInternship" aria-label="Wpisz staż do wysługi" matInput>
-          </mat-form-field>
+            <mat-checkbox name="profession-internship" [(ngModel)]="resource.professionInternship">
+              Staż w zawodzie
+            </mat-checkbox>
+          </div>
+
+          <div class="flex flex-col gap-2 w-1/2">
+            <mat-checkbox name="service-internship" [(ngModel)]="resource.serviceInternship">
+              Staż do wysługi
+            </mat-checkbox>
+
+            <mat-checkbox name="jubilee-internship" [(ngModel)]="resource.jubileeInternship">
+              Staż do jubileuszu
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="divider mb-2 mt-3">
+          <p class="text-md font-semibold">Informacje o naliczeniach składek</p>
         </div>
 
         <div class="flex flex-row gap-4 mb-2">
@@ -99,7 +105,6 @@
             <mat-checkbox name="is-pensioner" [(ngModel)]="resource.isPensioner">
               Status emeryta
             </mat-checkbox>
-
 
             <mat-checkbox name="is-lf" [(ngModel)]="resource.isLf">
               Czy Fundusz Pracy
@@ -145,9 +150,10 @@
   </form>
 </ng-template>
 
-<ng-template #tLoading>
+<ng-template #tAction>
   <div class="flex flex-col items-center my-5">
     <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
-    <p class="title-primary">Trwa dodawanie</p>
+    <p class="title-primary" *ngIf="service.loading$ | async">Trwa ładowanie</p>
+    <p class="title-primary" *ngIf="service.persist$ | async">Trwa dodawanie</p>
   </div>
 </ng-template>

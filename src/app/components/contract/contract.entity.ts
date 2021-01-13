@@ -20,16 +20,17 @@ export class Contract {
   isLeave: boolean;
   isSickLeave: boolean;
   isPkzp: boolean;
-  entireInternship: number;
-  professionInternship: number;
-  serviceInternship: number;
-  jubileeInternship: number;
+  workingTime: boolean;
+  entireInternship: boolean;
+  professionInternship: boolean;
+  serviceInternship: boolean;
+  jubileeInternship: boolean;
   createdAt: Date;
 
   constructor() {
     this.id = this.employedAt = this.employedEndAt = this.baseSalary = this.idJobPosition = this.jobPosition = this.idWorker = this.identifierZusNumber = this.isSick
-      = this.isAnnuitant = this.isPensioner = this.isHealthy = this.isLf = this.isGebf = this.isLeave = this.isSickLeave = this.isPkzp = this.entireInternship
-      = this.professionInternship = this.serviceInternship = this.jubileeInternship = this.createdAt = null;
+      = this.isAnnuitant = this.isPensioner = this.isHealthy = this.isLf = this.isGebf = this.isLeave = this.isSickLeave = this.isPkzp = this.workingTime
+      = this.entireInternship = this.professionInternship = this.serviceInternship = this.jubileeInternship = this.createdAt = null;
 
     this.worker = new Worker();
   }

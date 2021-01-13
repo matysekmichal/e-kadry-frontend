@@ -99,7 +99,9 @@
       <ng-container matColumnDef="name">
         <th class="uppercase" *matHeaderCellDef mat-header-cell>Imię i nazwisko</th>
         <td *matCellDef="let row" mat-cell>
-          <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
+          <a [routerLink]="['/contracts', row.id, 'manage']" class="friendly">
+            <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
+          </a>
         </td>
       </ng-container>
 
@@ -184,6 +186,10 @@
       <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
       <span>Edytuj</span>
     </button>
+    <a [routerLink]="['/workers', data.idWorker, 'manage']"  mat-menu-item>
+      <mat-icon [icIcon]="icWorker" size="24px"></mat-icon>
+      <span>Zobacz pracownika</span>
+    </a>
     <button type="button" (click)="deleteResource(data)" class="danger" mat-menu-item>
       <mat-icon [icIcon]="icDelete" size="24px"></mat-icon>
       <span>Usuń</span>

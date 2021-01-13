@@ -13,7 +13,7 @@ import {WorkerService} from '../../worker/worker.service';
 import {SearchQuery} from './search.query';
 import {Worker} from '../../worker/worker.entity';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {ContractType, ContractTypes} from './contract-types';
+import {ContractType, ContractTypes} from '../contract-types';
 
 @Component({
   selector: 'app-contract-add-dialog',
@@ -65,7 +65,7 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
 
     const worker = this.data.worker ? this.data.worker as unknown as Worker : null;
 
-    if (!!worker.id) {
+    if (worker) {
       this.workerId = worker.id;
       this.resource.idWorker = worker.id;
       this.resource.worker = worker;
@@ -130,7 +130,7 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
     for (const prop in contractType) {
       if (contractType.hasOwnProperty(prop) && this.resource.hasOwnProperty(prop)) {
         if (propertiesToNotUpdate.findIndex(x => x === prop) < 0) {
-            this.resource[prop] = contractType[prop];
+          this.resource[prop] = contractType[prop];
         }
       }
     }

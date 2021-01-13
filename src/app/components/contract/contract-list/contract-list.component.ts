@@ -10,6 +10,7 @@ import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import icLabel from '@iconify/icons-ic/twotone-label';
 import icClear from '@iconify/icons-ic/twotone-clear';
+import icWorker from '@iconify/icons-ic/twotone-person';
 import {RangeDateInterface} from '../../../contracts/range-date.interface';
 import * as moment from 'moment';
 import {EnumService} from '../../../services/enum.service';
@@ -30,6 +31,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   icSearch = icSearch;
   icLabel = icLabel;
   icClear = icClear;
+  icWorker = icWorker;
 
   jobPosition: number = null;
   showInactiveContracts = false;

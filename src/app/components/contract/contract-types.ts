@@ -1,19 +1,23 @@
 export interface ContractType {
-    name: string;
-    identifierZusNumber: number;
-    isSick: boolean;
-    isAnnuitant: boolean;
-    isPensioner: boolean;
-    isHealthy: boolean;
-    isLf: boolean;
-    isGebf: boolean;
-    isLeave: boolean;
-    isSickLeave: boolean;
-    isPkzp: boolean;
-    entireInternship: number;
-    professionInternship: number;
-    serviceInternship: number;
-    jubileeInternship: number;
+  name: string;
+  identifierZusNumber: number;
+  isSick: boolean;
+  isAnnuitant: boolean;
+  isPensioner: boolean;
+  isHealthy: boolean;
+  isLf: boolean;
+  isGebf: boolean;
+  isLeave: boolean;
+  isSickLeave: boolean;
+  isPkzp: boolean;
+  entireInternship: boolean;
+  professionInternship: boolean;
+  serviceInternship: boolean;
+  jubileeInternship: boolean;
+}
+
+export interface ContractTypeFiled<T> {
+  value: T;
 }
 
 export const ContractTypes: ContractType[] = [
@@ -29,10 +33,10 @@ export const ContractTypes: ContractType[] = [
     isLeave: true,
     isSickLeave: true,
     isPkzp: true,
-    entireInternship: 1,
-    professionInternship: 1,
-    serviceInternship: 1,
-    jubileeInternship: 1,
+    entireInternship: true,
+    professionInternship: true,
+    serviceInternship: true,
+    jubileeInternship: true,
   },
   {
     name: 'Umowa zlecenie',
@@ -46,10 +50,10 @@ export const ContractTypes: ContractType[] = [
     isLeave: false,
     isSickLeave: false,
     isPkzp: false,
-    entireInternship: 0,
-    professionInternship: 0,
-    serviceInternship: 0,
-    jubileeInternship: 0,
+    entireInternship: false,
+    professionInternship: false,
+    serviceInternship: false,
+    jubileeInternship: false,
   },
   {
     name: 'Umowa o dzieło',
@@ -63,9 +67,9 @@ export const ContractTypes: ContractType[] = [
     isLeave: false,
     isSickLeave: false,
     isPkzp: false,
-    entireInternship: 0,
-    professionInternship: 0,
-    serviceInternship: 0,
-    jubileeInternship: 0,
+    entireInternship: false,
+    professionInternship: false,
+    serviceInternship: false,
+    jubileeInternship: false,
   },
 ]
