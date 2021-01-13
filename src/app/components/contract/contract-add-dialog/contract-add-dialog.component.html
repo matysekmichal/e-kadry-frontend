@@ -42,8 +42,8 @@
 
           <mat-form-field class="w-full">
             <mat-label>Stanowisko</mat-label>
-            <mat-select name="job-position" [ngModel]="resource.idJobPosition">
-              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">
+            <mat-select>
+              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id" (click)="checkJobPosition(jobPosition.id)">
                 {{ jobPosition.displayName }}
               </mat-option>
             </mat-select>
@@ -60,7 +60,7 @@
 
           <mat-form-field class="w-full">
             <mat-label>Data zakończenia umowy</mat-label>
-            <input [matDatepicker]="employedEndAtPicker" name="employed-end-at" (focus)="employedEndAtPicker.open()" [min]="resource.employedAt" [(ngModel)]="resource.employedEndAt" aria-label="Wpisz datę zakończenia umowy" [disabled]="!resource.employedAt" required matInput>
+            <input [matDatepicker]="employedEndAtPicker" name="employed-end-at" (focus)="employedEndAtPicker.open()" [min]="resource.employedAt" [(ngModel)]="resource.employedEndAt" aria-label="Wpisz datę zakończenia umowy" [disabled]="!resource.employedAt" matInput>
             <mat-datepicker-toggle matSuffix [for]="employedEndAtPicker"></mat-datepicker-toggle>
             <mat-datepicker #employedEndAtPicker startView="multi-year"></mat-datepicker>
           </mat-form-field>
@@ -69,24 +69,24 @@
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-1/2">
             <mat-label>Staż ogółem</mat-label>
-            <input type="number" name="entire-internship" [(ngModel)]="resource.entireInternship" aria-label="Wpisz staż ogółem" required matInput>
+            <input type="number" name="entire-internship" [(ngModel)]="resource.entireInternship" aria-label="Wpisz staż ogółem" matInput>
           </mat-form-field>
 
           <mat-form-field class="w-1/2">
             <mat-label>Staż w zawodzie</mat-label>
-            <input type="number" name="profession-internship" [(ngModel)]="resource.professionInternship" aria-label="Wpisz staż w zawodzie" required matInput>
+            <input type="number" name="profession-internship" [(ngModel)]="resource.professionInternship" aria-label="Wpisz staż w zawodzie" matInput>
           </mat-form-field>
         </div>
 
         <div class="flex flex-row gap-4">
           <mat-form-field class="w-1/2">
             <mat-label>Staż do wysługi</mat-label>
-            <input type="number" name="service-internship" [(ngModel)]="resource.serviceInternship" aria-label="Wpisz staż do wysługi" required matInput>
+            <input type="number" name="service-internship" [(ngModel)]="resource.serviceInternship" aria-label="Wpisz staż do wysługi" matInput>
           </mat-form-field>
 
           <mat-form-field class="w-1/2">
             <mat-label>Staż do jubileuszu</mat-label>
-            <input type="number" name="jubilee-internship" [(ngModel)]="resource.jubileeInternship" aria-label="Wpisz staż do wysługi" required matInput>
+            <input type="number" name="jubilee-internship" [(ngModel)]="resource.jubileeInternship" aria-label="Wpisz staż do wysługi" matInput>
           </mat-form-field>
         </div>
 

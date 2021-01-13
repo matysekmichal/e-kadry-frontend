@@ -3,7 +3,7 @@ export interface Enums {
 }
 
 export interface EnumItem {
-  id: number;
+  id: number | string;
   key: string;
   displayName: string;
 }
