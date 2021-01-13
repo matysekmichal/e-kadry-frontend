@@ -20,13 +20,15 @@
     <ng-container matColumnDef="action">
       <th class="w-0" *matHeaderCellDef mat-header-cell></th>
       <td *matCellDef="let row" mat-cell>
-        <div *ngIf="workerId;then SelectWorker else NotSelectedWorker"></div>
+        <div *ngIf="workerId == row.id;then SelectWorker else NotSelectedWorker"></div>
         <ng-template #NotSelectedWorker>
           <mat-icon [icIcon]="icMore" size="22px"></mat-icon>
         </ng-template>
 
         <ng-template #SelectWorker>
-          <mat-icon [icIcon]="icCancel" size="22px"></mat-icon>
+          <div (click)="cancelWorker()">
+            <mat-icon [icIcon]="icCancel" size="22px"  class="absolute z-40"></mat-icon>
+          </div>
         </ng-template>
       </td>
     </ng-container>

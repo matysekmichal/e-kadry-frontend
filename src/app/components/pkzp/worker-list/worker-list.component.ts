@@ -50,8 +50,14 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
 
   selectWorker(worker: Worker | null) {
     if (this.workerId != worker.id) {
-      this.workerId = this.workerId ? null : worker.id;
+      this.workerId = worker.id;
       this.workerIdEvent.emit(this.workerId);
     }
+  }
+
+  cancelWorker()
+  {
+    this.workerId = null;
+    this.workerIdEvent.emit(this.workerId);
   }
 }
