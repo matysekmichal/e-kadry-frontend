@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ListTemplate} from '../../../templates/list.template';
 import {Worker} from '../../worker/worker.entity';
-import {TableColumn} from '../../../contracts/table-column.interface';
+import {TableColumnInterface} from '../../../contracts/table-column.interface';
 import {WorkerService} from '../../worker/worker.service';
 import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions} from '@angular/material/paginator';
 import icMore from '@iconify/icons-ic/twotone-read-more';
@@ -35,7 +35,7 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   workerId: string;
   @Output() workerIdEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() columns: TableColumn<Worker>[] = [
+  @Input() columns: TableColumnInterface<Worker>[] = [
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
     {label: 'Akcja', property: 'action', type: 'text', visible: true},
   ];

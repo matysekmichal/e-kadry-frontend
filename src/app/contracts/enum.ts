@@ -7,3 +7,7 @@ export interface EnumItem {
   key: string;
   displayName: string;
 }
+
+export function instanceOfEnumItem(object: any): object is EnumItem {
+  return object.discriminator === 'EnumItem';
+}

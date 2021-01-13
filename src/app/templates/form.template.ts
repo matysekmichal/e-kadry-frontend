@@ -1,6 +1,6 @@
 import {Injector} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ResourceId} from '../contracts/resource-id';
+import {ResourceIdInterface} from '../contracts/resource-id.interface';
 import {IResourceService} from '../contracts/data-source.interface';
 import {MessageService} from '../components/layout/services/message.service';
 
@@ -27,7 +27,7 @@ export abstract class FormTemplate {
     );
   }
 
-  deleteResource(service: IResourceService<any>, item: ResourceId, successCallback = () => {}) {
+  deleteResource(service: IResourceService<any>, item: ResourceIdInterface, successCallback = () => {}) {
     this.messageService.confirm('Czy napewno chcesz kontynuować?', null, null, null, () => {
       service.delete(item.id).subscribe(
         (response) => {

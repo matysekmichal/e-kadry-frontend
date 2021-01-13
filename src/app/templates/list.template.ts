@@ -5,10 +5,10 @@ import {DataSource} from './data-source';
 import {MatSort, Sort, SortDirection} from '@angular/material/sort';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {IResourceService, ResourceResponse} from '../contracts/data-source.interface';
-import {TableColumn} from '../contracts/table-column.interface';
+import {TableColumnInterface} from '../contracts/table-column.interface';
 import {merge} from 'rxjs';
 import {PaginationListInterface} from '../contracts/pagination-list.interface';
-import {ResourceId} from '../contracts/resource-id';
+import {ResourceIdInterface} from '../contracts/resource-id.interface';
 import {MessageService} from '../components/layout/services/message.service';
 
 @Component({
@@ -17,7 +17,7 @@ import {MessageService} from '../components/layout/services/message.service';
 export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestroy {
   service: IResourceService<T>;
   resource: T[];
-  columns: TableColumn<T>[];
+  columns: TableColumnInterface<T>[];
   pageSizeOptions: number[] = [15, 30, 50, 150];
   pageSize = this.pageSizeOptions[0];
   dataSource: DataSource<T> | null;
@@ -139,7 +139,7 @@ export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestro
     return this.columns.filter(column => column.visible).map(column => column.property);
   }
 
-  deleteResource(item: ResourceId) {
+  deleteResource(item: ResourceIdInterface) {
     this.messageService.confirm('Czy napewno chcesz kontynuować?', 'Potwierdzenie spowoduje usunięcie zasobu.', null, null, () => {
       this.service.delete(item.id).subscribe(
         (response: ResourceResponse) => {

@@ -1,5 +1,5 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
-import {TableColumn} from '../../../contracts/table-column.interface';
+import {TableColumnInterface} from '../../../contracts/table-column.interface';
 import {Operator} from '../operator.entity';
 import {OperatorService} from '../operator.service';
 import {ListTemplate} from '../../../templates/list.template';
@@ -24,7 +24,7 @@ export class OperatorListComponent extends ListTemplate<Operator> implements OnI
   icDelete = icDelete;
   icSearch = icSearch;
 
-  @Input() columns: TableColumn<Operator>[] = [
+  @Input() columns: TableColumnInterface<Operator>[] = [
     {label: 'Status', property: 'status', type: 'badge', visible: true},
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
     {label: 'Utworzono', property: 'created_at', type: 'text', visible: true},

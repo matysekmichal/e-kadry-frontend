@@ -8,9 +8,9 @@ export class Worker {
   birthday: Date | string;
   cityOfBirthday: string;
   pesel: string;
-  documentType: number | EnumItem;
+  documentType: number | string | EnumItem;
   documentNumber: string;
-  gender: number | EnumItem;
+  gender: number | string | EnumItem;
   street: string;
   propertyNumber: string;
   city: string;

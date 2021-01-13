@@ -6,7 +6,7 @@ import {WorkerService} from '../worker.service';
 import {DelegatedFormTemplate} from '../../../templates/delegated-form.template';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import {EnumService} from '../../../services/enum.service';
-import {EnumItem} from '../../../contracts/enum';
+import {EnumItem, instanceOfEnumItem} from '../../../contracts/enum';
 
 @Component({
   selector: 'app-operator-edit-dialog',
@@ -51,11 +51,11 @@ export class WorkerEditDialogComponent extends DelegatedFormTemplate<Worker> imp
   }
 
   onSubmit() {
-    if (typeof this.resource.documentType !== 'number') {
+    if (instanceOfEnumItem(this.resource.documentType)) {
       this.resource.documentType = this.resource.documentType.id;
     }
 
-    if (typeof this.resource.gender !== 'number') {
+    if (instanceOfEnumItem(this.resource.gender)) {
       this.resource.gender = this.resource.gender.id;
     }
 

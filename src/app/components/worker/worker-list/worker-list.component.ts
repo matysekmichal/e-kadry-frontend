@@ -1,6 +1,6 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
 import {ListTemplate} from '../../../templates/list.template';
-import {TableColumn} from '../../../contracts/table-column.interface';
+import {TableColumnInterface} from '../../../contracts/table-column.interface';
 import {Worker} from '../worker.entity';
 import {WorkerService} from '../worker.service';
 import icMore from '@iconify/icons-ic/twotone-more-horiz';
@@ -25,7 +25,7 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   icDelete = icDelete;
   icSearch = icSearch;
 
-  @Input() columns: TableColumn<Worker>[] = [
+  @Input() columns: TableColumnInterface<Worker>[] = [
     {label: 'Status', property: 'status', type: 'badge', visible: true},
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
     {label: 'Utworzono', property: 'created_at', type: 'text', visible: true},
