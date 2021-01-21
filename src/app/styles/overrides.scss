@@ -7,3 +7,22 @@ ic-icon:not(.ic-inline) > svg,
   margin: 0 auto;
   vertical-align: middle;
 }
+
+.mat-icon-button .mat-button-wrapper > *,
+.mat-menu-item .mat-icon,
+.mat-button .mat-icon {
+  vertical-align: middle !important;
+}
+
+.mat-icon,
+.mat-icon.iconify,
+.mat-icon-button .mat-icon.iconify {
+  height: unset !important;
+  width: unset !important;
+}
+
+.mat-form-field-suffix, .mat-form-field-prefix {
+  .mat-icon-button .mat-icon {
+    font-size: inherit;
+  }
+}

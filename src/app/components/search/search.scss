@@ -1,0 +1,19 @@
+.mat-form-field {
+  .new {
+    position: absolute;
+    right: 0;
+    background: #2383e0;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 3px 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: -3px;
+  }
+
+  .mat-icon {
+    width: auto !important;
+    height: auto !important;
+  }
+}

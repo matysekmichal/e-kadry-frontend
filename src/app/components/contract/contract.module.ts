@@ -21,6 +21,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {ContractAddDialogComponent} from './contract-add-dialog/contract-add-dialog.component';
 import {ContractAddDialogModule} from './contract-add-dialog/contract-add-dialog.module';
+import {SearchModule} from '../search/search.module';
 
 @NgModule({
   entryComponents: [
@@ -50,6 +51,7 @@ import {ContractAddDialogModule} from './contract-add-dialog/contract-add-dialog
     MatFormFieldModule,
     MatSelectModule,
     ContractAddDialogModule,
+    SearchModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

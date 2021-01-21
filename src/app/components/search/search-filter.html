@@ -1,0 +1,14 @@
+<mat-form-field class="search-select" appearance="legacy">
+  <mat-label>{{ label }}</mat-label>
+  <mat-icon [icIcon]="icIcon" size="18px"></mat-icon>
+  <input type="text" matInput [matAutocomplete]="auto" [formControl]="searchControl" (keyup)="filter()" [required]="required">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" [autoActiveFirstOption]="true">
+    <mat-option *ngFor="let item of resource" [id]="item.id" [value]="item.name">
+      <span class="body-1">{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-progress-spinner mode="indeterminate" color="primary" diameter="16" *ngIf="searchService.filter$ | async" matSuffix></mat-progress-spinner>
+  <button type="button" class="clear-form" (click)="clear()" *ngIf="searchControl.value || isValue">
+    <mat-icon [icIcon]="icClear" size="14px" class="text-red-500"></mat-icon>
+  </button>
+</mat-form-field>

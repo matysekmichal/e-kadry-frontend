@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>{{ label }}</mat-label>
+  <input type="text" matInput [matAutocomplete]="auto" [formControl]="searchControl" (keyup)="filter()" (change)="select(null)" [required]="required">
+  <mat-autocomplete (optionSelected)="select($event)" #auto="matAutocomplete" [autoActiveFirstOption]="true">
+    <mat-option *ngFor="let item of resource" [id]="item.id" [value]="item.name">
+      <span class="body-1">{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-progress-spinner mode="indeterminate" color="primary" diameter="16" *ngIf="searchService.filter$ | async" matSuffix></mat-progress-spinner>
+</mat-form-field>

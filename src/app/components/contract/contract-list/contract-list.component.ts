@@ -33,7 +33,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   icClear = icClear;
   icWorker = icWorker;
 
-  jobPosition: number = null;
+  jobPosition: string = null;
   showInactiveContracts = false;
   today = new Date();
   public range: RangeDateInterface = {
@@ -85,7 +85,7 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   editWorker(data: any) {
   }
 
-  filterJobPosition($event: number) {
+  filterJobPosition($event) {
     this.jobPosition = $event;
     this.localFilterChange();
   }

@@ -136,7 +136,8 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
     }
   }
 
-  checkJobPosition(id: number | string) {
-    this.resource.idJobPosition = id.toString();
+  checkJobPosition(id: string) {
+    console.log(id)
+    this.resource.idJobPosition = id;
   }
 }

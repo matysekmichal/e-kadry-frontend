@@ -1,17 +1,6 @@
 <div class="my-5 flex flex-row justify-between">
   <div class="flex flex-row justify-between gap-4 items-center">
-    <mat-form-field class="bs-select" appearance="standard">
-      <mat-label>Stanowisko</mat-label>
-      <mat-icon [icIcon]="icLabel" size="18px"></mat-icon>
-      <mat-select [ngModel]="jobPosition" (valueChange)="filterJobPosition($event)">
-        <mat-option [value]="null">
-          Dowolne
-        </mat-option>
-        <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">
-          {{ jobPosition.displayName }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-job-position-search (selected)="filterJobPosition($event)" [currentValue]="jobPosition" label="Stanowisko pracy"></app-job-position-search>
 
     <mat-slide-toggle [ngModel]="showInactiveContracts" (toggleChange)="toggleShowClosedLeads()" matTooltip="Pokaż również wygasłe umowy">
       <span class="caption font-medium text-gray-700">Wygasłe umowy</span>
@@ -175,7 +164,7 @@
   </ng-template>
   <ng-template #notFiltering>
     <div class="table-message" *ngIf="dataSource.isEmpty">
-      Nie znaleziono pracowników
+      Nie znaleziono umów
     </div>
   </ng-template>
 </div>

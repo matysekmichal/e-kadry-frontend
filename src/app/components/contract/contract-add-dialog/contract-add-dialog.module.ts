@@ -15,28 +15,30 @@ import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SearchModule} from '../../search/search.module';
 
 @NgModule({
   declarations: [
     ContractAddDialogComponent
   ],
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatButtonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    IconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-  ],
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        MatButtonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        IconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        SearchModule,
+    ],
   exports: [
     ContractAddDialogComponent
   ],

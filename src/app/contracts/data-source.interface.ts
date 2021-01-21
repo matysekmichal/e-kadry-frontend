@@ -34,9 +34,13 @@ export interface IResourceService<T> {
   filter$?: Observable<boolean>;
 
   getAll(page: number, filters: { [fieldName: string]: any }): Observable<{ data: T[] } | DataSourceInterface>;
+
   get(id: string): Observable<T>;
+
   delete(id: string): Observable<object | void>;
+
   update(id: string, resource: T): Observable<ResourceResponse>;
+
   create(resource: T): Observable<ResourceCreatedResponse>;
 }
 
@@ -48,4 +52,11 @@ export interface ResourceResponse {
   data: any;
   status: number;
   message: string;
+}
+
+export interface ISearchService<T> {
+  url: string;
+  filter$?: Observable<boolean>;
+
+  search(value: string, perPage: number): Observable<T[]>;
 }

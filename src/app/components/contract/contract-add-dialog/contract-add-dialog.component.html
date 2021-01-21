@@ -35,14 +35,9 @@
             <input type="number" name="identifier-zus-number" [(ngModel)]="resource.identifierZusNumber" aria-label="Wpisz numer tytułu ZUS" required matInput>
           </mat-form-field>
 
-          <mat-form-field class="w-full">
-            <mat-label>Stanowisko</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id" (click)="checkJobPosition(jobPosition.id)" required>
-                {{ jobPosition.displayName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="w-full">
+          <app-job-position label="Stanowisko" (selected)="checkJobPosition($event)" [required]="true" class="w-full"></app-job-position>
+          </div>
         </div>
 
         <div class="flex flex-row gap-4">
@@ -72,7 +67,6 @@
             <input type="number" name="working-time" [(ngModel)]="resource.workingTime" aria-label="Wpisz normatyw czasu pracy" required matInput>
           </mat-form-field>
         </div>
-
 
         <div class="divider mb-2">
           <p class="text-md font-semibold">Informacje o stażu</p>
