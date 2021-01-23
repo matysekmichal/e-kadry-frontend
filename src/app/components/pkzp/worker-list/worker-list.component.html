@@ -11,31 +11,20 @@
 <section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
   <table [dataSource]="dataSource" class="w-full" mat-table>
     <ng-container matColumnDef="name">
-      <th class="uppercase" *matHeaderCellDef mat-header-cell>Imię i nazwisko</th>
+      <th class="w-full uppercase" *matHeaderCellDef mat-header-cell>
+        <div class="flex justify-between items-center">
+          <span>Imię i nazwisko</span>
+          <mat-icon [icIcon]="icInfo" matTooltip="Wyświetlani są tylko pracownicy z aktywną umową i możliwością utworzenia PKZP" size="20px" class="text-blue-500"></mat-icon>
+        </div>
+      </th>
       <td *matCellDef="let row" mat-cell>
-        <span>{{ row.firstName }} {{ row.lastName }}</span> &nbsp;
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="action">
-      <th class="w-0" *matHeaderCellDef mat-header-cell></th>
-      <td *matCellDef="let row" mat-cell>
-        <div *ngIf="workerId == row.id;then SelectWorker else NotSelectedWorker"></div>
-        <ng-template #NotSelectedWorker>
-          <mat-icon [icIcon]="icMore" size="22px"></mat-icon>
-        </ng-template>
-
-        <ng-template #SelectWorker>
-          <div (click)="cancelWorker()">
-            <mat-icon [icIcon]="icCancel" size="22px"  class="absolute z-40"></mat-icon>
-          </div>
-        </ng-template>
+        <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span> &nbsp;
       </td>
     </ng-container>
 
     <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
     <tr class="hover:bg-gray-100 cursor-pointer transition-colors"
-        [class.active]="row.id == workerId"
+        [class.active]="row.worker.id == workerId"
         *matRowDef="let row; columns: visibleColumns;"
         (click)="selectWorker(row)"
         mat-row></tr>

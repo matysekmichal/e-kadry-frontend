@@ -1,14 +1,12 @@
 import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ListTemplate} from '../../../templates/list.template';
-import {Worker} from '../../worker/worker.entity';
 import {TableColumnInterface} from '../../../contracts/table-column.interface';
-import {WorkerService} from '../../worker/worker.service';
 import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions} from '@angular/material/paginator';
-import icMore from '@iconify/icons-ic/twotone-read-more';
-import icAdd from '@iconify/icons-ic/twotone-add';
-import icEdit from '@iconify/icons-ic/twotone-edit';
-import icCancel from '@iconify/icons-ic/twotone-close';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import icInfo from '@iconify/icons-ic/twotone-info';
+import {Contract} from '../../contract/contract.entity';
+import {ContractService} from '../../contract/contract.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pkzp-worker-list',
@@ -25,39 +23,36 @@ import icSearch from '@iconify/icons-ic/twotone-search';
     }
   ]
 })
-export class WorkerListComponent extends ListTemplate<Worker> implements OnInit {
-  icMore = icMore;
-  icAdd = icAdd;
-  icEdit = icEdit;
-  icCancel = icCancel;
+export class WorkerListComponent extends ListTemplate<Contract> implements OnInit {
   icSearch = icSearch;
+  icInfo = icInfo;
 
   workerId: string;
   @Output() workerIdEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() columns: TableColumnInterface<Worker>[] = [
+  @Input() columns: TableColumnInterface<Contract>[] = [
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
-    {label: 'Akcja', property: 'action', type: 'text', visible: true},
   ];
 
   constructor(
     protected injector: Injector,
-    private workerService: WorkerService,
+    private contractService: ContractService,
   ) {
     super(injector);
-    this.service = workerService;
+    this.service = contractService;
   }
 
-  selectWorker(worker: Worker | null) {
-    if (this.workerId != worker.id) {
-      this.workerId = worker.id;
+  selectWorker(contract: Contract | null) {
+    if (this.workerId != contract.worker.id) {
+      this.workerId = contract.worker.id;
       this.workerIdEvent.emit(this.workerId);
     }
   }
 
-  cancelWorker()
-  {
-    this.workerId = null;
-    this.workerIdEvent.emit(this.workerId);
+  get filtersResource() {
+    return Object.assign(this.baseFilterResource, {
+      ShowInactiveContracts: false,
+      HasPkzp: true,
+    });
   }
 }
