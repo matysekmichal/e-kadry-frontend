@@ -7,6 +7,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {PeriodModule} from '../../period/period.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatInputModule} from '@angular/material/input';
     MatProgressSpinnerModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    PeriodModule,
   ],
   exports: [
     PkzpAddDialogComponent

@@ -1,0 +1,8 @@
+<mat-form-field class="w-full">
+  <mat-label>Wybierz okres</mat-label>
+  <mat-select [(ngModel)]="selectedValue">
+    <mat-option *ngFor="let period of periods" [value]="period.id" (onSelectionChange)="selectPeriod(period)">
+      {{ period.dateFrom | date:'MMM yyyy' }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

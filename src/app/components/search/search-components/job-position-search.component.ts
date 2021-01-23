@@ -9,7 +9,7 @@ import {JobPositionService} from '../../contract/job-position.service';
   selector: 'app-job-position-search',
   templateUrl: '../search-filter.html',
   styleUrls: [
-    '../search-filter.scss'
+    '../search.scss'
   ]
 })
 export class JobPositionSearchComponent extends Search<JobPosition> implements OnInit {

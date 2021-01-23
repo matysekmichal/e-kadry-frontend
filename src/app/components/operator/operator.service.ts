@@ -5,6 +5,6 @@ import {Operator} from './operator.entity';
 @Injectable({
   providedIn: 'root'
 })
-export class OperatorService extends ResourceService<Operator>{
+export class OperatorService extends ResourceService<Operator> {
   url = 'operators';
 }

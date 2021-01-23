@@ -4,7 +4,7 @@
   <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
     <mat-dialog-content>
       <div class="flex flex-col">
-        <p class="title-primary mb-4">Dodaj operatora</p>
+        <p class="title-primary mb-4">Dodaj pozycję PKZP</p>
 
         <mat-form-field>
           <mat-label>Login</mat-label>
@@ -20,6 +20,8 @@
           <mat-label>Nazwisko</mat-label>
           <input type="text" name="last-name" [(ngModel)]="resource.lastName" aria-label="Wpisz nazwisko" required matInput>
         </mat-form-field>
+
+        <app-period-select (selected)="resource.id = $event"></app-period-select>
       </div>
     </mat-dialog-content>
 
