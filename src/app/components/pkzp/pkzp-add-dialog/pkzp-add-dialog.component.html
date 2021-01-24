@@ -1,27 +1,67 @@
-<!--<div *ngIf="(service.loading$ | async);then tForm else tLoading"></div>-->
+<div *ngIf="(pkzpService.loading$ | async) || (pkzpService.persist$ | async);then tLoading else tForm"></div>
 
-<!--<ng-template #tForm>-->
+<ng-template #tForm>
   <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" class="tiny-form">
     <mat-dialog-content>
       <div class="flex flex-col">
         <p class="title-primary mb-4">Dodaj pozycję PKZP</p>
 
-        <mat-form-field>
-          <mat-label>Login</mat-label>
-          <input type="text" name="login" [(ngModel)]="resource.login" aria-label="Wpisz login" required matInput>
+        <mat-form-field class="w-full">
+          <mat-label>Wybierz rodzaj</mat-label>
+          <mat-select name="pkzp-position-type" [(ngModel)]="resource.pkzpPositionType">
+            <mat-option *ngFor="let type of pkzpPositionTypes" [value]="type.id">
+              {{ type.displayName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Imię</mat-label>
-          <input type="text" name="first-name" [(ngModel)]="resource.firstName" aria-label="Wpisz imię" required matInput>
-        </mat-form-field>
+        <app-period-select (selected)="resource.periodId = $event"></app-period-select>
 
         <mat-form-field>
-          <mat-label>Nazwisko</mat-label>
-          <input type="text" name="last-name" [(ngModel)]="resource.lastName" aria-label="Wpisz nazwisko" required matInput>
+          <mat-label>{{ label }}</mat-label>
+          <input type="text" name="amount" [(ngModel)]="resource.amount" aria-label="Wpisz {{ label }}" required matInput>
         </mat-form-field>
 
-        <app-period-select (selected)="resource.id = $event"></app-period-select>
+        <div *ngIf="resource.pkzpPositionType == 20">
+          <div class="divider mb-2">
+            <p class="text-md font-semibold">Parametry pożyczki</p>
+          </div>
+
+          <mat-form-field class="w-full">
+            <mat-label>Rodzaj spłaty</mat-label>
+            <mat-select>
+              <mat-option (click)="setRepaymentType('count')" value="Raty">Raty</mat-option>
+              <mat-option (click)="setRepaymentType('amount')" value="Kwota">Kwota</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div [ngSwitch]="repaymentType">
+            <div *ngSwitchCase="'count'">
+              <div class="flex flex-row pl-2">
+                <span>Liczba rat</span>
+                <mat-slider
+                  class="w-full"
+                  name="installments-count"
+                  [(ngModel)]="resource.installmentsCount"
+                  thumbLabel
+                  tickInterval="1000"
+                  min="1"
+                  max="72"></mat-slider>
+              </div>
+
+              <div class="px-2">Liczba rat: <b>{{ resource.installmentsCount}}</b></div>
+              <div class="px-2">Wysokość raty: <b>{{ countInstallmentsAmount() }}</b></div>
+            </div>
+            <div *ngSwitchCase="'amount'">
+              <mat-form-field class="w-full">
+                <mat-label>Wysokość raty</mat-label>
+                <input type="number" name="installments-amount" [(ngModel)]="resource.installmentAmount" max="12000 " aria-label="Wpisz wysokość jednej raty" required matInput>
+              </mat-form-field>
+
+              <div class="px-2">Liczba rat: <b>{{ countInstallmentsCount() }}</b></div>
+            </div>
+          </div>
+        </div>
       </div>
     </mat-dialog-content>
 
@@ -32,11 +72,11 @@
       </div>
     </mat-dialog-actions>
   </form>
-<!--</ng-template>-->
+</ng-template>
 
-<!--<ng-template #tLoading>-->
-<!--  <div class="flex flex-col items-center my-5">-->
-<!--    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>-->
-<!--    <p class="title-primary">Trwa dodawanie</p>-->
-<!--  </div>-->
-<!--</ng-template>-->
+<ng-template #tLoading>
+  <div class="flex flex-col items-center my-5">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+    <p class="title-primary">Trwa dodawanie</p>
+  </div>
+</ng-template>

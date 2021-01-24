@@ -27,12 +27,14 @@ export const DATA_PLACEHOLDER: DataSourceInterface = {
   total: 0
 };
 
-export interface IResourceService<T> {
+export interface IApiService {
   url: string;
   loading$?: Observable<boolean>;
   persist$?: Observable<boolean>;
   filter$?: Observable<boolean>;
+}
 
+export interface IResourceService<T> extends IApiService {
   getAll(page: number, filters: { [fieldName: string]: any }): Observable<{ data: T[] } | DataSourceInterface>;
 
   get(id: string): Observable<T>;

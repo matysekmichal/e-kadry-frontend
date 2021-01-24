@@ -10,3 +10,7 @@ export interface ResourcePkzpAddDialogData<T> extends ResourceDialogData<T> {
 export interface ResourceContractAddDialogData<T> extends ResourceDialogData<T> {
   worker: Worker;
 }
+
+export interface PkzpAddDialogData {
+  workerId: string;
+}

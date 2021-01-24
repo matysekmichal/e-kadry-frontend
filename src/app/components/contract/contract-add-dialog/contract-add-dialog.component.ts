@@ -25,8 +25,6 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
   private refreshAfterClose = false;
   workerId: any;
   genderTypes: EnumItem[];
-  documentTypes: EnumItem[];
-  jobPositions: EnumItem[];
 
   contractTypes = ContractTypes;
   icVisibility = icVisibility;
@@ -48,10 +46,6 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
   ) {
     super(injector);
     this.service = contractService;
-
-    this.dialogRef.beforeClosed().subscribe(() => {
-      this.closeDialog();
-    });
   }
 
   ngOnInit(): void {
@@ -75,8 +69,8 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
       this.genderTypes = response;
     });
 
-    this.enumService.jobPosition.subscribe(response => {
-      this.jobPositions = response;
+    this.dialogRef.beforeClosed().subscribe(() => {
+      this.closeDialog();
     });
   }
 

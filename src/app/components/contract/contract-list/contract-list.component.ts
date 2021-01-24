@@ -61,15 +61,10 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   constructor(
     protected injector: Injector,
     private contractService: ContractService,
-    private enumService: EnumService,
     private dialog: MatDialog,
   ) {
     super(injector);
     this.service = contractService;
-
-    this.enumService.jobPosition.subscribe(response => {
-      this.jobPositions = response;
-    })
   }
 
   addContract() {

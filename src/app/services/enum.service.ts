@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Enums} from '../contracts/enum';
 
-type EnumType = 'documentType' | 'gender' | 'jobPosition';
+type EnumType = 'documentType' | 'gender' | 'jobPosition' | 'pkzpType' | 'pkzpPositionType';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,14 @@ export class EnumService {
 
   get jobPosition() {
     return this._getOrReturn('jobPosition');
+  }
+
+  get pkzpType() {
+    return this._getOrReturn('pkzpType');
+  }
+
+  get pkzpPositionType() {
+    return this._getOrReturn('pkzpPositionType')
   }
 
   refresh() {

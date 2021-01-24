@@ -8,6 +8,8 @@ import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {PeriodModule} from '../../period/period.module';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import {PeriodModule} from '../../period/period.module';
     MatFormFieldModule,
     MatInputModule,
     PeriodModule,
+    MatSelectModule,
+    MatSliderModule,
   ],
   exports: [
     PkzpAddDialogComponent

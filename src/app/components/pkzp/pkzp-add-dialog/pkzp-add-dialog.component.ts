@@ -1,66 +1,90 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {DelegatedFormTemplate} from '../../../templates/delegated-form.template';
-import {Operator} from '../../operator/operator.entity';
-import {OperatorService} from '../../operator/operator.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ResourceDialogData, ResourcePkzpAddDialogData} from '../../../contracts/dialog.interface';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
+import {PkzpPositionCreateOrUpdate} from '../pkzp-position.entity';
+import {PkzpService} from '../pkzp.service';
+import {EnumService} from '../../../services/enum.service';
+import {EnumItem} from '../../../contracts/enum';
+import {PkzpAddDialogData} from '../../../contracts/dialog.interface';
+
+type RepaymentTypes = 'count' | 'amount';
 
 @Component({
   selector: 'app-pkzp-add-dialog',
   templateUrl: './pkzp-add-dialog.component.html',
   styleUrls: ['./pkzp-add-dialog.component.scss']
 })
-export class PkzpAddDialogComponent extends DelegatedFormTemplate<Operator> implements OnInit {
-  private refreshAfterClose = false;
+export class PkzpAddDialogComponent implements OnInit {
   icVisibility = icVisibility;
 
-  @Inject(MAT_DIALOG_DATA) private data: ResourcePkzpAddDialogData<Operator>;
+  resource: PkzpPositionCreateOrUpdate;
+  pkzpPositionTypes: EnumItem[];
+
+  repaymentType: RepaymentTypes;
 
   constructor(
     private injector: Injector,
-    private operatorService: OperatorService,
+    public pkzpService: PkzpService,
+    private enumService: EnumService,
     private dialogRef: MatDialogRef<PkzpAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: ResourcePkzpAddDialogData<Operator>,
+    @Inject(MAT_DIALOG_DATA) data: PkzpAddDialogData,
   ) {
-    super(injector);
-    this.data = data;
-    this.service = operatorService;
+    this.resource = new PkzpPositionCreateOrUpdate();
+
+    if (data.workerId) {
+      this.resource.workerId = data.workerId;
+    }
+  }
+
+  ngOnInit(): void {
+    this.enumService.pkzpPositionType.subscribe(response => {
+      this.pkzpPositionTypes = response;
+    });
 
     this.dialogRef.beforeClosed().subscribe(() => {
       this.closeDialog();
     });
   }
 
-  ngOnInit(): void {
-    if (this.data.resource) {
-      this.redirect = this.data.redirect ?? false;
-      this.resource = this.data.resource;
-      this.resourceId = this.data.resource.id;
-    } else {
-      this.resource = new Operator();
-    }
-  }
-
   onSubmit() {
-    if (this.resourceId) {
-      this.updateResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
-    } else {
-      this.createResource(() => {
-        this.refreshAfterClose = true;
-        this.dialogRef.close()
-      });
-    }
+    console.log(this.resource);
+    this.pkzpService.create(this.resource).subscribe(response => {
+      console.log(response);
+    })
   }
 
   private closeDialog() {
     this.dialogRef.close({
       data: {
-        refresh: this.refreshAfterClose
+        refresh: true
       }
     });
+  }
+
+  setRepaymentType(type: RepaymentTypes) {
+    this.repaymentType = type;
+  }
+
+  countInstallmentsAmount() {
+    return Math.round(this.resource.amount / this.resource.installmentsCount);
+  }
+
+  countInstallmentsCount() {
+    return Math.round(this.resource.amount / this.resource.installmentAmount);
+  }
+
+  get label() {
+    switch (this.resource.pkzpPositionType) {
+      case 10 :
+        return 'Wysokość wkładu pienieżnego';
+      case 20 :
+        return 'Wysokość pożyczki';
+      case 30 :
+        return 'Wysokość wpisowego';
+      case 40 :
+        return 'Wysokość spłaty';
+      default :
+        return 'Wartość kwotową';
+    }
   }
 }
