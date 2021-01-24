@@ -6,6 +6,7 @@ import {PkzpService} from '../pkzp.service';
 import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
 import {PkzpAddDialogData} from '../../../contracts/dialog.interface';
+import {PkzpParameters} from '../pkzp-parameters.interface';
 
 type RepaymentTypes = 'count' | 'amount';
 
@@ -19,6 +20,7 @@ export class PkzpAddDialogComponent implements OnInit {
 
   resource: PkzpPositionCreateOrUpdate;
   pkzpPositionTypes: EnumItem[];
+  pkzpParameters: PkzpParameters;
 
   repaymentType: RepaymentTypes;
 
@@ -39,6 +41,10 @@ export class PkzpAddDialogComponent implements OnInit {
   ngOnInit(): void {
     this.enumService.pkzpPositionType.subscribe(response => {
       this.pkzpPositionTypes = response;
+    });
+
+    this.pkzpService.parameter().subscribe(response => {
+      this.pkzpParameters = response;
     });
 
     this.dialogRef.beforeClosed().subscribe(() => {
