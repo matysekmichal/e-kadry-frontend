@@ -1,23 +1,59 @@
 <div *ngIf="workerId;then showPkzp else selectWorker"></div>
 <ng-template #showPkzp>
-  <section class="card-bar border-b">
-    <div class="flex gap-6">
-      <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
+
+  <div *ngIf="!(pkzpService.loading$ | async);then showPkzpSummary else showLoading"></div>
+
+  <ng-template #showPkzpSummary>
+    <div class="flex flex-row gap-4">
+      <div class="flex flex-col bg-white px-3 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 text-center">Suma wkładów</p>
+        <p class="text-center">
+          <span class="text-3xl font-black leading-tight">{{ 1200 | price }}</span>
+          <span class="text-sm text-gray-700 ml-2">PLN</span>
+        </p>
+      </div>
+      <div class="flex flex-col bg-white px-3 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 text-center">Suma wkładów</p>
+        <p class="text-center">
+          <span class="text-3xl font-black leading-tight">{{ 42204 | price }}</span>
+          <span class="text-sm text-gray-700 ml-2">PLN</span>
+        </p>
+      </div>
+      <div class="relative flex flex-col bg-white px-3 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 text-center">Suma pożyczek</p>
+        <p class="text-center">
+          <span class="text-3xl font-black leading-tight">{{ 8000 | price }}</span>
+          <span class="text-sm text-gray-700 ml-2">PLN</span>
+        </p>
+      </div>
     </div>
-    <div>
-      <button type="button" class="btn-icon-primary" (click)="addRecord()">
-        <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
-      </button>
-    </div>
-  </section>
+  </ng-template>
+  <ng-template #showLoading>
+    Loading
+  </ng-template>
+
+  <div class="card-base mt-4">
+    <section class="card-bar border-b">
+      <div class="flex gap-6">
+        <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
+      </div>
+      <div>
+        <button type="button" class="btn-icon-primary" (click)="addRecord()">
+          <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
+        </button>
+      </div>
+    </section>
+  </div>
 
   {{ workerId | json }}
 </ng-template>
 
 <ng-template #selectWorker>
-  <div class="message-simply w-full py-16">
-    <mat-icon [icIcon]="icWorker" size="80px" class="text-blue-500"></mat-icon>
-    <span class="h2 title-primary">Wybierz pracownika</span>
+  <div class="card-base">
+    <div class="message-simply w-full py-16">
+      <mat-icon [icIcon]="icWorker" size="80px" class="text-blue-500"></mat-icon>
+      <span class="h2 title-primary">Wybierz pracownika</span>
+    </div>
   </div>
 </ng-template>
 
