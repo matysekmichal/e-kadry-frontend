@@ -53,7 +53,15 @@ export class PkzpAddDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.resource);
+    switch (this.repaymentType) {
+      case 'amount':
+        this.resource.installmentsCount = 0;
+        break;
+      case 'count':
+        this.resource.installmentAmount = 0;
+        break;
+    }
+
     this.pkzpService.create(this.resource).subscribe(response => {
       console.log(response);
     })

@@ -4,12 +4,14 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
+import {MessageService} from '../components/layout/services/message.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) {
   }
 
@@ -22,12 +24,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
 
         if (error instanceof HttpErrorResponse) {
-          const applicationError = error.headers.get('Application-Error');
-
-          if (applicationError) {
-            return throwError(applicationError);
-          }
-
           const serverError = error.error;
           let modalStateErrors = '';
 
@@ -38,6 +34,8 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
             }
           }
+
+          this.messageService.error(error.error.detail);
 
           return throwError(modalStateErrors || serverError || 'Server Error');
         }
