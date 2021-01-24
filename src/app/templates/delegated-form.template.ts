@@ -11,7 +11,7 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
   private edit = true;
   protected redirect: string | boolean = this.router.url;
 
-  constructor(injector: Injector) {
+  protected constructor(injector: Injector) {
     super(injector);
   }
 
@@ -42,7 +42,6 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
         this.messageService.toast(response.message);
         successCallback();
       }, error => {
-        this.messageService.error('Nie udało się zaktualizowanie zasobu.');
         errorCallback();
       }
     );
@@ -56,7 +55,6 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
         }
         successCallback();
       }, (error: ResourceCreatedResponse) => {
-        this.messageService.error('Nie można było stworzyć zasobu.');
         errorCallback();
       }
     );
