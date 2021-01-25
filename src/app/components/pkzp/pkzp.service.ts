@@ -23,10 +23,10 @@ export class PkzpService extends ApiService {
     }).pipe(finalize(() => this.persistSubject.next(false)));
   }
 
-  summary(workerId: string): Observable<Pkzp> {
+  summary(workerId: string): Observable<Pkzp[]> {
     this.loadingSubject.next(true);
 
-    return this.http.get<Pkzp>(`${this.apiUrl}${this.url}/${workerId}`, {
+    return this.http.get<Pkzp[]>(`${this.apiUrl}${this.url}/${workerId}`, {
       headers: this.headers
     }).pipe(finalize(() => this.loadingSubject.next(false)));
   }

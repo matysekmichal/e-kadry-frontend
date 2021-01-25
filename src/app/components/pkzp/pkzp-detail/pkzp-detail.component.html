@@ -1,51 +1,54 @@
 <div *ngIf="workerId;then showPkzp else selectWorker"></div>
 <ng-template #showPkzp>
-
   <div *ngIf="!(pkzpService.loading$ | async);then showPkzpSummary else showLoading"></div>
 
   <ng-template #showPkzpSummary>
     <div class="flex flex-row gap-4">
-      <div class="flex flex-col bg-white px-3 py-4 w-full card-base">
-        <p class="text-sm text-gray-700 text-center">Suma wkładów</p>
-        <p class="text-center">
-          <span class="text-3xl font-black leading-tight">{{ 1200 | price }}</span>
+      <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icBalances" class="inline-block align-middle text-black" size="18px"></mat-icon> Bilans</p>
+        <p class="">
+          <span class="text-3xl font-black leading-tight">{{ balance() | price }}</span>
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>
-      <div class="flex flex-col bg-white px-3 py-4 w-full card-base">
-        <p class="text-sm text-gray-700 text-center">Suma wkładów</p>
-        <p class="text-center">
-          <span class="text-3xl font-black leading-tight">{{ 42204 | price }}</span>
+      <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icContribution" class="inline-block align-middle text-green-500" size="18px"></mat-icon> Suma wkładów</p>
+        <p class="">
+          <span class="text-3xl font-black leading-tight">{{ pkzpContributionSum() | price }}</span>
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>
-      <div class="relative flex flex-col bg-white px-3 py-4 w-full card-base">
-        <p class="text-sm text-gray-700 text-center">Suma pożyczek</p>
-        <p class="text-center">
-          <span class="text-3xl font-black leading-tight">{{ 8000 | price }}</span>
+      <div class="relative flex flex-col bg-white px-6 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icLoan" class="inline-block align-middle text-red-500" size="18px"></mat-icon> Suma pożyczek</p>
+        <p class="">
+          <span class="text-3xl font-black leading-tight">{{ pkzpLoanSum() | price }}</span>
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>
     </div>
+
+    <div class="card-base mt-4">
+      <section class="card-bar border-b">
+        <div class="flex gap-6">
+          <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
+        </div>
+        <div>
+          <button type="button" class="btn-icon-primary" (click)="addRecord()">
+            <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
+          </button>
+        </div>
+      </section>
+      <section>
+        {{ workerId | json }}
+      </section>
+    </div>
   </ng-template>
   <ng-template #showLoading>
-    Loading
+    <div class="flex flex-col items-center py-16">
+      <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+      <p class="title-primary">Trwa ładowanie</p>
+    </div>
   </ng-template>
-
-  <div class="card-base mt-4">
-    <section class="card-bar border-b">
-      <div class="flex gap-6">
-        <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
-      </div>
-      <div>
-        <button type="button" class="btn-icon-primary" (click)="addRecord()">
-          <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
-        </button>
-      </div>
-    </section>
-  </div>
-
-  {{ workerId | json }}
 </ng-template>
 
 <ng-template #selectWorker>

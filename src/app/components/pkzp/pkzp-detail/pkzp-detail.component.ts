@@ -5,6 +5,9 @@ import {PkzpAddDialogComponent} from '../pkzp-add-dialog/pkzp-add-dialog.compone
 import icWorker from '@iconify/icons-ic/twotone-person';
 import {PkzpService} from '../pkzp.service';
 import {Pkzp} from '../pkzp.entity';
+import icBalances from '@iconify/icons-ic/twotone-import-export';
+import icContribution from '@iconify/icons-ic/twotone-vertical-align-bottom';
+import icLoan from '@iconify/icons-ic/twotone-upgrade';
 
 @Component({
   selector: 'app-pkzp-detail',
@@ -17,7 +20,10 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   @Input() workerId: string;
   icWorker = icWorker;
 
-  pkzpSummary: Pkzp;
+  pkzpSummary: Pkzp[];
+  icBalances = icBalances;
+  icContribution = icContribution;
+  icLoan = icLoan;
 
   constructor(
     public pkzpService: PkzpService,
@@ -48,4 +54,44 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
     });
   }
 
+  balance() {
+    let result = 0;
+    this.pkzpSummary.forEach(x => {
+      if (typeof x.pkzpType == 'object') {
+        switch (x.pkzpType.id) {
+          case 10 :
+            result += x.balance;
+            break;
+          case 20 :
+            result -= x.debit;
+            break;
+        }
+      }
+    });
+
+    return result ?? 0;
+  }
+
+  pkzpContributionSum() {
+    let pkzpContributions = this.pkzpSummary.find(x => {
+      if (typeof x.pkzpType == 'object') {
+        return x.pkzpType.id == 10;
+      }
+    });
+
+    return pkzpContributions ? pkzpContributions.balance : 0;
+  }
+
+  pkzpLoanSum() {
+    let result = 0;
+    let pkzpLoans = this.pkzpSummary.filter(x => {
+      if (typeof x.pkzpType == 'object') {
+        return x.pkzpType.id == 20;
+      }
+    });
+
+    pkzpLoans.forEach(x => result += x.debit);
+
+    return result ?? 0;
+  }
 }

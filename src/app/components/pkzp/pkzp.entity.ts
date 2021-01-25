@@ -7,8 +7,7 @@ export class Pkzp {
   balance: number;
   debit: number;
   credit: number;
-  pkzpType: number
-  displayPkzpType: number | string | EnumItem;
+  pkzpType: number | string | EnumItem
   idPkzpPosition: string;
   // TODO: Add pkzpPosition
   pkzpPosition: any;
@@ -16,7 +15,7 @@ export class Pkzp {
   pkzpSchedules: any[];
 
   constructor() {
-    this.id = this.idWorker = this.worker = this.balance = this.debit = this.credit = this.pkzpType = this.displayPkzpType = this.idPkzpPosition = this.pkzpPosition = null;
+    this.id = this.idWorker = this.worker = this.balance = this.debit = this.credit = this.pkzpType = this.idPkzpPosition = this.pkzpPosition = null;
     this.pkzpSchedules = [];
   }
 }
