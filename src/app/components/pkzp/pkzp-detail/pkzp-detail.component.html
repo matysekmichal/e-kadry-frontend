@@ -1,9 +1,9 @@
-<div *ngIf="workerId;then showPkzp else selectWorker"></div>
+<div *ngIf="worker;then showPkzp else selectWorker"></div>
 <ng-template #showPkzp>
   <div *ngIf="!(pkzpService.loading$ | async);then showPkzpSummary else showLoading"></div>
 
   <ng-template #showPkzpSummary>
-    <div class="flex flex-row gap-4">
+    <section class="flex flex-row gap-4">
       <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
         <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icBalances" class="inline-block align-middle text-black" size="18px"></mat-icon> Bilans</p>
         <p class="">
@@ -25,23 +25,23 @@
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>
-    </div>
+    </section>
 
-    <div class="card-base mt-4">
-      <section class="card-bar border-b">
+    <section class="card-base mt-4">
+      <div class="card-bar border-b">
         <div class="flex gap-6">
-          <h2 class="text-xl font-semibold flex items-center">PKZP</h2>
+          <h2 class="text-xl font-semibold flex items-center">PKZP - {{ worker.firstName }} {{ worker.lastName }}</h2>
         </div>
         <div>
           <button type="button" class="btn-icon-primary" (click)="addRecord()">
             <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
           </button>
         </div>
-      </section>
-      <section>
-        {{ workerId | json }}
-      </section>
-    </div>
+      </div>
+      <div class="content">
+        {{ worker | json }}
+      </div>
+    </section>
   </ng-template>
   <ng-template #showLoading>
     <div class="flex flex-col items-center py-16">

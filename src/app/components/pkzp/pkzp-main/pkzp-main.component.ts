@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Worker} from '../../worker/worker.entity';
 
 @Component({
   selector: 'app-pkzp-main',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./pkzp-main.component.scss']
 })
 export class PkzpMainComponent implements OnInit {
-  workerId: string;
+  worker: Worker;
 
   constructor() {
   }
@@ -14,7 +15,7 @@ export class PkzpMainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectWorker($event: string) {
-    this.workerId = $event;
+  selectWorker($event: Worker) {
+    this.worker = $event;
   }
 }

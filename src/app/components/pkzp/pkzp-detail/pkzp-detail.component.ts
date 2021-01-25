@@ -8,6 +8,7 @@ import {Pkzp} from '../pkzp.entity';
 import icBalances from '@iconify/icons-ic/twotone-import-export';
 import icContribution from '@iconify/icons-ic/twotone-vertical-align-bottom';
 import icLoan from '@iconify/icons-ic/twotone-upgrade';
+import {Worker} from '../../worker/worker.entity';
 
 @Component({
   selector: 'app-pkzp-detail',
@@ -17,7 +18,7 @@ import icLoan from '@iconify/icons-ic/twotone-upgrade';
 export class PkzpDetailComponent implements OnInit, OnChanges {
   icAdd = icAdd;
 
-  @Input() workerId: string;
+  @Input() worker: Worker;
   icWorker = icWorker;
 
   pkzpSummary: Pkzp[];
@@ -35,8 +36,8 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.workerId) {
-      this.pkzpService.summary(this.workerId).subscribe(response => {
+    if (this.worker) {
+      this.pkzpService.summary(this.worker.id).subscribe(response => {
         this.pkzpSummary = response;
       });
     }
@@ -46,7 +47,7 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
     this.dialog.open(PkzpAddDialogComponent, {
       data: {
         resource: null,
-        workerId: this.workerId,
+        workerId: this.worker,
       },
       disableClose: true,
       autoFocus: false,

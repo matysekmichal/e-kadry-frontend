@@ -6,7 +6,7 @@ import icSearch from '@iconify/icons-ic/twotone-search';
 import icInfo from '@iconify/icons-ic/twotone-info';
 import {Contract} from '../../contract/contract.entity';
 import {ContractService} from '../../contract/contract.service';
-import * as moment from 'moment';
+import {Worker} from '../../worker/worker.entity';
 
 @Component({
   selector: 'app-pkzp-worker-list',
@@ -27,8 +27,8 @@ export class WorkerListComponent extends ListTemplate<Contract> implements OnIni
   icSearch = icSearch;
   icInfo = icInfo;
 
-  workerId: string;
-  @Output() workerIdEvent: EventEmitter<string> = new EventEmitter<string>();
+  worker: Worker;
+  @Output() workerEvent: EventEmitter<Worker> = new EventEmitter<Worker>();
 
   @Input() columns: TableColumnInterface<Contract>[] = [
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
@@ -43,9 +43,9 @@ export class WorkerListComponent extends ListTemplate<Contract> implements OnIni
   }
 
   selectWorker(contract: Contract | null) {
-    if (this.workerId != contract.worker.id) {
-      this.workerId = contract.worker.id;
-      this.workerIdEvent.emit(this.workerId);
+    if (this.worker != contract.worker) {
+      this.worker = contract.worker;
+      this.workerEvent.emit(this.worker);
     }
   }
 
