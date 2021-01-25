@@ -41,11 +41,17 @@ export class OperatorListComponent extends ListTemplate<Operator> implements OnI
   }
 
   addOperator() {
-    this.dialog.open(OperatorAddDialogComponent, {
+    const dialogRef = this.dialog.open(OperatorAddDialogComponent, {
       data: {},
       disableClose: true,
       autoFocus: false,
       minWidth: 400
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.refresh) {
+        this.getData();
+      }
     });
   }
 
@@ -59,8 +65,8 @@ export class OperatorListComponent extends ListTemplate<Operator> implements OnI
       minWidth: 400
     });
 
-    dialogRef.afterClosed().subscribe(next => {
-      if (next.data.refresh == true) {
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.refresh) {
         this.getData();
       }
     });

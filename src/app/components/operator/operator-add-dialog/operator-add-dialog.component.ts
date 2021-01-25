@@ -12,7 +12,6 @@ import icVisibility from '@iconify/icons-ic/twotone-visibility';
   styleUrls: ['./operator-add-dialog.component.scss']
 })
 export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> implements OnInit {
-  private refreshAfterClose = false;
   public showPassword = false;
   icVisibility = icVisibility;
 
@@ -32,7 +31,6 @@ export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> 
 
   ngOnInit(): void {
     if (this.data.resource) {
-      this.redirect = this.data.redirect ?? false;
       this.resource = this.data.resource;
       this.resourceId = this.data.resource.id;
     } else {
@@ -45,12 +43,12 @@ export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> 
   onSubmit() {
     if (this.resourceId) {
       this.updateResource(() => {
-        this.refreshAfterClose = true;
+        this.redirect = false;
         this.dialogRef.close()
       });
     } else {
       this.createResource(() => {
-        this.refreshAfterClose = true;
+        this.redirect = false;
         this.dialogRef.close()
       });
     }
@@ -69,9 +67,7 @@ export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> 
 
   private closeDialog() {
     this.dialogRef.close({
-      data: {
-        refresh: this.refreshAfterClose
-      }
+      refresh: true
     });
   }
 }

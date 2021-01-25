@@ -50,7 +50,7 @@ export abstract class DelegatedFormTemplate<T> extends FormTemplate implements O
   createResource(successCallback: () => any = () => {}, errorCallback: () => any = () => {}) {
     this.service.create(this.resource).subscribe(
       (response: ResourceCreatedResponse) => {
-        if (this.redirect !== false) {
+        if (this.redirect == true) {
           this.router.navigate([this.redirect, response.id, 'manage']).then();
         }
         successCallback();

@@ -69,10 +69,8 @@ export class OperatorEditDialogComponent extends DelegatedFormTemplate<Operator>
 
   private closeDialog() {
     this.dialogRef.close({
-      data: {
-        refresh: this.refreshAfterClose,
-        resource: this.resource,
-      }
+      refresh: this.refreshAfterClose,
+      resource: this.resource,
     });
   }
 }
