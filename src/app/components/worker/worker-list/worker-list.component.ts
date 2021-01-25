@@ -7,10 +7,10 @@ import icMore from '@iconify/icons-ic/twotone-more-horiz';
 import icAdd from '@iconify/icons-ic/twotone-add';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import icDelete from '@iconify/icons-ic/twotone-delete';
+import icLink from '@iconify/icons-ic/twotone-link';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import {MatDialog} from '@angular/material/dialog';
 import {WorkerAddDialogComponent} from '../worker-add-dialog/worker-add-dialog.component';
-import {OperatorEditDialogComponent} from '../../operator/operator-edit-dialog/operator-edit-dialog.component';
 import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
 
 @Component({
@@ -23,6 +23,7 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   icAdd = icAdd;
   icEdit = icEdit;
   icDelete = icDelete;
+  icLink = icLink;
   icSearch = icSearch;
 
   @Input() columns: TableColumnInterface<Worker>[] = [

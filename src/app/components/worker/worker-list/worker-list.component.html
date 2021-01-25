@@ -77,6 +77,10 @@
 <mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
   <ng-template let-data="data" matMenuContent class="bg-black">
     <button type="button" (click)="editWorker(data)" mat-menu-item>
+      <mat-icon [icIcon]="icLink" size="24px"></mat-icon>
+      <span>Otwórz</span>
+    </button>
+    <button type="button" (click)="editWorker(data)" mat-menu-item>
       <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
       <span>Edytuj</span>
     </button>
