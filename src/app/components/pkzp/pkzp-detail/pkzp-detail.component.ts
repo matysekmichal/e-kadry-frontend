@@ -25,6 +25,8 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   icBalances = icBalances;
   icContribution = icContribution;
   icLoan = icLoan;
+  pkzpContributions: Pkzp;
+  private pkzpLoans: Pkzp[];
 
   constructor(
     public pkzpService: PkzpService,
@@ -37,22 +39,32 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.worker) {
-      this.pkzpService.summary(this.worker.id).subscribe(response => {
-        this.pkzpSummary = response;
-      });
+      this.fetchData();
     }
   }
 
+  fetchData() {
+    this.pkzpService.summary(this.worker.id).subscribe(response => {
+      this.pkzpSummary = response;
+    });
+  }
+
   addRecord() {
-    this.dialog.open(PkzpAddDialogComponent, {
+    let dialogRef = this.dialog.open(PkzpAddDialogComponent, {
       data: {
-        resource: null,
-        workerId: this.worker,
+        worker: this.worker,
+        contributions: this.pkzpContributions
       },
       disableClose: true,
       autoFocus: false,
       minWidth: 400
     });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.refresh) {
+        this.fetchData();
+      }
+    })
   }
 
   balance() {
@@ -74,24 +86,24 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   }
 
   pkzpContributionSum() {
-    let pkzpContributions = this.pkzpSummary.find(x => {
+    this.pkzpContributions = this.pkzpSummary.find(x => {
       if (typeof x.pkzpType == 'object') {
         return x.pkzpType.id == 10;
       }
     });
 
-    return pkzpContributions ? pkzpContributions.balance : 0;
+    return this.pkzpContributions ? this.pkzpContributions.balance : 0;
   }
 
   pkzpLoanSum() {
     let result = 0;
-    let pkzpLoans = this.pkzpSummary.filter(x => {
+    this.pkzpLoans = this.pkzpSummary.filter(x => {
       if (typeof x.pkzpType == 'object') {
         return x.pkzpType.id == 20;
       }
     });
 
-    pkzpLoans.forEach(x => result += x.debit);
+    this.pkzpLoans.forEach(x => result += x.debit);
 
     return result ?? 0;
   }

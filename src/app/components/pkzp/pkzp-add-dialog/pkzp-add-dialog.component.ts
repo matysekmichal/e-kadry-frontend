@@ -7,6 +7,7 @@ import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
 import {PkzpAddDialogData} from '../../../contracts/dialog.interface';
 import {PkzpParameters} from '../pkzp-parameters.interface';
+import {Pkzp} from '../pkzp.entity';
 
 type RepaymentTypes = 'count' | 'amount';
 
@@ -23,6 +24,7 @@ export class PkzpAddDialogComponent implements OnInit {
   pkzpParameters: PkzpParameters;
 
   repaymentType: RepaymentTypes;
+  private contributions: Pkzp;
 
   constructor(
     private injector: Injector,
@@ -33,8 +35,12 @@ export class PkzpAddDialogComponent implements OnInit {
   ) {
     this.resource = new PkzpPositionCreateOrUpdate();
 
-    if (data.workerId) {
-      this.resource.workerId = data.workerId;
+    if (data.worker) {
+      this.resource.workerId = data.worker.id;
+    }
+
+    if (data.contributions) {
+      this.contributions = data.contributions;
     }
   }
 
@@ -63,16 +69,8 @@ export class PkzpAddDialogComponent implements OnInit {
     }
 
     this.pkzpService.create(this.resource).subscribe(response => {
-      console.log(response);
+      this.closeDialog();
     })
-  }
-
-  private closeDialog() {
-    this.dialogRef.close({
-      data: {
-        refresh: true
-      }
-    });
   }
 
   setRepaymentType(type: RepaymentTypes) {
@@ -100,5 +98,27 @@ export class PkzpAddDialogComponent implements OnInit {
       default :
         return 'Wartość kwotową';
     }
+  }
+
+  isTypeAble(type: EnumItem) {
+    switch (type.id) {
+      case 10 :
+        return true;
+      case 20:
+      case 30:
+      case 40:
+        if (typeof this.contributions == 'undefined' || this.contributions.credit <= 0) {
+          return false;
+        }
+    }
+
+    return true;
+  }
+
+
+  private closeDialog() {
+    this.dialogRef.close({
+      refresh: true
+    });
   }
 }

@@ -9,7 +9,7 @@
         <mat-form-field class="w-full">
           <mat-label>Wybierz rodzaj</mat-label>
           <mat-select name="pkzp-position-type" [(ngModel)]="resource.pkzpPositionType">
-            <mat-option *ngFor="let type of pkzpPositionTypes" [value]="type.id">
+            <mat-option *ngFor="let type of pkzpPositionTypes" [value]="type.id" [disabled]="!isTypeAble(type)">
               {{ type.displayName }}
             </mat-option>
           </mat-select>

@@ -1,3 +1,6 @@
+import {Pkzp} from '../components/pkzp/pkzp.entity';
+import {Worker} from '../components/worker/worker.entity';
+
 export interface ResourceDialogData<T> {
   redirect: boolean;
   resource: T;
@@ -12,5 +15,6 @@ export interface ResourceContractAddDialogData<T> extends ResourceDialogData<T> 
 }
 
 export interface PkzpAddDialogData {
-  workerId: string;
+  worker: Worker;
+  contributions: Pkzp;
 }
