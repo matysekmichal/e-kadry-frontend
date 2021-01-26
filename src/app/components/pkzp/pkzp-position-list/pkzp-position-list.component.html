@@ -1,0 +1,49 @@
+<section class="card-bar border-b">
+  <div class="flex justify-between w-full">
+    <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
+    <label for="search" class="table-search">
+      <ic-icon [icIcon]="icSearch" size="22px"></ic-icon>
+      <input id="search" type="search" [formControl]="searchControl" placeholder="Szukaj ..." aria-label="Szukaj">
+    </label>
+  </div>
+</section>
+
+<section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
+  <table [dataSource]="dataSource" class="w-full" mat-table>
+    <ng-container matColumnDef="name">
+      <th class="w-full uppercase" *matHeaderCellDef mat-header-cell>
+        <div class="flex justify-between items-center">
+          <span>Imię i nazwisko</span>
+          <mat-icon [icIcon]="icInfo" matTooltip="Wyświetlani są tylko pracownicy z aktywną umową i możliwością utworzenia PKZP" size="20px" class="text-blue-500"></mat-icon>
+        </div>
+      </th>
+      <td *matCellDef="let row" mat-cell>
+        <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span> &nbsp;
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+    <tr class="hover:bg-gray-100 cursor-pointer transition-colors"
+        [class.active]="row.worker == worker"
+        *matRowDef="let row; columns: visibleColumns;"
+        mat-row></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                 [pageSize]="(dataSource.data$ | async).perPage"
+                 [length]="(dataSource.data$ | async).total"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</section>
+
+<div *ngIf="service.filter$ | async;then filtering else notFiltering"></div>
+<ng-template #filtering>
+  <div class="table-message">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56"></mat-progress-spinner>
+  </div>
+</ng-template>
+<ng-template #notFiltering>
+  <div class="table-message" *ngIf="dataSource.isEmpty">
+    Nie znaleziono pracowników
+  </div>
+</ng-template>

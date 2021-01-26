@@ -10,12 +10,13 @@ import {merge} from 'rxjs';
 import {PaginationListInterface} from '../contracts/pagination-list.interface';
 import {ResourceIdInterface} from '../contracts/resource-id.interface';
 import {MessageService} from '../components/layout/services/message.service';
+import {ApiService} from '../services/api.service';
 
 @Component({
   template: ''
 })
 export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestroy {
-  service: IResourceService<T>;
+  service: ApiService | IResourceService<T>;
   resource: T[];
   columns: TableColumnInterface<T>[];
   pageSizeOptions: number[] = [15, 30, 50, 150];
@@ -29,7 +30,7 @@ export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestro
   searchControl = new FormControl();
   typingTimer: number;
   typingInterval = 800;
-  private cdr: ChangeDetectorRef;
+  protected cdr: ChangeDetectorRef;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -141,14 +142,16 @@ export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestro
 
   deleteResource(item: ResourceIdInterface) {
     this.messageService.confirm('Czy napewno chcesz kontynuować?', 'Potwierdzenie spowoduje usunięcie zasobu.', null, null, () => {
-      this.service.delete(item.id).subscribe(
-        (response: ResourceResponse) => {
-          this.dataSource.loadData(this.paginator.pageIndex + 1, this.filters);
-          this.messageService.toast(response.message);
-        }, (error: ResourceResponse) => {
-          this.messageService.error(error.message);
-        }
-      );
+      if (!(this.service instanceof ApiService)) {
+        this.service.delete(item.id).subscribe(
+          (response: ResourceResponse) => {
+            this.dataSource.loadData(this.paginator.pageIndex + 1, this.filters);
+            this.messageService.toast(response.message);
+          }, (error: ResourceResponse) => {
+            this.messageService.error(error.message);
+          }
+        );
+      }
     });
   }
 

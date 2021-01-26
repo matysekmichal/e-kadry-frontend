@@ -38,8 +38,9 @@
           </button>
         </div>
       </div>
-      <div class="content">
+      <div class="content" *ngIf="worker.id">
         {{ worker | json }}
+<!--        <app-pkzp-position-list [worker]="worker"></app-pkzp-position-list>-->
       </div>
     </section>
   </ng-template>

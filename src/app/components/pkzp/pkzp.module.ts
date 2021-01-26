@@ -16,6 +16,7 @@ import {PkzpDetailComponent} from './pkzp-detail/pkzp-detail.component';
 import {PkzpAddDialogModule} from './pkzp-add-dialog/pkzp-add-dialog.module';
 import {PkzpAddDialogComponent} from './pkzp-add-dialog/pkzp-add-dialog.component';
 import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
+import {PkzpPositionListModule} from './pkzp-position-list/pkzp-position-list.module';
 
 @NgModule({
   entryComponents: [
@@ -26,21 +27,22 @@ import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
     PkzpDetailComponent,
     WorkerListComponent,
   ],
-    imports: [
-        CommonModule,
-        PkzpRoutingModule,
-        MatIconModule,
-        MatPaginatorModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        IconModule,
-        ReactiveFormsModule,
-        MatSortModule,
-        MatTooltipModule,
-        MatButtonModule,
-        PkzpAddDialogModule,
-        PricePipeModule
-    ]
+  imports: [
+    CommonModule,
+    PkzpRoutingModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    IconModule,
+    ReactiveFormsModule,
+    MatSortModule,
+    MatTooltipModule,
+    MatButtonModule,
+    PkzpAddDialogModule,
+    PricePipeModule,
+    PkzpPositionListModule,
+  ]
 })
 export class PkzpModule {
 }
