@@ -12,7 +12,7 @@ import icOperators from '@iconify/icons-ic/twotone-supervisor-account';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Colesear';
+  title = 'EKadry';
 
   constructor(
     private navigationService: NavigationService,
@@ -20,12 +20,12 @@ export class AppComponent {
   ) {
 
     this.navigationService.items = [
-      {
-        type: 'link',
-        label: 'Pulpit',
-        route: '/dashboard',
-        icon: icDashboard
-      },
+      // {
+      //   type: 'link',
+      //   label: 'Pulpit',
+      //   route: '/dashboard',
+      //   icon: icDashboard
+      // },
       {
         type: 'link',
         label: 'PKZP',

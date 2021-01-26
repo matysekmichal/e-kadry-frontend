@@ -7,13 +7,13 @@ import {ColRoutes} from './components/layout/interfaces/col-route.interface';
 const childrenRoutes: ColRoutes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'pkzp',
     pathMatch: 'full',
   },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
-  },
+  // {
+  //   path: 'dashboard',
+  //   loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
+  // },
   {
     path: 'contracts',
     loadChildren: () => import('./components/contract/contract.module').then(m => m.ContractModule),
