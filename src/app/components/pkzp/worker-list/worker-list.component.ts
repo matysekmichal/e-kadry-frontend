@@ -4,9 +4,8 @@ import {TableColumnInterface} from '../../../contracts/table-column.interface';
 import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions} from '@angular/material/paginator';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import icInfo from '@iconify/icons-ic/twotone-info';
-import {Contract} from '../../contract/contract.entity';
-import {ContractService} from '../../contract/contract.service';
 import {Worker} from '../../worker/worker.entity';
+import {WorkerService} from '../../worker/worker.service';
 
 @Component({
   selector: 'app-pkzp-worker-list',
@@ -23,28 +22,28 @@ import {Worker} from '../../worker/worker.entity';
     }
   ]
 })
-export class WorkerListComponent extends ListTemplate<Contract> implements OnInit {
+export class WorkerListComponent extends ListTemplate<Worker> implements OnInit {
   icSearch = icSearch;
   icInfo = icInfo;
 
   worker: Worker;
   @Output() workerEvent: EventEmitter<Worker> = new EventEmitter<Worker>();
 
-  @Input() columns: TableColumnInterface<Contract>[] = [
+  @Input() columns: TableColumnInterface<Worker>[] = [
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
   ];
 
   constructor(
     protected injector: Injector,
-    private contractService: ContractService,
+    private workerService: WorkerService,
   ) {
     super(injector);
-    this.service = contractService;
+    this.service = workerService;
   }
 
-  selectWorker(contract: Contract | null) {
-    if (this.worker != contract.worker) {
-      this.worker = contract.worker;
+  selectWorker(Worker: Worker | null) {
+    if (this.worker != Worker) {
+      this.worker = Worker;
       this.workerEvent.emit(this.worker);
     }
   }
