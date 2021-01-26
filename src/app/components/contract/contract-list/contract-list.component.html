@@ -171,14 +171,14 @@
 
 <mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
   <ng-template let-data="data" matMenuContent class="bg-black">
-    <button type="button" (click)="editWorker(data)" mat-menu-item>
-      <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
-      <span>Edytuj</span>
-    </button>
     <a [routerLink]="['/workers', data.idWorker, 'manage']"  mat-menu-item>
       <mat-icon [icIcon]="icWorker" size="24px"></mat-icon>
       <span>Zobacz pracownika</span>
     </a>
+    <button type="button" (click)="editWorker(data)" mat-menu-item>
+      <mat-icon [icIcon]="icEdit" size="24px"></mat-icon>
+      <span>Edytuj</span>
+    </button>
     <button type="button" (click)="deleteResource(data)" class="danger" mat-menu-item>
       <mat-icon [icIcon]="icDelete" size="24px"></mat-icon>
       <span>Usuń</span>

@@ -22,10 +22,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {ContractAddDialogComponent} from './contract-add-dialog/contract-add-dialog.component';
 import {ContractAddDialogModule} from './contract-add-dialog/contract-add-dialog.module';
 import {SearchModule} from '../search/search.module';
+import {ContractUpdateDialogModule} from './contract-update-dialog/contract-update-dialog.module';
+import {ContractUpdateDialogComponent} from './contract-update-dialog/contract-update-dialog.component';
 
 @NgModule({
   entryComponents: [
     ContractAddDialogComponent,
+    ContractUpdateDialogComponent,
   ],
   declarations: [
     ContractListComponent,
@@ -52,6 +55,7 @@ import {SearchModule} from '../search/search.module';
     MatSelectModule,
     ContractAddDialogModule,
     SearchModule,
+    ContractUpdateDialogModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

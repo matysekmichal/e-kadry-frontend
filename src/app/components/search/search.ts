@@ -34,6 +34,7 @@ export abstract class Search<T> implements OnInit {
 
   ngOnInit() {
     if (this.currentValue) {
+      this.searchControl.setValue(this.currentValue);
       this.isValue = true;
     }
   }

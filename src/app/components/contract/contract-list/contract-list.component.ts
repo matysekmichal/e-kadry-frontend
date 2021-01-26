@@ -13,10 +13,10 @@ import icClear from '@iconify/icons-ic/twotone-clear';
 import icWorker from '@iconify/icons-ic/twotone-person';
 import {RangeDateInterface} from '../../../contracts/range-date.interface';
 import * as moment from 'moment';
-import {EnumService} from '../../../services/enum.service';
 import {EnumItem} from '../../../contracts/enum';
 import {MatDialog} from '@angular/material/dialog';
 import {ContractAddDialogComponent} from '../contract-add-dialog/contract-add-dialog.component';
+import {ContractUpdateDialogComponent} from '../contract-update-dialog/contract-update-dialog.component';
 
 @Component({
   selector: 'app-contract-list',
@@ -77,7 +77,23 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
     });
   }
 
-  editWorker(data: any) {
+  editWorker(resource: Contract) {
+    console.log(resource);
+    const dialogRef = this.dialog.open(ContractUpdateDialogComponent, {
+      data: {
+        resource: resource,
+      },
+      disableClose: true,
+      autoFocus: false,
+      maxWidth: 600,
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.refresh) {
+        this.getData();
+      }
+    });
   }
 
   filterJobPosition($event) {

@@ -17,6 +17,7 @@ type RepaymentTypes = 'count' | 'amount';
   styleUrls: ['./pkzp-add-dialog.component.scss']
 })
 export class PkzpAddDialogComponent implements OnInit {
+  private refreshAfterClose = false;
   icVisibility = icVisibility;
 
   resource: PkzpPositionCreateOrUpdate;
@@ -69,6 +70,7 @@ export class PkzpAddDialogComponent implements OnInit {
     }
 
     this.pkzpService.create(this.resource).subscribe(response => {
+      this.refreshAfterClose = true;
       this.closeDialog();
     })
   }
@@ -118,7 +120,7 @@ export class PkzpAddDialogComponent implements OnInit {
 
   private closeDialog() {
     this.dialogRef.close({
-      refresh: true
+      refresh: this.refreshAfterClose
     });
   }
 }

@@ -24,7 +24,6 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
 
   private refreshAfterClose = false;
   workerId: any;
-  genderTypes: EnumItem[];
 
   contractTypes = ContractTypes;
   icVisibility = icVisibility;
@@ -64,10 +63,6 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
       this.resource.idWorker = worker.id;
       this.resource.worker = worker;
     }
-
-    this.enumService.gender.subscribe(response => {
-      this.genderTypes = response;
-    });
 
     this.dialogRef.beforeClosed().subscribe(() => {
       this.closeDialog();
@@ -131,7 +126,6 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
   }
 
   checkJobPosition(id: string) {
-    console.log(id)
     this.resource.idJobPosition = id;
   }
 }
