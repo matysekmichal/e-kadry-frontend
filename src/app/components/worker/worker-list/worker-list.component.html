@@ -1,4 +1,16 @@
-<main class="card-base mt-10">
+<div class="my-5 flex flex-row justify-between">
+  <div class="flex flex-row justify-between gap-4 items-center">
+    <app-job-position-search (selected)="filterJobPosition($event)" [currentValue]="jobPosition" label="Stanowisko pracy"></app-job-position-search>
+
+    <mat-slide-toggle [ngModel]="showInactiveContracts" (toggleChange)="toggleShowClosedLeads()" matTooltip="Pokaż również wygasłe umowy">
+      <span class="caption font-medium text-gray-700">Wygasłe umowy</span>
+    </mat-slide-toggle>
+  </div>
+  <div>
+  </div>
+</div>
+
+<main class="card-base">
   <section class="card-bar border-b">
     <div class="flex gap-6">
       <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
@@ -20,7 +32,7 @@
         <th class="w-16" *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let row" mat-cell>
           <div class="w-full flex items-center cursor-pointer p-1">
-            <div class="w-3 h-3 rounded-full" [class.bg-green-500]="row.active" [class.bg-red-500]="!row.active"></div>
+            <div class="w-3 h-3 rounded-full" [class]="isActiveContract(row.contracts)"></div>
           </div>
         </td>
       </ng-container>

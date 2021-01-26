@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WorkerListComponent} from './worker-list/worker-list.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IconModule} from '@visurel/iconify-angular';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -21,6 +21,8 @@ import {WorkerEditDialogComponent} from './worker-edit-dialog/worker-edit-dialog
 import {WorkerEditDialogModule} from './worker-edit-dialog/worker-edit-dialog.module';
 import {ContractAddDialogComponent} from '../contract/contract-add-dialog/contract-add-dialog.component';
 import {ContractAddDialogModule} from '../contract/contract-add-dialog/contract-add-dialog.module';
+import {SearchModule} from '../search/search.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   entryComponents: [
@@ -50,6 +52,9 @@ import {ContractAddDialogModule} from '../contract/contract-add-dialog/contract-
     WorkerAddDialogModule,
     WorkerEditDialogModule,
     ContractAddDialogModule,
+    SearchModule,
+    MatSlideToggleModule,
+    FormsModule,
   ]
 })
 export class WorkerModule {

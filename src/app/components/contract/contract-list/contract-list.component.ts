@@ -13,7 +13,6 @@ import icClear from '@iconify/icons-ic/twotone-clear';
 import icWorker from '@iconify/icons-ic/twotone-person';
 import {RangeDateInterface} from '../../../contracts/range-date.interface';
 import * as moment from 'moment';
-import {EnumItem} from '../../../contracts/enum';
 import {MatDialog} from '@angular/material/dialog';
 import {ContractAddDialogComponent} from '../contract-add-dialog/contract-add-dialog.component';
 import {ContractUpdateDialogComponent} from '../contract-update-dialog/contract-update-dialog.component';
@@ -43,8 +42,6 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
 
   filterKey = 'contract-filter';
   filters: any = this.storedFilters;
-
-  jobPositions: EnumItem[];
 
   @Input() columns: TableColumnInterface<Contract>[] = [
     {label: 'Status', property: 'status', type: 'badge', visible: true},
@@ -137,12 +134,12 @@ export class ContractListComponent extends ListTemplate<Contract> implements OnI
   }
 
   isActiveContract(row: Contract) {
-    if (moment(row.employedAt).isAfter()) {
-      return 'bg-orange-500';
+    if (moment(row.employedAt).isBefore() && moment(row.employedEndAt).isAfter()) {
+      return 'bg-red-500';
     }
 
-    if (row.employedEndAt || moment(row.employedEndAt).isBefore()) {
-      return 'bg-red-500';
+    if (moment(row.employedAt).isAfter()) {
+      return 'bg-orange-500';
     }
 
     return 'bg-green-500';

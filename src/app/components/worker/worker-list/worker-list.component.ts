@@ -12,6 +12,8 @@ import icSearch from '@iconify/icons-ic/twotone-search';
 import {MatDialog} from '@angular/material/dialog';
 import {WorkerAddDialogComponent} from '../worker-add-dialog/worker-add-dialog.component';
 import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
+import {Contract} from '../../contract/contract.entity';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-worker-list',
@@ -25,6 +27,12 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
   icDelete = icDelete;
   icLink = icLink;
   icSearch = icSearch;
+
+  jobPosition: string = null;
+  showInactiveContracts = true;
+
+  filterKey = 'contract-filter';
+  filters: any = this.storedFilters;
 
   @Input() columns: TableColumnInterface<Worker>[] = [
     {label: 'Status', property: 'status', type: 'badge', visible: true},
@@ -68,5 +76,45 @@ export class WorkerListComponent extends ListTemplate<Worker> implements OnInit 
         this.getData();
       }
     });
+  }
+
+  filterJobPosition($event) {
+    this.jobPosition = $event;
+    this.localFilterChange();
+  }
+
+  toggleShowClosedLeads() {
+    this.showInactiveContracts = !this.showInactiveContracts;
+
+    this.localFilterChange();
+  }
+
+  localFilterChange() {
+    this.paginator.pageIndex = 0;
+    this.filterChange();
+  }
+
+  get filtersResource() {
+    return Object.assign(this.baseFilterResource, {
+      JobPosition: this.jobPosition,
+      ShowInactiveContracts: this.showInactiveContracts,
+    });
+  }
+
+  filtersPublish(filters) {
+    super.filtersPublish(filters);
+    this.jobPosition = filters.JobPosition;
+    this.showInactiveContracts = filters.ShowInactiveContracts;
+  }
+
+  isActiveContract(contracts: Contract[]) {
+    let isOrWillBeActive = false;
+    contracts.forEach(contract => {
+      if (contract.employedEndAt == null || moment(contract.employedEndAt).isBefore()) {
+        isOrWillBeActive = true;
+      }
+    });
+
+    return isOrWillBeActive ? 'bg-green-500' : 'bg-red-500';
   }
 }
