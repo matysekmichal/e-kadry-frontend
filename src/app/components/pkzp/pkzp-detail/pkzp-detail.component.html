@@ -5,16 +5,23 @@
   <ng-template #showPkzpSummary>
     <section class="flex flex-row gap-4">
       <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
-        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icBalances" class="inline-block align-middle text-black" size="18px"></mat-icon> Bilans</p>
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icContribution" class="inline-block align-middle text-green-500" size="18px"></mat-icon> Suma wkładów</p>
+        <p class="">
+          <span class="text-3xl font-black leading-tight">{{ pkzpContributionSum() | price }}</span>
+          <span class="text-sm text-gray-700 ml-2">PLN</span>
+        </p>
+      </div>
+      <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icBalances" class="inline-block align-middle text-blue-500" size="18px"></mat-icon> Bilans</p>
         <p class="">
           <span class="text-3xl font-black leading-tight">{{ balance() | price }}</span>
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>
-      <div class="flex flex-col bg-white px-6 py-4 w-full card-base">
-        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icContribution" class="inline-block align-middle text-green-500" size="18px"></mat-icon> Suma wkładów</p>
+      <div class="relative flex flex-col bg-white px-6 py-4 w-full card-base">
+        <p class="text-sm text-gray-700 "><mat-icon [icIcon]="icRepayment" class="inline-block align-middle text-green-500" size="18px"></mat-icon> Suma spłat</p>
         <p class="">
-          <span class="text-3xl font-black leading-tight">{{ pkzpContributionSum() | price }}</span>
+          <span class="text-3xl font-black leading-tight">{{ pkzpRepaymentSum() | price }}</span>
           <span class="text-sm text-gray-700 ml-2">PLN</span>
         </p>
       </div>

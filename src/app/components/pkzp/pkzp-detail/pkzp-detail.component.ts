@@ -6,8 +6,9 @@ import icWorker from '@iconify/icons-ic/twotone-person';
 import {PkzpService} from '../pkzp.service';
 import {Pkzp} from '../pkzp.entity';
 import icBalances from '@iconify/icons-ic/twotone-import-export';
-import icContribution from '@iconify/icons-ic/twotone-vertical-align-bottom';
+import icContribution from '@iconify/icons-ic/twotone-input';
 import icLoan from '@iconify/icons-ic/twotone-upgrade';
+import icRepayment from '@iconify/icons-ic/twotone-vertical-align-bottom';
 import {Worker} from '../../worker/worker.entity';
 
 @Component({
@@ -25,6 +26,7 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   icBalances = icBalances;
   icContribution = icContribution;
   icLoan = icLoan;
+  icRepayment = icRepayment;
   pkzpContributions: Pkzp;
   private pkzpLoans: Pkzp[];
 
@@ -68,6 +70,7 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   }
 
   balance() {
+    // TODO: Update with PKZP schedules
     let result = 0;
     this.pkzpSummary.forEach(x => {
       if (typeof x.pkzpType == 'object') {
@@ -93,6 +96,11 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
     });
 
     return this.pkzpContributions ? this.pkzpContributions.balance : 0;
+  }
+
+  pkzpRepaymentSum() {
+    // TODO: Calculate it from PKZP schedules
+    return 0;
   }
 
   pkzpLoanSum() {
