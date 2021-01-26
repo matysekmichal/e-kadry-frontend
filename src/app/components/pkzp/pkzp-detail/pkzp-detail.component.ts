@@ -70,16 +70,13 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   }
 
   balance() {
-    // TODO: Update with PKZP schedules
     let result = 0;
     this.pkzpSummary.forEach(x => {
       if (typeof x.pkzpType == 'object') {
         switch (x.pkzpType.id) {
-          case 10 :
-            result += x.balance;
-            break;
           case 20 :
             result -= x.debit;
+            result += x.repayment;
             break;
         }
       }
@@ -99,8 +96,14 @@ export class PkzpDetailComponent implements OnInit, OnChanges {
   }
 
   pkzpRepaymentSum() {
-    // TODO: Calculate it from PKZP schedules
-    return 0;
+    let result = 0;
+    this.pkzpSummary.forEach(x => {
+      if (typeof x.pkzpType == 'object' && x.pkzpType.id == 20) {
+        result += x.repayment;
+      }
+    });
+
+    return result;
   }
 
   pkzpLoanSum() {
