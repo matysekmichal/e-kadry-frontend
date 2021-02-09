@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import icAdd from '@iconify/icons-ic/twotone-add';
 import {MatDialog} from '@angular/material/dialog';
 import {PkzpAddDialogComponent} from '../pkzp-add-dialog/pkzp-add-dialog.component';
 import icWorker from '@iconify/icons-ic/twotone-person';
@@ -17,7 +16,6 @@ import {Worker} from '../../worker/worker.entity';
   styleUrls: ['./pkzp-detail.component.scss']
 })
 export class PkzpDetailComponent implements OnInit, OnChanges {
-  icAdd = icAdd;
 
   @Input() worker: Worker;
   icWorker = icWorker;

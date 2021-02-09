@@ -1,15 +1,11 @@
-import {AfterViewInit, Component, Injector, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ListTemplate} from '../../../templates/list.template';
 import {TableColumnInterface} from '../../../contracts/table-column.interface';
-import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions, PageEvent} from '@angular/material/paginator';
-import icSearch from '@iconify/icons-ic/twotone-search';
-import icInfo from '@iconify/icons-ic/twotone-info';
+import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions} from '@angular/material/paginator';
 import {Worker} from '../../worker/worker.entity';
 import {PkzpPositionService} from '../pkzp-position.service';
 import {PkzpPosition} from '../pkzp-position.entity';
-import {DataSource} from '../../../templates/data-source';
-import {merge} from 'rxjs';
-import {Sort} from '@angular/material/sort';
+import icAdd from '@iconify/icons-ic/twotone-add';
 
 @Component({
   selector: 'app-pkzp-position-list',
@@ -26,16 +22,21 @@ import {Sort} from '@angular/material/sort';
     }
   ]
 })
-export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implements OnInit, OnChanges, AfterViewInit {
-  icSearch = icSearch;
-  icInfo = icInfo;
+export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implements OnInit {
+  icAdd = icAdd;
 
+  paymentTypes = [10, 30];
+
+  pkzpPositions: PkzpPosition[];
   @Input() worker: Worker;
   @Input() columns: TableColumnInterface<PkzpPosition>[] = [
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
+    {label: 'Okres', property: 'period', type: 'text', visible: true},
+    {label: 'Wartość', property: 'amount', type: 'text', visible: true},
   ];
+  @Output() addRecord = new EventEmitter<boolean>();
 
-  pkzpPositions: PkzpPosition[];
+  filters: any = null;
 
   constructor(
     protected injector: Injector,
@@ -45,36 +46,26 @@ export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implem
     this.service = pkzpPositionService;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.getData();
-  }
-
-  ngAfterViewInit() {
-    console.log(this.worker);
-    if (this.sort && this.paginator) {
-      this.sort.sortChange.subscribe((r) => {
-        this.paginator.pageIndex = 0;
-      });
-
-      merge(this.sort.sortChange, this.paginator.page)
-        .subscribe((result: Sort | PageEvent) => {
-          this.filters.PerPage = this.paginator.page;
-
-          if ('active' in result) {
-            this.orderDirection = result.direction;
-            this.orderBy = result.active;
-          }
-
-          this.filterChange();
-        });
-    }
-    this.cdr.detectChanges();
+  ngOnInit(): void {
+    this.filters = this.filtersResource;
+    super.ngOnInit();
   }
 
   get filtersResource() {
-    console.log(this.worker)
     return Object.assign(this.baseFilterResource, {
-      IdWorker: this.worker ? this.worker.id : null,
+      WorkerId: this.worker?.id,
     });
+  }
+
+  callAddRecord() {
+    this.addRecord.emit(true);
+  }
+
+  isPayment(type: number) {
+    console.log(this.paymentTypes.findIndex(x => {
+      console.log(`${x} - ${type}`)
+      return x == type
+    }));
+    return this.paymentTypes.findIndex(x => x == type) >= 0;
   }
 }

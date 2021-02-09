@@ -1,49 +1,73 @@
-<section class="card-bar border-b">
-  <div class="flex justify-between w-full">
-    <h2 class="text-xl font-semibold flex items-center">Pracownicy</h2>
-    <label for="search" class="table-search">
-      <ic-icon [icIcon]="icSearch" size="22px"></ic-icon>
-      <input id="search" type="search" [formControl]="searchControl" placeholder="Szukaj ..." aria-label="Szukaj">
-    </label>
+<section class="card-base mt-4">
+  <div class="card-bar border-b">
+    <div class="flex gap-6">
+      <h2 class="text-xl font-semibold flex items-center">PKZP - {{ worker?.firstName }} {{ worker?.lastName }}</h2>
+    </div>
+    <div>
+      <button type="button" class="btn-icon-primary" (click)="callAddRecord()">
+        <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="content no-padding">
+    <section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
+      <table [dataSource]="dataSource" class="w-full" mat-table>
+        <ng-container matColumnDef="name">
+          <th class="uppercase" *matHeaderCellDef mat-header-cell>Rodzaj</th>
+          <td *matCellDef="let row" mat-cell>
+            {{ row.pkzpPositionType.displayName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="period">
+          <th class="uppercase" *matHeaderCellDef mat-header-cell>Okres</th>
+          <td *matCellDef="let row" mat-cell>
+            <div *ngIf="row.period;then periodSet else periodNotSet"></div>
+            <ng-template #periodSet>
+              {{ row.period.dateFrom | date:'LLLL yyyy' | titlecase }}
+            </ng-template>
+            <ng-template #periodNotSet>
+              -
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th class="uppercase" *matHeaderCellDef mat-header-cell>Wartość</th>
+          <td *matCellDef="let row" mat-cell>
+            <div *ngIf="isPayment(row.pkzpPositionType.id);then payment else payout"></div>
+            <ng-template #payment>
+              + {{ row.amount }}
+            </ng-template>
+            <ng-template #payout>
+              - {{ row.amount }}
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+        <tr class="hover:bg-gray-100 cursor-pointer transition-colors"
+            *matRowDef="let row; columns: visibleColumns;"
+            mat-row></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     [pageSize]="(dataSource.data$ | async).perPage"
+                     [length]="(dataSource.data$ | async).total"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+    </section>
+
+    <div *ngIf="service.filter$ | async;then filtering else notFiltering"></div>
+    <ng-template #filtering>
+      <div class="table-message">
+        <mat-progress-spinner mode="indeterminate" color="primary" diameter="56"></mat-progress-spinner>
+      </div>
+    </ng-template>
+    <ng-template #notFiltering>
+      <div class="table-message" *ngIf="dataSource.isEmpty">
+        Nie znaleziono pracowników
+      </div>
+    </ng-template>
   </div>
 </section>
-
-<section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
-  <table [dataSource]="dataSource" class="w-full" mat-table>
-    <ng-container matColumnDef="name">
-      <th class="w-full uppercase" *matHeaderCellDef mat-header-cell>
-        <div class="flex justify-between items-center">
-          <span>Imię i nazwisko</span>
-          <mat-icon [icIcon]="icInfo" matTooltip="Wyświetlani są tylko pracownicy z aktywną umową i możliwością utworzenia PKZP" size="20px" class="text-blue-500"></mat-icon>
-        </div>
-      </th>
-      <td *matCellDef="let row" mat-cell>
-        <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span> &nbsp;
-      </td>
-    </ng-container>
-
-    <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
-    <tr class="hover:bg-gray-100 cursor-pointer transition-colors"
-        [class.active]="row.worker == worker"
-        *matRowDef="let row; columns: visibleColumns;"
-        mat-row></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="pageSizeOptions"
-                 [pageSize]="(dataSource.data$ | async).perPage"
-                 [length]="(dataSource.data$ | async).total"
-                 [showFirstLastButtons]="true">
-  </mat-paginator>
-</section>
-
-<div *ngIf="service.filter$ | async;then filtering else notFiltering"></div>
-<ng-template #filtering>
-  <div class="table-message">
-    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56"></mat-progress-spinner>
-  </div>
-</ng-template>
-<ng-template #notFiltering>
-  <div class="table-message" *ngIf="dataSource.isEmpty">
-    Nie znaleziono pracowników
-  </div>
-</ng-template>
