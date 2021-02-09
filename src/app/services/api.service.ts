@@ -23,6 +23,6 @@ export abstract class ApiService implements IApiService {
     protected router: Router
   ) {
     this.headers = new HttpHeaders();
-    this.headers.set('Access-Control-Allow-Origin', '*');
+    this.headers.set('Access-Control-Allow-Origin', environment.allowDomains.join(','));
   }
 }

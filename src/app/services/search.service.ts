@@ -1,26 +1,19 @@
 import {ISearchService} from '../contracts/data-source.interface';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
+import {ApiService} from './api.service';
 
 @Injectable()
-export abstract class SearchService<T> implements ISearchService<T> {
-  public abstract url: string;
-  protected apiUrl = environment.apiUrl.toString();
-  protected filterSubject = new BehaviorSubject<boolean>(false);
-  public filter$ = this.filterSubject.asObservable();
-  public headers: HttpHeaders;
-
+export abstract class SearchService<T> extends ApiService implements ISearchService<T> {
   constructor(
     protected http: HttpClient,
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    this.headers = new HttpHeaders();
-    this.headers.set('Access-Control-Allow-Origin', '*');
+    super(http, route, router);
   }
 
   search(value: string, perPage: number): Observable<T[]> {
