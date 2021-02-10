@@ -23,10 +23,6 @@ export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> 
   ) {
     super(injector);
     this.service = operatorService;
-
-    this.dialogRef.beforeClosed().subscribe(() => {
-      this.closeDialog();
-    });
   }
 
   ngOnInit(): void {
@@ -44,12 +40,12 @@ export class OperatorAddDialogComponent extends DelegatedFormTemplate<Operator> 
     if (this.resourceId) {
       this.updateResource(() => {
         this.redirect = false;
-        this.dialogRef.close()
+        this.closeDialog();
       });
     } else {
       this.createResource(() => {
         this.redirect = false;
-        this.dialogRef.close()
+        this.closeDialog();
       });
     }
   }
