@@ -7,8 +7,6 @@ import icEdit from '@iconify/icons-ic/twotone-edit';
 import {WorkerEditDialogComponent} from '../worker-edit-dialog/worker-edit-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ContractAddDialogComponent} from '../../contract/contract-add-dialog/contract-add-dialog.component';
-import {ResourceContractAddDialogData} from '../../../contracts/dialog.interface';
-import {Contract} from '../../contract/contract.entity';
 
 @Component({
   selector: 'app-worker-manage',

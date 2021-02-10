@@ -360,3 +360,10 @@ form {
     display: none;
   }
 }
+
+.lock {
+  pointer-events: none;
+  filter: blur(2px);
+  user-select: none;
+  transition: filter 200ms;
+}

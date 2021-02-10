@@ -1,12 +1,42 @@
 <main class="mt-10">
-  <div class="flex flex-row gap-6">
-    <div class="w-2/6">
+  <div class="flex flex-row gap-4">
+    <div class="flex flex-col gap-4 w-2/6">
       <div class="card-base">
+        <div class="card-header">
+          <div>
+            <h2 class="text-xl font-semibold flex items-center">Zarządzaj PKZP</h2>
+          </div>
+          <div class="flex flex-row gap-4">
+            <button type="button" (click)="export()" matTooltip="Exportuj dane PKZP do .csv" mat-icon-button [disabled]="isAccounting">
+              <mat-icon [icIcon]="icExport" class="text-dark" [class.text-dark]="isAccounting" size="24px"></mat-icon>
+            </button>
+            <button type="button" (click)="accounting()" color="primary" mat-flat-button>
+              <span *ngIf="isAccounting;then backFromAccounting else accountingBtnContent "></span>
+              <ng-template #accountingBtnContent>
+                <mat-icon [icIcon]="icManage" class="text-white mr-1" size="24px"></mat-icon>
+                <span class="font-semibold">Rozlicz</span>
+              </ng-template>
+              <ng-template #backFromAccounting>
+                <mat-icon [icIcon]="icBack" class="text-white mr-1" size="24px"></mat-icon>
+                <span class="font-semibold">Powrót</span>
+              </ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-base" [class.lock]="isAccounting">
         <app-pkzp-worker-list (workerEvent)="selectWorker($event)"></app-pkzp-worker-list>
       </div>
     </div>
     <div class="w-4/6">
-      <app-pkzp-detail [worker]="worker"></app-pkzp-detail>
+      <div *ngIf="isAccounting;then showAccounting else showPkzp"></div>
+      <ng-template #showAccounting>
+        <app-pkzp-accounting></app-pkzp-accounting>
+      </ng-template>
+      <ng-template #showPkzp>
+        <app-pkzp-detail [worker]="worker"></app-pkzp-detail>
+      </ng-template>
     </div>
   </div>
 </main>

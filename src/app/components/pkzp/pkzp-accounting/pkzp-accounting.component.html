@@ -1,0 +1,13 @@
+<div *ngIf="!(pkzpService.loading$ | async);then showPkzpSummary else showLoading"></div>
+
+<ng-template #showPkzpSummary>
+  Accounting works!
+</ng-template>
+<ng-template #showLoading>
+  <div class="flex flex-col items-center py-16">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="56" class="m-auto mb-5"></mat-progress-spinner>
+    <p class="title-primary">Trwa ładowanie</p>
+  </div>
+</ng-template>
+
+
