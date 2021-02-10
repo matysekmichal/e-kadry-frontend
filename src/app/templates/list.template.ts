@@ -4,19 +4,18 @@ import {FormControl} from '@angular/forms';
 import {DataSource} from './data-source';
 import {MatSort, Sort, SortDirection} from '@angular/material/sort';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {IResourceService, ResourceResponse} from '../contracts/data-source.interface';
+import {IApiService, IResourceService, ResourceResponse} from '../contracts/data-source.interface';
 import {TableColumnInterface} from '../contracts/table-column.interface';
 import {merge} from 'rxjs';
 import {PaginationListInterface} from '../contracts/pagination-list.interface';
 import {ResourceIdInterface} from '../contracts/resource-id.interface';
 import {MessageService} from '../components/layout/services/message.service';
-import {ApiService} from '../services/api.service';
 
 @Component({
   template: ''
 })
 export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestroy {
-  service: ApiService | IResourceService<T>;
+  service: IApiService | IResourceService<T>;
   resource: T[];
   columns: TableColumnInterface<T>[];
   pageSizeOptions: number[] = [15, 30, 50, 150];
@@ -142,7 +141,7 @@ export abstract class ListTemplate<T> implements OnInit, AfterViewInit, OnDestro
 
   deleteResource(item: ResourceIdInterface) {
     this.messageService.confirm('Czy napewno chcesz kontynuować?', 'Potwierdzenie spowoduje usunięcie zasobu.', null, null, () => {
-      if (!(this.service instanceof ApiService)) {
+      if ('delete' in this.service) {
         this.service.delete(item.id).subscribe(
           (response: ResourceResponse) => {
             this.dataSource.loadData(this.paginator.pageIndex + 1, this.filters);
