@@ -62,10 +62,6 @@ export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implem
   }
 
   isPayment(type: number) {
-    console.log(this.paymentTypes.findIndex(x => {
-      console.log(`${x} - ${type}`)
-      return x == type
-    }));
     return this.paymentTypes.findIndex(x => x == type) >= 0;
   }
 }

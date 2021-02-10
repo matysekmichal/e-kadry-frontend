@@ -51,11 +51,6 @@ export class AvatarComponent {
       this.login.trim().split('').forEach(char => {
         charactersSum += char.charCodeAt(0);
       });
-
-      console.log(charactersSum);
-      console.log(this.colors.length);
-      console.log(charactersSum % this.colors.length);
-
       this.colorClassSaved = this.colors[charactersSum % this.colors.length];
     }
 
