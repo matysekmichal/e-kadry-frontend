@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {IconModule} from '@visurel/iconify-angular';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -19,7 +20,8 @@ import {IconModule} from '@visurel/iconify-angular';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    IconModule
+    IconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginModule {

@@ -31,23 +31,3 @@
     }
   }
 }
-
-.navigation-color {
-  //color: var(--navigation-color);
-}
-
-.navigation-menu-item {
-  //transition: var(--trans-ease-out);
-
-  &:hover {
-    //@apply text-blue-500;
-
-    .mat-icon {
-      //@apply text-blue-500;
-    }
-  }
-
-  .mat-icon {
-    //transition: var(--trans-ease-out);
-  }
-}

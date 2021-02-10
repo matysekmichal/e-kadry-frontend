@@ -7,6 +7,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {IconModule} from '@visurel/iconify-angular';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {IconModule} from '@visurel/iconify-angular';
     MatRippleModule,
     MatMenuModule,
     MatIconModule,
-    IconModule
+    IconModule,
+    MatTooltipModule
   ]
 })
 export class NavigationModule {

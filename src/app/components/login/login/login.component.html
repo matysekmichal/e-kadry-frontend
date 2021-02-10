@@ -3,22 +3,25 @@
   <div class="login-container">
     <div class="bg-white shadow rounded p-8">
       <h1 class="font-bold text-center text-lg text-blue-600 tracking-wide uppercase mb-4">Logowanie do systemu</h1>
-      <form class="flex flex-col" novalidate>
+      <form class="flex flex-col" novalidate #form="ngForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-icon [icIcon]="icLogin" class="mr-3 text-gray-500" matPrefix size="22px"></mat-icon>
           <mat-label>Login</mat-label>
-          <input aria-label="Wprowadź login do systemu" matInput name="email" placeholder="Wprowadź login do systemu"
-                 type="email">
+          <input aria-label="Wprowadź login do systemu" matInput name="email" [(ngModel)]="auth.login" placeholder="Wprowadź login do systemu" type="email">
         </mat-form-field>
 
         <mat-form-field>
           <mat-icon [icIcon]="icPassword" class="mr-3 text-gray-500" matPrefix size="22px"></mat-icon>
           <mat-label>Hasło</mat-label>
-          <input aria-label="Wprowadź hasło" matInput name="password" placeholder="Wprowadź hasło" type="password">
+          <input aria-label="Wprowadź hasło" matInput name="password" [(ngModel)]="auth.password" placeholder="Wprowadź hasło" type="password">
         </mat-form-field>
 
-        <button class="h-12 font-bold text-lg uppercase tracking-wide" color="primary" mat-flat-button type="submit">
-          Zaloguj się
+        <button class="h-12 font-bold text-lg uppercase tracking-wide" color="primary" mat-flat-button [disabled]="persist$ | async">
+          <span *ngIf="persist$ | async;then loginPersist else login"></span>
+          <ng-template #loginPersist>
+            <mat-progress-spinner mode="indeterminate" color="primary" diameter="20" class="m-auto"></mat-progress-spinner>
+          </ng-template>
+          <ng-template #login>Zaloguj się</ng-template>
         </button>
       </form>
     </div>
