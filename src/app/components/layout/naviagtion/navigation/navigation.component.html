@@ -1,8 +1,14 @@
 <div class="navigation flex">
   <app-navigation-item *ngFor="let item of items" [item]="item"></app-navigation-item>
 
-  <a [routerLink]="" class="navigation-item text-gray-500 hover:text-red-500" (click)="logout()" matTooltip="Wyloguj się">
-    <mat-icon [icIcon]="icLogout" size="24px"></mat-icon>
-  </a>
-
+  <app-avatar class="avatar" [matMenuTriggerFor]="actionMenu"></app-avatar>
 </div>
+
+<mat-menu class="mat-menu-dark" #actionMenu="matMenu" xPosition="before">
+  <ng-template let-data="data" matMenuContent class="bg-black">
+    <button type="button" (click)="logout()" class="danger" mat-menu-item>
+      <mat-icon [icIcon]="icLogout" size="24px"></mat-icon>
+      <span>Wyloguj się</span>
+    </button>
+  </ng-template>
+</mat-menu>

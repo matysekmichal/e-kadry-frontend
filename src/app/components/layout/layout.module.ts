@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {NavigationModule} from './naviagtion/navigation.module';
 import {MessageModule} from './message/message.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {AvatarModule} from './avatar/avatar.module';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -14,6 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     NavigationModule,
     MatToolbarModule,
     MessageModule,
+    AvatarModule,
   ],
 })
 export class LayoutModule {

@@ -30,7 +30,7 @@ export class AuthService {
         map((response: any) => {
           if (response) {
             localStorage.setItem('token', response.token);
-            localStorage.setItem('operator', btoa(encodeURIComponent(escape(JSON.stringify(response.user)))));
+            localStorage.setItem('operator', btoa(encodeURIComponent(escape(JSON.stringify(response.operator)))));
             this.decodedToken = this.jwtHelper.decodeToken(response.token);
           }
         })
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   get user(): Operator {
-    return JSON.parse(unescape(decodeURIComponent(atob(localStorage.getItem('who')))));
+    return JSON.parse(unescape(decodeURIComponent(atob(localStorage.getItem('operator')))));
   }
 
   logout() {

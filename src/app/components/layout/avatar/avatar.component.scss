@@ -1,0 +1,7 @@
+.avatar {
+  @apply rounded-full w-10 h-10 flex justify-center items-center font-semibold text-white cursor-pointer text-sm;
+
+  span {
+    @apply pointer-events-none select-none;
+  }
+}

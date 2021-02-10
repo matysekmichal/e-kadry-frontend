@@ -8,6 +8,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {IconModule} from '@visurel/iconify-angular';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {AvatarModule} from '../avatar/avatar.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatMenuModule,
     MatIconModule,
     IconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    AvatarModule
   ]
 })
 export class NavigationModule {
