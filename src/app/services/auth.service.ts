@@ -13,14 +13,15 @@ import {Operator} from '../components/operator/operator.entity';
 })
 export class AuthService {
   private baseUrl = environment.apiUrl + 'auth';
+  private jwtHelper: JwtHelperService;
   decodedToken: any;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private messageService: MessageService,
-    private jwtHelper: JwtHelperService,
   ) {
+    this.jwtHelper = new JwtHelperService();
   }
 
   login(login: Auth) {
