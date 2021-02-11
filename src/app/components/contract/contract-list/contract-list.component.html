@@ -88,7 +88,7 @@
       <ng-container matColumnDef="name">
         <th class="uppercase" *matHeaderCellDef mat-header-cell>Imię i nazwisko</th>
         <td *matCellDef="let row" mat-cell>
-          <a [routerLink]="['/contracts', row.id, 'manage']" class="friendly">
+          <a [routerLink]="['/workers', row.worker.id, 'manage']" class="friendly">
             <span>{{ row.worker.firstName }} {{ row.worker.lastName }}</span>
           </a>
         </td>

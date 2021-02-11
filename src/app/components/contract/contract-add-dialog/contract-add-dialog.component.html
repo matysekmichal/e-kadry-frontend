@@ -17,7 +17,7 @@
               </div>
             </mat-option>
           </mat-autocomplete>
-          <mat-icon [icIcon]="icVisibility" *ngIf="searchResult != undefined && searchResult.length <= 0" matSuffix style="display: inline-block;height: auto"></mat-icon>
+          <mat-icon [icIcon]="icNotFound" *ngIf="searchResult != undefined && searchResult.length <= 0" style="display: inline-block;height: auto" matSuffix></mat-icon>
         </mat-form-field>
 
         <mat-form-field class="w-full">

@@ -2,10 +2,9 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ResourceContractAddDialogData} from '../../../contracts/dialog.interface';
 import {DelegatedFormTemplate} from '../../../templates/delegated-form.template';
-import icVisibility from '@iconify/icons-ic/twotone-visibility';
+import icNotFound from '@iconify/icons-ic/twotone-search-off';
 import icLabel from '@iconify/icons-ic/twotone-label';
 import {EnumService} from '../../../services/enum.service';
-import {EnumItem} from '../../../contracts/enum';
 import {ContractService} from '../contract.service';
 import {Contract} from '../contract.entity';
 import {FormControl} from '@angular/forms';
@@ -22,11 +21,11 @@ import {ContractType, ContractTypes} from '../contract-types';
 })
 export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> implements OnInit {
 
-  private refreshAfterClose = false;
+  private refreshAfterClose = true;
   workerId: any;
 
   contractTypes = ContractTypes;
-  icVisibility = icVisibility;
+  icNotFound = icNotFound;
   icLabel = icLabel;
 
   searchForm = new FormControl();
@@ -72,12 +71,12 @@ export class ContractAddDialogComponent extends DelegatedFormTemplate<Contract> 
   onSubmit() {
     if (this.resourceId) {
       this.updateResource(() => {
-        this.refreshAfterClose = true;
+        this.refreshAfterClose = false;
         this.dialogRef.close()
       });
     } else {
       this.createResource(() => {
-        this.refreshAfterClose = true;
+        this.refreshAfterClose = false;
         this.dialogRef.close()
       });
     }
