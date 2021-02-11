@@ -47,6 +47,7 @@ export class PkzpAddDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.enumService.pkzpPositionType.subscribe(response => {
+      response = response.filter(item => item.id !== 40);
       this.pkzpPositionTypes = response;
     });
 
@@ -97,6 +98,8 @@ export class PkzpAddDialogComponent implements OnInit {
         return 'Wysokość wpisowego';
       case 40 :
         return 'Wysokość spłaty';
+      case 50 :
+        return 'Wartość salda początkowego';
       default :
         return 'Wartość kwotową';
     }
@@ -104,14 +107,16 @@ export class PkzpAddDialogComponent implements OnInit {
 
   isTypeAble(type: EnumItem) {
     switch (type.id) {
-      case 10 :
+      case 30 :
+      case 50 :
         return true;
-      case 20:
-      case 30:
-      case 40:
+      case 10 :
+      case 20 :
+      case 40 :
         if (typeof this.contributions == 'undefined' || this.contributions.credit <= 0) {
           return false;
         }
+        break;
     }
 
     return true;
