@@ -1,6 +1,9 @@
 export interface PkzpParameters {
   form: number;
   installmentsCount: number;
-  contribution: number;
-  composition: number;
+  entry: number;
+  minComposition: number;
+  maxComposition: number;
+  maxAmount: number;
+  minContribution: number;
 }
