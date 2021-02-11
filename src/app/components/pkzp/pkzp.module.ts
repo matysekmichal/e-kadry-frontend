@@ -18,6 +18,7 @@ import {PkzpAddDialogComponent} from './pkzp-add-dialog/pkzp-add-dialog.componen
 import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
 import {PkzpPositionListModule} from './pkzp-position-list/pkzp-position-list.module';
 import {PkzpAccountingComponent} from './pkzp-accounting/pkzp-accounting.component';
+import {PeriodModule} from '../period/period.module';
 
 @NgModule({
   entryComponents: [
@@ -44,6 +45,7 @@ import {PkzpAccountingComponent} from './pkzp-accounting/pkzp-accounting.compone
     PkzpAddDialogModule,
     PricePipeModule,
     PkzpPositionListModule,
+    PeriodModule,
   ]
 })
 export class PkzpModule {

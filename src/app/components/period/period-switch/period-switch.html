@@ -1,0 +1,19 @@
+<div class="period-switch" *ngIf="periods">
+  <button type="button"
+          class="period-item period-arrow"
+          [matTooltip]="prevable ? (periods[0]?.dateFrom | date:'MMM yyyy' | uppercase) : ''"
+          (click)="switchPrevious()"
+          [disabled]="!prevable">
+    <mat-icon [icIcon]="icPrev" size="24px"></mat-icon>
+  </button>
+
+  <div class="period-item period-current">{{ currentPeriod.dateFrom | date:'MMM yyyy' | uppercase }}</div>
+
+  <button type="button"
+          class="period-item period-arrow"
+          [matTooltip]="nextable ? (periods[periods.length - 1]?.dateFrom | date:'MMM yyyy' | uppercase) : ''"
+          (click)="switchNext()"
+          [disabled]="!nextable">
+    <mat-icon [icIcon]="icNext" size="24px"></mat-icon>
+  </button>
+</div>

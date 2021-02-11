@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PkzpService} from '../pkzp.service';
-import icBalances from '@iconify/icons-ic/twotone-import-export';
 
 @Component({
   selector: 'app-pkzp-accounting',
@@ -8,7 +7,7 @@ import icBalances from '@iconify/icons-ic/twotone-import-export';
   styleUrls: ['./pkzp-accounting.component.scss']
 })
 export class PkzpAccountingComponent implements OnInit {
-
+  period: string;
 
   constructor(
     public pkzpService: PkzpService,
@@ -16,5 +15,9 @@ export class PkzpAccountingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  fetch($event: string) {
+    this.period = $event;
   }
 }
