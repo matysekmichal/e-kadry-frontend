@@ -33,7 +33,10 @@ export class PeriodSwitchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchPeriods(periods => this.currentPeriod = periods[1]);
+    this.fetchPeriods(periods => {
+      this.currentPeriod = periods[1];
+      this.selected.emit(this.currentPeriod.id);
+    });
   }
 
   selectPeriod(period: Period, direct: PeriodSwitchDirections) {
