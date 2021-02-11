@@ -17,15 +17,18 @@ export class LoginComponent {
   icPassword = icPassword;
 
   protected persistSubject = new BehaviorSubject<boolean>(false);
-  public persist$ = this.persistSubject.asObservable();
+  persist$ = this.persistSubject.asObservable();
 
-  public auth: Auth= new Auth();
+  auth: Auth;
+  currentYear: number;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
   ) {
+    this.auth = new Auth();
+    this.currentYear = new Date().getFullYear();
   }
 
   onSubmit() {
