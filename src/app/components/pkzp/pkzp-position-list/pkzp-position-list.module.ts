@@ -7,6 +7,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {PricePipeModule} from '../../../pipes/price-pipe/price-pipe.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatIconModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    PricePipeModule,
+    MatTooltipModule,
   ]
 })
 export class PkzpPositionListModule {

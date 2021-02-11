@@ -14,9 +14,11 @@ export class PkzpPosition {
   idAncestorPkzpPosition: string;
   ancestorPkzpPosition: Pkzp;
   pkzp: Pkzp[];
+  createdAt: Date;
 
   constructor() {
-    this.id = this.pkzpPositionType = this.amount = this.idPeriod = this.period = this.idWorker = this.worker = this.idAncestorPkzpPosition = this.ancestorPkzpPosition = null;
+    this.id = this.pkzpPositionType = this.amount = this.idPeriod = this.period = this.idWorker = this.worker = this.idAncestorPkzpPosition
+      = this.createdAt = this.ancestorPkzpPosition = null;
     this.pkzp = [];
   }
 }

@@ -5,7 +5,7 @@ export class PkzpContributions {
   IdWorker: number;
   Worker: Worker;
   Amount: number;
-  UpdatedAt: Date | string;
+  UpdatedAt: Date;
 
   constructor() {
   }

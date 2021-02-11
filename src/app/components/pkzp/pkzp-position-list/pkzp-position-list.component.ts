@@ -6,6 +6,7 @@ import {Worker} from '../../worker/worker.entity';
 import {PkzpPositionService} from '../pkzp-position.service';
 import {PkzpPosition} from '../pkzp-position.entity';
 import icAdd from '@iconify/icons-ic/twotone-add';
+import icSetting from '@iconify/icons-ic/twotone-settings';
 
 @Component({
   selector: 'app-pkzp-position-list',
@@ -24,6 +25,7 @@ import icAdd from '@iconify/icons-ic/twotone-add';
 })
 export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implements OnInit {
   icAdd = icAdd;
+  icSetting = icSetting;
 
   paymentTypes = [10, 30];
 
@@ -33,6 +35,7 @@ export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implem
     {label: 'Imię i nazwisko', property: 'name', type: 'text', visible: true},
     {label: 'Okres', property: 'period', type: 'text', visible: true},
     {label: 'Wartość', property: 'amount', type: 'text', visible: true},
+    {label: 'Utworzono', property: 'createdAt', type: 'text', visible: true},
   ];
   @Output() addRecord = new EventEmitter<boolean>();
 
@@ -54,6 +57,7 @@ export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implem
   get filtersResource() {
     return Object.assign(this.baseFilterResource, {
       WorkerId: this.worker?.id,
+      OrderBy: 'createdAt',
     });
   }
 

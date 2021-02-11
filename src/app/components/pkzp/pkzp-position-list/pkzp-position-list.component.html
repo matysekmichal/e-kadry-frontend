@@ -3,7 +3,10 @@
     <div class="flex gap-6">
       <h2 class="text-xl font-semibold flex items-center">PKZP - {{ worker?.firstName }} {{ worker?.lastName }}</h2>
     </div>
-    <div>
+    <div class="flex flex-row gap-4">
+      <button type="button" class="btn-icon-gray" matTooltip="Ustawienia PKZP dla pracownika">
+        <mat-icon [icIcon]="icSetting" class="text-dark" size="19px"></mat-icon>
+      </button>
       <button type="button" class="btn-icon-primary" (click)="callAddRecord()">
         <mat-icon [icIcon]="icAdd" class="text-white" size="24px"></mat-icon>
       </button>
@@ -34,16 +37,25 @@
 
         <ng-container matColumnDef="amount">
           <th class="uppercase" *matHeaderCellDef mat-header-cell>Wartość</th>
-          <td *matCellDef="let row" mat-cell>
+          <td class="font-semibold" *matCellDef="let row" mat-cell>
             <div *ngIf="isPayment(row.pkzpPositionType.id);then payment else payout"></div>
             <ng-template #payment>
-              + {{ row.amount }}
+              <span class="text-green-700 text-md">+ {{ row.amount | price }}</span>
             </ng-template>
             <ng-template #payout>
-              - {{ row.amount }}
+              <span class="text-red-700 text-md">- {{ row.amount | price }}</span>
             </ng-template>
+            <span class="text-dark font-semibold text-xs pl-1">PLN</span>
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th class="uppercase" *matHeaderCellDef mat-header-cell>Utworzono</th>
+          <td *matCellDef="let row" mat-cell>
+            {{ row.createdAt | date:'dd MMM yyyy' }}
+          </td>
+        </ng-container>
+
 
         <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
         <tr class="hover:bg-gray-100 cursor-pointer transition-colors"
