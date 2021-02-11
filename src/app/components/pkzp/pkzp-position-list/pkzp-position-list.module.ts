@@ -9,6 +9,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {PricePipeModule} from '../../../pipes/price-pipe/price-pipe.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatProgressSpinnerModule,
     PricePipeModule,
     MatTooltipModule,
+    MatSortModule,
   ]
 })
 export class PkzpPositionListModule {

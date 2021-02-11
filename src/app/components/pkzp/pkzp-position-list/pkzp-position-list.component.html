@@ -14,7 +14,7 @@
   </div>
   <div class="content no-padding">
     <section [class.hidden]="dataSource?.isEmpty || (service.filter$ | async)">
-      <table [dataSource]="dataSource" class="w-full" mat-table>
+      <table [dataSource]="dataSource" class="w-full" mat-table matSort>
         <ng-container matColumnDef="name">
           <th class="uppercase" *matHeaderCellDef mat-header-cell>Rodzaj</th>
           <td *matCellDef="let row" mat-cell>
@@ -50,7 +50,7 @@
         </ng-container>
 
         <ng-container matColumnDef="createdAt">
-          <th class="uppercase" *matHeaderCellDef mat-header-cell>Utworzono</th>
+          <th class="uppercase" *matHeaderCellDef mat-header-cell mat-sort-header="CreatedAt">Utworzono</th>
           <td *matCellDef="let row" mat-cell>
             {{ row.createdAt | date:'dd MMM yyyy' }}
           </td>
