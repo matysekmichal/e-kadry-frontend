@@ -2,10 +2,11 @@ import {Period} from '../period/period.entity';
 import {Pkzp} from './pkzp.entity';
 import {Worker} from '../worker/worker.entity';
 import {EnumItem} from '../../contracts/enum';
+import {PkzpSchedule} from './pkzp.schedule';
 
 export class PkzpPosition {
   id: string;
-  pkzpPositionType: string | EnumItem;
+  pkzpPositionType: number | EnumItem;
   amount: number;
   idPeriod: string;
   period: Period;
@@ -14,12 +15,14 @@ export class PkzpPosition {
   idAncestorPkzpPosition: string;
   ancestorPkzpPosition: Pkzp;
   pkzp: Pkzp[];
+  pkzpSchedules: PkzpSchedule[];
   createdAt: Date;
 
   constructor() {
     this.id = this.pkzpPositionType = this.amount = this.idPeriod = this.period = this.idWorker = this.worker = this.idAncestorPkzpPosition
       = this.createdAt = this.ancestorPkzpPosition = null;
     this.pkzp = [];
+    this.pkzpSchedules = [];
   }
 }
 

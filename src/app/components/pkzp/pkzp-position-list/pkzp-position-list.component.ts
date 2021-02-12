@@ -27,7 +27,7 @@ export class PkzpPositionListComponent extends ListTemplate<PkzpPosition> implem
   icAdd = icAdd;
   icSetting = icSetting;
 
-  paymentTypes = [10, 30];
+  paymentTypes = [10, 30, 40, 50];
 
   pkzpPositions: PkzpPosition[];
   @Input() worker: Worker;

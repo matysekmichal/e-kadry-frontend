@@ -19,6 +19,7 @@ import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
 import {PkzpPositionListModule} from './pkzp-position-list/pkzp-position-list.module';
 import {PkzpAccountingComponent} from './pkzp-accounting/pkzp-accounting.component';
 import {PeriodModule} from '../period/period.module';
+import {PkzpAccountingListComponent} from './pkzp-accounting-list/pkzp-accounting-list.component';
 
 @NgModule({
   entryComponents: [
@@ -29,6 +30,7 @@ import {PeriodModule} from '../period/period.module';
     PkzpMainComponent,
     PkzpDetailComponent,
     WorkerListComponent,
+    PkzpAccountingListComponent,
   ],
   imports: [
     CommonModule,

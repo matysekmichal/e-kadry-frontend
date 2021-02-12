@@ -59,7 +59,7 @@ export class PeriodSwitchComponent implements OnInit {
         this.currentPeriod = periods[1];
       }
 
-      this.selected.emit(period.id);
+      this.selected.emit(this.currentPeriod.id);
     });
   }
 
