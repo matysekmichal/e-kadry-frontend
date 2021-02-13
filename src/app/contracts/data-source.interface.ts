@@ -56,9 +56,6 @@ export interface ResourceResponse {
   message: string;
 }
 
-export interface ISearchService<T> {
-  url: string;
-  filter$?: Observable<boolean>;
-
+export interface ISearchService<T> extends IApiService {
   search(value: string, perPage: number): Observable<T[]>;
 }
