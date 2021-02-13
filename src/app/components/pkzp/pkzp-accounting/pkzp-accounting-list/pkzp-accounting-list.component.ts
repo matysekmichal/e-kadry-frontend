@@ -1,9 +1,9 @@
 import {Component, Injector, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {PkzpAccountingService} from '../pkzp-accounting.service';
-import {ListTemplate} from '../../../templates/list.template';
-import {TableColumnInterface} from '../../../contracts/table-column.interface';
-import {Worker} from '../../worker/worker.entity';
-import {PkzpPosition} from '../pkzp-position.entity';
+import {PkzpAccountingService} from '../../pkzp-accounting.service';
+import {ListTemplate} from '../../../../templates/list.template';
+import {TableColumnInterface} from '../../../../contracts/table-column.interface';
+import {Worker} from '../../../worker/worker.entity';
+import {PkzpPosition} from '../../pkzp-position.entity';
 
 @Component({
   selector: 'app-pkzp-accounting-list',

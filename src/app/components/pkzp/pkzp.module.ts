@@ -17,20 +17,16 @@ import {PkzpAddDialogModule} from './pkzp-add-dialog/pkzp-add-dialog.module';
 import {PkzpAddDialogComponent} from './pkzp-add-dialog/pkzp-add-dialog.component';
 import {PricePipeModule} from '../../pipes/price-pipe/price-pipe.module';
 import {PkzpPositionListModule} from './pkzp-position-list/pkzp-position-list.module';
-import {PkzpAccountingComponent} from './pkzp-accounting/pkzp-accounting.component';
-import {PeriodModule} from '../period/period.module';
-import {PkzpAccountingListComponent} from './pkzp-accounting-list/pkzp-accounting-list.component';
+import {PkzpAccountingModule} from './pkzp-accounting/pkzp-accounting.module';
 
 @NgModule({
   entryComponents: [
     PkzpAddDialogComponent
   ],
   declarations: [
-    PkzpAccountingComponent,
     PkzpMainComponent,
     PkzpDetailComponent,
     WorkerListComponent,
-    PkzpAccountingListComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +43,7 @@ import {PkzpAccountingListComponent} from './pkzp-accounting-list/pkzp-accountin
     PkzpAddDialogModule,
     PricePipeModule,
     PkzpPositionListModule,
-    PeriodModule,
+    PkzpAccountingModule,
   ]
 })
 export class PkzpModule {
