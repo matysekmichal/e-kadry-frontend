@@ -27,6 +27,9 @@ export class PeriodSwitchComponent implements OnInit {
   nextable = true;
   currentPeriod: Period;
 
+  switchTimer: number;
+  switchInterval = 600;
+
   constructor(
     private periodService: PeriodService
   ) {
@@ -70,15 +73,32 @@ export class PeriodSwitchComponent implements OnInit {
     });
   }
 
-  switchPrevious() {
-    this.nextMonths -= 1;
-    this.subMonths += 1;
-    this.selectPeriod(this.periods[0], 'prev');
-  }
+  switchPeriod(direct: PeriodSwitchDirections) {
+    clearTimeout(this.switchTimer);
 
-  switchNext() {
-    this.subMonths -= 1;
-    this.nextMonths += 1;
-    this.selectPeriod(this.periods[this.periods.length - 1], 'next');
+    switch (direct) {
+      case 'next':
+        this.subMonths -= 1;
+        this.nextMonths += 1;
+        break;
+      case 'prev':
+        this.nextMonths -= 1;
+        this.subMonths += 1;
+        break;
+    }
+
+    if (direct) {
+      // @ts-ignore
+      this.switchTimer = setTimeout(() => {
+        switch (direct) {
+          case 'next':
+            this.selectPeriod(this.periods[this.periods.length - 1], 'next');
+            break;
+          case 'prev':
+            this.selectPeriod(this.periods[0], 'prev');
+            break;
+        }
+      }, this.switchInterval);
+    }
   }
 }

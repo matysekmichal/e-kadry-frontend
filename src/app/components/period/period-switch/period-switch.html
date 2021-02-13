@@ -2,7 +2,7 @@
   <button type="button"
           class="period-item period-arrow"
           [matTooltip]="prevable ? (periods[0]?.dateFrom | date:'MMM yyyy' | uppercase) : ''"
-          (click)="switchPrevious()"
+          (click)="switchPeriod('prev')"
           [disabled]="!prevable">
     <mat-icon [icIcon]="icPrev" size="24px"></mat-icon>
   </button>
@@ -12,7 +12,7 @@
   <button type="button"
           class="period-item period-arrow"
           [matTooltip]="nextable ? (periods[periods.length - 1]?.dateFrom | date:'MMM yyyy' | uppercase) : ''"
-          (click)="switchNext()"
+          (click)="switchPeriod('next')"
           [disabled]="!nextable">
     <mat-icon [icIcon]="icNext" size="24px"></mat-icon>
   </button>
